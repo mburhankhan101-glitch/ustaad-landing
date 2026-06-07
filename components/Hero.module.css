@@ -1,0 +1,733 @@
+/* Hero.module.css – final version with improved stats strip spacing */
+
+/* ── Scroll Reveal ─────────────────────────────────────────────── */
+.revealUp {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+}
+:global(.ustaad-revealed) {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* ── Hero wrapper ──────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding-bottom: 60px;
+  padding-top: 50px;
+}
+
+/* ── Two‑column grid ───────────────────────────────────────────── */
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+  padding: 40px 72px 72px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.heroLeft {
+  max-width: 580px;
+  animation: fadeUp 0.6s ease both;
+}
+
+/* ── Headline (bigger & bolder) ───────────────────────────────── */
+.h1 {
+  font-size: 68px;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin-bottom: 24px;
+  animation: fadeUp 0.6s ease 0.18s both;
+}
+
+.h1Line {
+  display: block;
+  color: white;
+}
+
+.h1Cycle {
+  display: block;
+  color: #FFD700;
+  position: relative;
+  height: 1.1em;
+  overflow: hidden;
+}
+
+.cw {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.42s ease, transform 0.42s ease;
+  white-space: nowrap;
+}
+.cw.on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Subtext ───────────────────────────────────────────────────── */
+.sub {
+  font-size: 16.5px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.75;
+  margin-bottom: 34px;
+  font-weight: 400;
+  animation: fadeUp 0.6s ease 0.32s both;
+}
+.sub strong {
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 600;
+}
+
+/* ── CTAs wrapper ──────────────────────────────────────────────── */
+.ctas {
+  width: 100%;
+  margin-bottom: 38px;
+  animation: fadeUp 0.6s ease 0.48s both;
+}
+
+/* ── CTA Buttons ───────────────────────────────────────────────── */
+.ctaColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.btnPrimary {
+  width: 100%;
+  padding: 15px 24px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #6C63FF, #9C89FF);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(108, 99, 255, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(108, 99, 255, 0.5);
+}
+.btnPrimary:active {
+  transform: translateY(0);
+}
+
+.btnContinue {
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #6C63FF, #9C89FF);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.15s ease;
+}
+.btnContinue:hover {
+  transform: translateY(-2px);
+}
+
+.btnSwitch {
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  padding: 9px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.btnSwitch:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.btnSkeleton {
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(108, 99, 255, 0.35);
+  animation: skelPulse 1.5s ease-in-out infinite;
+}
+
+/* ── Phone area ────────────────────────────────────────────────── */
+.heroRight {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 0;
+  animation: slideRight 0.75s cubic-bezier(0.34, 1.1, 0.64, 1) 0.25s both;
+}
+
+.phoneShadow {
+  position: absolute;
+  bottom: 32px;
+  width: 260px;
+  height: 60px;
+  background: radial-gradient(ellipse, rgba(108, 99, 255, 0.55) 0%, transparent 70%);
+  filter: blur(18px);
+  z-index: 0;
+}
+
+.phoneWrap {
+  position: relative;
+  z-index: 1;
+  width: 265px;
+  transform: perspective(1100px) rotateY(-9deg) rotateX(2deg);
+  filter: drop-shadow(0 28px 55px rgba(0, 0, 0, 0.65));
+  transition: transform 0.6s ease;
+}
+.phoneWrap:hover {
+  transform: perspective(1100px) rotateY(-3deg) rotateX(1deg);
+}
+
+.phoneBody {
+  background: #070B27;
+  border-radius: 38px;
+  padding: 14px;
+  border: 1.5px solid rgba(255, 255, 255, 0.13);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.island {
+  width: 90px;
+  height: 24px;
+  border-radius: 100px;
+  background: #030614;
+  margin: 0 auto 12px;
+}
+
+.screen {
+  background: linear-gradient(188deg, #0B0F31 0%, #0F0A36 100%);
+  border-radius: 26px;
+  overflow: hidden;
+}
+
+.appBar {
+  padding: 12px 14px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.back {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+.appTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+}
+.streakChip {
+  background: #FFD700;
+  color: #1a1000;
+  padding: 3px 9px;
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.progWrap {
+  padding: 0 14px 10px;
+}
+.progMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.38);
+  margin-bottom: 5px;
+}
+.progTrack {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+}
+.progBar {
+  height: 100%;
+  width: 28%;
+  background: linear-gradient(90deg, #6C63FF, #A78BFA);
+  border-radius: 2px;
+}
+
+.topicChip {
+  margin: 0 14px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(108, 99, 255, 0.12);
+  border: 1px solid rgba(108, 99, 255, 0.25);
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+.chipDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #6C63FF;
+}
+.chipLbl {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.qcard {
+  margin: 0 14px 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 12px;
+}
+.qnum {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+  margin-bottom: 7px;
+}
+.qtext {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.55;
+}
+
+.opts {
+  padding: 0 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.opt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  transition: background 0.2s;
+}
+.optCorrect {
+  background: rgba(76, 175, 80, 0.12);
+  border-color: rgba(76, 175, 80, 0.35);
+}
+.optWrong {
+  background: rgba(255, 107, 107, 0.1);
+  border-color: rgba(255, 107, 107, 0.3);
+}
+.optL {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.07);
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.45);
+  flex-shrink: 0;
+}
+.optCorrect .optL {
+  background: rgba(76, 175, 80, 0.25);
+  color: #4CAF50;
+}
+.optWrong .optL {
+  background: rgba(255, 107, 107, 0.25);
+  color: #FF6B6B;
+}
+.optT {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.72);
+  flex: 1;
+}
+.optI {
+  font-size: 11px;
+  margin-left: auto;
+}
+
+/* ── Floating badges ───────────────────────────────────────────── */
+.fbStreak {
+  position: absolute;
+  top: 26px;
+  left: -56px;
+  background: rgba(10, 8, 30, 0.88);
+  border: 1px solid rgba(255, 215, 0, 0.28);
+  padding: 9px 13px;
+  border-radius: 13px;
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 215, 0, 0.08);
+  animation: floatY 4s ease-in-out infinite;
+  z-index: 10;
+}
+.fbStreakIcon {
+  font-size: 20px;
+}
+.fbStreakInfo {
+  display: flex;
+  flex-direction: column;
+}
+.fbStreakNum {
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFD700;
+  line-height: 1;
+}
+.fbStreakLbl {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 2px;
+}
+
+.fbAi {
+  position: absolute;
+  bottom: 56px;
+  right: -48px;
+  background: rgba(10, 8, 30, 0.88);
+  border: 1px solid rgba(108, 99, 255, 0.38);
+  padding: 9px 13px;
+  border-radius: 13px;
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45), 0 0 14px rgba(108, 99, 255, 0.18);
+  animation: floatY 4s ease-in-out 2s infinite;
+  z-index: 10;
+}
+.fbAiIcon {
+  font-size: 18px;
+}
+.fbAiInfo {
+  display: flex;
+  flex-direction: column;
+}
+.fbAiMain {
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  line-height: 1;
+}
+.fbAiSub {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 2px;
+}
+
+/* ── Stats strip (inside .heroLeft) ────────────────────────────── */
+.glowLine {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(108, 99, 255, 0.35), rgba(255, 215, 0, 0.2), transparent);
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+/* Base stats strip styles */
+.strip {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.stripItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;   /* reduced vertical gap between number and label */
+  text-align: center;
+}
+.stripNum {
+  font-size: 32px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.5px;
+}
+.stripLbl {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+}
+.stripSep {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.12), transparent);
+}
+
+/* Inside heroLeft: left-aligned with more horizontal space */
+.heroLeft .strip {
+  justify-content: flex-start;
+  margin-top: 32px;
+  padding: 0;
+  gap: 48px;   /* increased horizontal gap between columns */
+}
+.heroLeft .stripItem {
+  align-items: flex-start;
+}
+.heroLeft .stripSep {
+  height: 32px;
+}
+
+/* ── Keyframes ─────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(44px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(76, 175, 80, 0);
+  }
+}
+@keyframes floatY {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+@keyframes skelPulse {
+  0%, 100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+/* ================================================================
+   TABLET  768–1100px
+   ================================================================ */
+@media (max-width: 1100px) {
+  .heroGrid {
+    gap: 28px;
+    padding: 32px 40px 56px;
+  }
+
+  .h1 {
+    font-size: 52px;
+    letter-spacing: -1.5px;
+  }
+  .sub {
+    font-size: 15px;
+  }
+
+  .phoneWrap {
+    width: 220px;
+    transform: perspective(900px) rotateY(-6deg) rotateX(1deg);
+  }
+  .phoneWrap:hover {
+    transform: perspective(900px) rotateY(-2deg) rotateX(0deg);
+  }
+
+  .fbStreak {
+    left: -10px;
+    top: 14px;
+    padding: 7px 10px;
+  }
+  .fbAi {
+    right: -10px;
+    bottom: 28px;
+    padding: 7px 10px;
+  }
+  .fbStreakNum {
+    font-size: 12px;
+  }
+  .fbAiMain {
+    font-size: 10px;
+  }
+
+  .heroLeft .strip {
+    gap: 40px; /* slightly less than desktop but still spacious */
+    margin-top: 28px;
+  }
+}
+
+/* ================================================================
+   LARGE MOBILE  480–767px
+   Single column, phone visible below CTA, floating badges hidden.
+   ================================================================ */
+@media (max-width: 767px) {
+  .hero {
+    padding-top: 32px;
+    padding-bottom: 40px;
+  }
+
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 24px 24px 48px;
+    text-align: center;
+  }
+
+  .heroLeft {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .h1 {
+    font-size: 42px;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+  .h1Cycle {
+    height: 1.15em;
+  }
+
+  .sub {
+    font-size: 14.5px;
+    margin-bottom: 28px;
+    max-width: 480px;
+  }
+
+  .ctas {
+    margin-bottom: 28px;
+  }
+
+  .heroRight {
+    padding: 32px 0 16px;
+  }
+
+  .phoneWrap {
+    width: 210px;
+    transform: none;
+    filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.6));
+  }
+  .phoneWrap:hover {
+    transform: none;
+  }
+
+  .phoneShadow {
+    width: 180px;
+    height: 40px;
+    bottom: 20px;
+  }
+
+  .fbStreak,
+  .fbAi {
+    display: none;
+  }
+
+  /* Stats strip – centered on mobile, good spacing */
+  .heroLeft .strip {
+    justify-content: center;
+    margin-top: 28px;
+    gap: 32px;
+  }
+  .heroLeft .stripItem {
+    align-items: center;
+  }
+  .heroLeft .stripSep {
+    height: 36px;
+  }
+  .stripItem {
+    gap: 2px; /* keep vertical gap tight */
+  }
+
+  .btnLogin,
+  .btnRegister {
+    font-size: 14px;
+  }
+}
+
+/* ================================================================
+   SMALL MOBILE  < 480px
+   Hide phone mockup entirely.
+   ================================================================ */
+@media (max-width: 479px) {
+  .heroGrid {
+    padding: 20px 16px 40px;
+  }
+
+  .h1 {
+    font-size: 36px;
+    letter-spacing: -0.5px;
+  }
+
+  .sub {
+    font-size: 13.5px;
+  }
+
+  .heroRight {
+    display: none;
+  }
+
+  .btnPrimary {
+    font-size: 15px;
+    padding: 14px 20px;
+  }
+  .btnLogin,
+  .btnRegister {
+    font-size: 13px;
+    padding: 12px 8px;
+  }
+
+  .heroLeft .strip {
+    gap: 24px;
+  }
+  .stripNum {
+    font-size: 22px;
+  }
+  .stripLbl {
+    font-size: 10px;
+  }
+  .stripItem {
+    gap: 2px;
+  }
+}

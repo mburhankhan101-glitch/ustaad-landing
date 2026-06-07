@@ -1,0 +1,374 @@
+/* ================================================================
+   NAVBAR — Navbar.module.css
+   Breakpoints:
+     Desktop   > 768px   full horizontal nav
+     Mobile    ≤ 768px   hamburger menu
+   ================================================================ */
+
+/* ── Base ─────────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 0;
+  transition: all 0.3s ease;
+}
+
+.scrolled {
+  background: rgba(10, 14, 46, 0.92);
+  backdrop-filter: blur(12px);
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(108, 99, 255, 0.2);
+}
+
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Logo ─────────────────────────────────────────────────────── */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 101; /* stay above mobile menu */
+}
+
+.logoImg {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.brand {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+/* ── Desktop Links (hidden on mobile) ────────────────────────── */
+.desktopLinks {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.desktopLinks a {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.desktopLinks a:hover {
+  color: #fff;
+}
+
+/* Register – primary solid button */
+.register {
+  background: var(--primary, #6C63FF) !important;
+  color: #fff !important;
+  padding: 10px 22px;
+  border-radius: 99px;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  transition: opacity 0.2s, transform 0.2s !important;
+}
+
+.register:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Login – ghost / outline button */
+.login {
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  padding: 10px 22px;
+  border-radius: 99px;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.2s !important;
+}
+
+.login:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #fff !important;
+}
+
+/* ── Hamburger Button (visible only on mobile) ───────────────── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 101;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.hamburger:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+/* Hamburger open animation */
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── Mobile Menu (overlay) ───────────────────────────────────── */
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 14, 46, 0.97);
+  backdrop-filter: blur(14px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.mobileMenuOpen {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobileMenuInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+}
+
+.mobileLink {
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: color 0.2s;
+  line-height: 1.2;
+}
+
+.mobileLink:hover {
+  color: #fff;
+}
+
+.loginMobile {
+  margin-top: 16px;
+  padding: 12px 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 99px;
+  font-size: 18px !important;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85) !important;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.loginMobile:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff !important;
+}
+
+.registerMobile {
+  padding: 14px 44px;
+  background: var(--primary, #6C63FF);
+  border-radius: 99px;
+  font-size: 18px !important;
+  font-weight: 600;
+  color: #fff !important;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.registerMobile:hover {
+  opacity: 0.9;
+  transform: scale(1.03);
+}
+
+/* ── Responsive Breakpoints ──────────────────────────────────── */
+
+/* Tablets & Mobiles (≤768px) – show hamburger, hide desktop links */
+@media (max-width: 768px) {
+  .desktopLinks {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* Small phones – smaller logo */
+@media (max-width: 480px) {
+  .logoImg {
+    height: 48px;
+    width: 48px;
+  }
+
+  .brand {
+    font-size: 18px;
+  }
+
+  .mobileLink {
+    font-size: 20px;
+  }
+
+}
+/* Add to Navbar.module.css */
+
+/* Make the anchor-looking buttons appear as before */
+/* ── Desktop Links (common reset) ─────────── */
+.desktopLinks button {
+  font-family: 'Poppins', sans-serif;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.2s;
+  background: transparent;
+  text-decoration: none;
+}
+
+.desktopLinks button:hover {
+  color: #fff;
+}
+
+/* ── Login – no border / background (text‑link look) ── */
+.desktopLinks .login,
+.desktopLinks .login:hover {
+  background: transparent !important;
+  border: none !important;
+  padding: 14px 28px;               /* same spacing as Register for alignment */
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.desktopLinks .login:hover {
+  color: #fff !important;
+  text-decoration: underline;      /* optional, gives link‑feel */
+}
+
+/* ── Register – big blue pill + idle shine + hover bump & glisten ── */
+.desktopLinks .register {
+  position: relative;              /* for the shine pseudo‑element */
+  padding: 14px 28px;              /* 👈 make it as big as you like */
+  background: var(--primary, #6C63FF) !important;
+  color: #fff !important;
+  border: none;
+  border-radius: 99px;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+  overflow: hidden;                /* keeps the shine inside rounded corners */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* – Idle shine (after 2 seconds, plays once) – */
+.desktopLinks .register::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: idleShine 1.2s ease 2s forwards;   /* delay = 2s */
+  pointer-events: none;
+}
+
+@keyframes idleShine {
+  0%   { left: -100%; }
+  60%  { left: 120%; }
+  100% { left: 120%; opacity: 0; }
+}
+
+/* – Hover: bump up + white glow (glisten) – */
+.desktopLinks .register:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(108, 99, 255, 0.5),
+              0 0 12px rgba(255, 255, 255, 0.4);
+}
+
+/* – On hover, override the idle shine with a fast, more visible sweep – */
+.desktopLinks .register:hover::after {
+  animation: none;
+  left: -100%;
+  opacity: 1;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  animation: hoverShine 0.6s ease forwards;
+}
+
+@keyframes hoverShine {
+  0%   { left: -100%; }
+  60%  { left: 120%; }
+  100% { left: 120%; opacity: 0; }
+}
+
+/* Disabled state (while navigating) */
+.desktopLinks button:disabled,
+.mobileLink:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Disabled state (while navigating) */
+.desktopLinks button:disabled,
+.mobileLink:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
