@@ -1,4 +1,4 @@
-/* Navbar.module.css – fixed mobile overlay + circular logo */
+/* Navbar.module.css – fixed mobile overlay + visible hamburger */
 
 .nav {
   position: fixed;
@@ -27,7 +27,7 @@
   justify-content: space-between;
 }
 
-/* Logo – circular border added */
+/* Logo */
 .logo {
   display: flex;
   align-items: center;
@@ -38,10 +38,7 @@
 .logoImg {
   width: 36px;
   height: 36px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 1.5px solid rgba(108, 99, 255, 0.4);
-  background: #0a0e2e;
+  object-fit: contain;
 }
 
 .brand {
@@ -112,7 +109,7 @@
   box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
 }
 
-/* Hamburger (hidden on desktop) */
+/* Hamburger – hidden on desktop, visible on mobile */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -146,7 +143,7 @@
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Mobile menu overlay */
+/* Mobile Menu Overlay */
 .mobileMenu {
   position: fixed;
   top: 0;

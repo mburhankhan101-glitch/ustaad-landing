@@ -1,4 +1,4 @@
-/* Hero.module.css – centered exam name cycling + no phone on mobile */
+/* Hero.module.css – mobile: centered, stats below, no phone, full height */
 
 /* Scroll Reveal */
 .revealUp {
@@ -12,7 +12,7 @@
   transform: translateY(0) !important;
 }
 
-/* Hero wrapper – full height */
+/* Hero wrapper – full viewport height */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -24,7 +24,7 @@
   justify-content: center;
 }
 
-/* Two-column grid */
+/* Two‑column grid */
 .heroGrid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -48,7 +48,6 @@
   letter-spacing: -2px;
   margin-bottom: 24px;
   animation: fadeUp 0.6s ease 0.18s both;
-  text-align: left;
 }
 
 .h1Line {
@@ -56,30 +55,26 @@
   color: white;
 }
 
-/* Centered cycling word container */
 .h1Cycle {
-  display: inline-block;
+  display: block;
   color: #FFD700;
   position: relative;
-  min-width: 170px;
-  text-align: center;
-  vertical-align: baseline;
+  height: 1.1em;
+  overflow: hidden;
 }
 
 .cw {
   position: absolute;
-  left: 50%;
+  left: 0;
   top: 0;
-  transform: translateX(-50%) translateY(10px);
   opacity: 0;
+  transform: translateY(10px);
   transition: opacity 0.42s ease, transform 0.42s ease;
   white-space: nowrap;
-  width: auto;
-  text-align: center;
 }
 .cw.on {
   opacity: 1;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
 }
 
 /* Subtext */
@@ -480,7 +475,7 @@
 /* Mobile (≤ 992px) – center everything, hide phone, stats below */
 @media (max-width: 992px) {
   .hero {
-    padding-top: 80px;
+    padding-top: 80px; /* less than before to avoid extra space */
     min-height: 100vh;
     justify-content: center;
   }
@@ -513,7 +508,20 @@
     margin: 0 4px;
   }
   .h1Cycle {
-    min-width: 140px;
+    display: inline-block;
+    height: auto;
+    color: #FFD700;
+  }
+  .cw {
+    position: static;
+    opacity: 0;
+    transform: translateY(0);
+    transition: opacity 0.3s ease;
+    white-space: normal;
+  }
+  .cw.on {
+    opacity: 1;
+    transform: translateY(0);
   }
   .sub {
     text-align: center;
@@ -532,7 +540,7 @@
   .heroRight, .fbStreak, .fbAi {
     display: none !important;
   }
-  /* Stats strip centered below buttons */
+  /* Stats strip: centered, below buttons */
   .heroLeft .strip {
     margin-top: 40px !important;
     display: flex;
