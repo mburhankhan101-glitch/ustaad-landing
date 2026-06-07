@@ -1,11 +1,12 @@
-/* Navbar.module.css – complete navbar styles */
+/* Navbar.module.css – fixed mobile overlay */
 
 .nav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  /* z-index MUST be above the mobile menu so the X button stays clickable */
+  z-index: 10000;
   background: rgba(10, 14, 46, 0.95);
   backdrop-filter: blur(12px);
   padding: 12px 0;
@@ -27,7 +28,7 @@
   justify-content: space-between;
 }
 
-/* Logo */
+/* ── Logo ── */
 .logo {
   display: flex;
   align-items: center;
@@ -50,7 +51,7 @@
   color: transparent;
 }
 
-/* Desktop links */
+/* ── Desktop links ── */
 .desktopLinks {
   display: flex;
   align-items: center;
@@ -69,13 +70,12 @@
   color: white;
 }
 
-/* Contact link specific (if needed) */
 .contactLink {
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
 }
 
-/* Desktop buttons */
+/* ── Desktop buttons ── */
 .login {
   background: transparent;
   border: 1.5px solid rgba(108, 99, 255, 0.5);
@@ -110,7 +110,7 @@
   box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
 }
 
-/* Hamburger menu */
+/* ── Hamburger ── */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -119,13 +119,18 @@
   border: none;
   cursor: pointer;
   padding: 8px;
+  /* Must be above the mobile menu overlay */
+  position: relative;
+  z-index: 10001;
 }
 
 .hamburger span {
+  display: block;
   width: 24px;
   height: 2px;
   background: white;
-  transition: 0.3s;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .hamburger.open span:nth-child(1) {
@@ -140,18 +145,27 @@
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Mobile menu overlay */
+/* ================================================================
+   MOBILE MENU OVERLAY
+   KEY FIX: solid background + z-index below navbar but above EVERYTHING else
+   ================================================================ */
 .mobileMenu {
   position: fixed;
-  top: 70px;
+  /* Start from the very top of the screen */
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(10, 14, 46, 0.98);
-  backdrop-filter: blur(12px);
+  /* SOLID background — no alpha so hero never bleeds through */
+  background: #070B27;
+  /* Slide in from the right */
   transform: translateX(100%);
-  transition: transform 0.3s ease;
-  z-index: 999;
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Below the navbar (10000) but above everything else */
+  z-index: 9999;
+  /* Top padding clears the navbar */
+  padding-top: 70px;
+  overflow-y: auto;
 }
 
 .mobileMenuOpen {
@@ -161,53 +175,71 @@
 .mobileMenuInner {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 32px 24px;
+  gap: 8px;
+  padding: 24px 20px 40px;
+}
+
+/* Thin divider between nav links and auth buttons */
+.mobileMenuDivider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 8px 0;
 }
 
 .mobileLink {
   display: block;
   width: 100%;
-  padding: 12px 20px;
+  padding: 14px 20px;
   font-size: 16px;
   font-weight: 500;
   text-align: center;
   border-radius: 12px;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
   text-decoration: none;
   background: transparent;
   border: none;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.75);
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Mobile Login button – ghost style (visible) */
+.mobileLink:hover,
+.mobileLink:active {
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+}
+
+/* ── Mobile auth buttons ── */
 .loginMobile {
-  background: rgba(108, 99, 255, 0.15);
-  border: 1px solid rgba(108, 99, 255, 0.5);
-  color: #9C89FF;
-  margin-top: 8px;
+  background: rgba(108, 99, 255, 0.12);
+  border: 1.5px solid rgba(108, 99, 255, 0.4);
+  color: #A897FF;
+  margin-top: 4px;
+  font-weight: 600;
 }
 .loginMobile:hover,
 .loginMobile:active {
-  background: rgba(108, 99, 255, 0.3);
-  color: #B8A9FF;
+  background: rgba(108, 99, 255, 0.25);
+  border-color: rgba(108, 99, 255, 0.7);
+  color: #C4B5FF;
 }
 
-/* Mobile Register button – solid gradient (visible) */
 .registerMobile {
   background: linear-gradient(135deg, #6C63FF, #9C89FF);
   color: white;
   border: none;
-  margin-top: 8px;
+  margin-top: 4px;
+  font-weight: 700;
+  box-shadow: 0 6px 20px rgba(108, 99, 255, 0.35);
 }
 .registerMobile:hover,
 .registerMobile:active {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
+  box-shadow: 0 8px 24px rgba(108, 99, 255, 0.5);
 }
 
-/* Responsive */
+/* ── Responsive breakpoints ── */
 @media (max-width: 768px) {
   .desktopLinks {
     display: none;
@@ -234,11 +266,8 @@
   .inner {
     padding: 0 20px;
   }
-  .logoImg {
-    width: 32px;
-    height: 32px;
-  }
-  .brand {
-    font-size: 18px;
+  /* mobileMenu top padding matches nav height */
+  .mobileMenu {
+    padding-top: 64px;
   }
 }

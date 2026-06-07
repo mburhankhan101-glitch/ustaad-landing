@@ -1,4 +1,4 @@
-/* Hero.module.css – final version with fixed mobile spacing */
+/* Hero.module.css – fixed mobile layout */
 
 /* ── Scroll Reveal ─────────────────────────────────────────────── */
 .revealUp {
@@ -120,6 +120,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+  box-sizing: border-box;
 }
 .btnPrimary:hover {
   transform: translateY(-2px);
@@ -145,6 +146,7 @@
   justify-content: center;
   gap: 8px;
   transition: transform 0.15s ease;
+  box-sizing: border-box;
 }
 .btnContinue:hover {
   transform: translateY(-2px);
@@ -161,6 +163,7 @@
   padding: 9px 16px;
   cursor: pointer;
   transition: border-color 0.15s, color 0.15s;
+  box-sizing: border-box;
 }
 .btnSwitch:hover {
   border-color: rgba(255, 255, 255, 0.35);
@@ -548,76 +551,131 @@
    LARGE MOBILE  480–767px
    ================================================================ */
 @media (max-width: 767px) {
+  /* ── Hero container ── */
   .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;        /* vertical centering */
+    min-height: 100svh; /* svh avoids mobile browser chrome issues */
+    display: block;
     padding-top: 0;
     padding-bottom: 0;
+    overflow-x: hidden;
   }
 
+  /* ── Grid: single column, full width ── */
   .heroGrid {
     grid-template-columns: 1fr;
     gap: 0;
-    padding: 80px 24px 40px;   /* top padding = navbar height (approx 70px + safe) */
+    /* top: clear the fixed navbar (~64px) + breathing room */
+    padding: 96px 24px 56px;
     text-align: center;
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
   }
 
+  /* ── Left col: full width, everything centered ── */
   .heroLeft {
     max-width: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: center;  /* center children horizontally */
+    text-align: center;
+    animation: none; /* disable on mobile for perf */
   }
 
+  /* ── Headline ── */
   .h1 {
-    font-size: 42px;
+    font-size: 40px;
     letter-spacing: -1px;
     margin-bottom: 16px;
     text-align: center;
+    width: 100%;
   }
 
   .h1Cycle {
     height: 1.15em;
   }
 
+  /* ── Subtext ── */
   .sub {
-    font-size: 14.5px;
+    font-size: 15px;
     margin-bottom: 28px;
-    max-width: 480px;
+    max-width: 420px;
+    width: 100%;
     text-align: center;
   }
 
+  /* ── CTA area: full width ── */
   .ctas {
-    margin-bottom: 28px;
+    margin-bottom: 32px;
     width: 100%;
+    box-sizing: border-box;
   }
 
+  .ctaColumn {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .btnPrimary {
+    width: 100%;
+    font-size: 16px;
+    padding: 16px 20px;
+    border-radius: 14px;
+    box-sizing: border-box;
+  }
+
+  .btnContinue {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .btnSwitch {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* ── Hide phone and floating badges ── */
   .heroRight {
-    display: none;   /* hide phone on mobile completely */
-  }
-
-  .fbStreak, .fbAi {
     display: none;
   }
 
-  /* Stats strip – centered */
+  .fbStreak,
+  .fbAi {
+    display: none;
+  }
+
+  /* ── Stats strip: centered, all 3 items visible ── */
   .heroLeft .strip {
     justify-content: center;
-    margin-top: 16px;
+    align-items: center;
+    margin-top: 24px;
     margin-bottom: 0;
-    gap: 32px;
+    gap: 0;           /* let items control their own spacing */
+    flex-wrap: nowrap;
+    width: 100%;
   }
+
   .heroLeft .stripItem {
     align-items: center;
+    text-align: center;
+    flex: 1;          /* distribute equally */
+    min-width: 0;
   }
+
   .heroLeft .stripSep {
-    height: 36px;
+    height: 32px;
+    flex-shrink: 0;
   }
-  .stripItem {
-    gap: 2px;
+
+  .stripNum {
+    font-size: 26px;
+    letter-spacing: -0.5px;
+  }
+
+  .stripLbl {
+    font-size: 11px;
   }
 }
 
@@ -626,25 +684,33 @@
    ================================================================ */
 @media (max-width: 479px) {
   .heroGrid {
-    padding: 70px 16px 30px;   /* smaller top padding */
+    padding: 88px 16px 48px;
   }
+
   .h1 {
-    font-size: 36px;
+    font-size: 34px;
+    letter-spacing: -0.5px;
   }
+
   .sub {
-    font-size: 13.5px;
+    font-size: 14px;
+    line-height: 1.7;
   }
+
   .btnPrimary {
     font-size: 15px;
-    padding: 14px 20px;
+    padding: 15px 16px;
   }
+
   .heroLeft .strip {
-    gap: 24px;
-    margin-top: 12px;
+    margin-top: 20px;
+    gap: 0;
   }
+
   .stripNum {
     font-size: 22px;
   }
+
   .stripLbl {
     font-size: 10px;
   }
