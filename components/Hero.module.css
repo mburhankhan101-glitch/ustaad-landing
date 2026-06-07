@@ -549,62 +549,103 @@
    ================================================================ */
 @media (max-width: 767px) {
   .hero {
-    padding-top: 16px;    /* reduced from 32px – less space after navbar */
-    padding-bottom: 24px; /* reduced from 40px – less blue space */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;        /* vertical centering */
+    padding-top: 0;
+    padding-bottom: 0;
   }
+
   .heroGrid {
     grid-template-columns: 1fr;
     gap: 0;
-    padding: 16px 24px 24px; /* top, sides, bottom – tighter */
+    padding: 80px 24px 40px;   /* top padding = navbar height (approx 70px + safe) */
     text-align: center;
+    width: 100%;
   }
+
   .heroLeft {
     max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
+
   .h1 {
     font-size: 42px;
     letter-spacing: -1px;
     margin-bottom: 16px;
+    text-align: center;
   }
-  .h1Cycle { height: 1.15em; }
+
+  .h1Cycle {
+    height: 1.15em;
+  }
+
   .sub {
     font-size: 14.5px;
     margin-bottom: 28px;
     max-width: 480px;
+    text-align: center;
   }
-  .ctas { margin-bottom: 28px; }
-  .heroRight { padding: 24px 0 8px; }
-  .phoneWrap { width: 210px; transform: none; filter: drop-shadow(0 18px 40px rgba(0,0,0,0.6)); }
-  .phoneWrap:hover { transform: none; }
-  .phoneShadow { width: 180px; height: 40px; bottom: 20px; }
-  .fbStreak, .fbAi { display: none; }
 
-  /* Stats strip – centered, less top margin, no bottom margin */
+  .ctas {
+    margin-bottom: 28px;
+    width: 100%;
+  }
+
+  .heroRight {
+    display: none;   /* hide phone on mobile completely */
+  }
+
+  .fbStreak, .fbAi {
+    display: none;
+  }
+
+  /* Stats strip – centered */
   .heroLeft .strip {
     justify-content: center;
-    margin-top: 16px;     /* reduced from 28px */
+    margin-top: 16px;
     margin-bottom: 0;
     gap: 32px;
   }
-  .heroLeft .stripItem { align-items: center; }
-  .heroLeft .stripSep { height: 36px; }
-  .stripItem { gap: 2px; }
+  .heroLeft .stripItem {
+    align-items: center;
+  }
+  .heroLeft .stripSep {
+    height: 36px;
+  }
+  .stripItem {
+    gap: 2px;
+  }
 }
 
 /* ================================================================
    SMALL MOBILE  < 480px
    ================================================================ */
 @media (max-width: 479px) {
-  .heroGrid { padding: 12px 16px 20px; }
-  .h1 { font-size: 36px; letter-spacing: -0.5px; }
-  .sub { font-size: 13.5px; }
-  .heroRight { display: none; }
-  .btnPrimary { font-size: 15px; padding: 14px 20px; }
-  .heroLeft .strip { gap: 24px; margin-top: 12px; }
-  .stripNum { font-size: 22px; }
-  .stripLbl { font-size: 10px; }
-  .stripItem { gap: 2px; }
+  .heroGrid {
+    padding: 70px 16px 30px;   /* smaller top padding */
+  }
+  .h1 {
+    font-size: 36px;
+  }
+  .sub {
+    font-size: 13.5px;
+  }
+  .btnPrimary {
+    font-size: 15px;
+    padding: 14px 20px;
+  }
+  .heroLeft .strip {
+    gap: 24px;
+    margin-top: 12px;
+  }
+  .stripNum {
+    font-size: 22px;
+  }
+  .stripLbl {
+    font-size: 10px;
+  }
 }
