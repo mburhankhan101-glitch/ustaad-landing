@@ -540,53 +540,46 @@
    MOBILE  ≤ 767px
    ================================================================ */
 /* ── Mobile Responsive Overrides ── */
+/* ── Mobile Responsive Overrides ── */
 @media (max-width: 992px) {
   .hero {
-    padding-top: 80px;
-    display: flex;
-    align-items: center; /* Helps vertical centering */
+    padding-top: 110px; /* Give plenty of breathing room for the navbar */
+    display: block; 
   }
 
   .heroGrid {
-    /* FIX: Collapse 2 columns into 1 so there's no blank right side */
+    /* 1 Column, natural block flow to prevent squishing */
     grid-template-columns: 1fr;
-    padding: 20px 24px; /* Tighter padding for mobile */
-    gap: 30px;
+    padding: 0 24px;
+    display: block; 
     width: 100%;
-    min-height: 80vh; /* Ensure it takes up vertical space */
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   .heroLeft {
-    /* FIX: Center horizontally and vertically */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     text-align: center;
     margin: 0 auto;
     width: 100%;
-    max-width: 100%;
   }
 
   .h1 {
-    font-size: 2.5rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    font-size: 2.2rem;
+    display: block; /* Let the sentence flow naturally */
+    line-height: 1.4;
+    margin-bottom: 20px;
   }
 
   .h1Line, .h1Cycle {
-    text-align: center;
+    display: inline-block; /* Keeps words side-by-side */
+    margin: 0 4px;
   }
 
   .sub {
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto 32px auto;
+    max-width: 100%;
   }
 
   .ctaColumn {
@@ -594,7 +587,6 @@
     gap: 12px;
   }
 
-  /* Force elements to span full mobile width */
   .btnPrimary,
   .btnContinue,
   .btnSwitch,
@@ -604,22 +596,23 @@
     justify-content: center;
   }
 
-  /* ── Hide phone mockup completely so it stops taking up layout space ── */
+  /* ── Hide phone mockup completely ── */
   .heroRight,
   .fbStreak,
   .fbAi {
     display: none !important;
   }
 
-  /* ── Stats strip: centred evenly ── */
+  /* ── Force cards down to prevent overlapping the text ── */
   .heroLeft .strip {
+    position: relative;
+    margin-top: 50px !important; /* Hard gap so it never covers the heading */
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin-top: 32px;
-    margin-bottom: 0;
-    gap: 0;
-    flex-wrap: nowrap;
     width: 100%;
+    gap: 12px;
   }
 
   .heroLeft .stripItem {
