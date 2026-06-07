@@ -149,64 +149,60 @@
    MOBILE MENU OVERLAY
    KEY FIX: solid background + z-index below navbar but above EVERYTHING else
    ================================================================ */
+/* ── Mobile Menu Overlay ── */
 .mobileMenu {
   position: fixed;
-  /* Start from the very top of the screen */
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  /* SOLID background — no alpha so hero never bleeds through */
-  background: #070B27;
-  /* Slide in from the right */
-  transform: translateX(100%);
-  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
-  /* Below the navbar (10000) but above everything else */
-  z-index: 9999;
-  /* Top padding clears the navbar */
-  padding-top: 70px;
-  overflow-y: auto;
+  width: 100vw;
+  height: 100vh; /* FIX: Force to cover the entire viewport height */
+  background: rgba(10, 14, 46, 0.98); /* Solid enough to hide background */
+  backdrop-filter: blur(15px);
+  z-index: 9999; /* FIX: Just below .nav (10000) so the close button is clickable */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none; /* Ignore clicks when closed */
+  transition: opacity 0.35s ease-in-out;
 }
 
 .mobileMenuOpen {
-  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .mobileMenuInner {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 24px 20px 40px;
-}
-
-/* Thin divider between nav links and auth buttons */
-.mobileMenuDivider {
+  align-items: center;
+  justify-content: center;
+  gap: 32px; /* Add spacing between links */
   width: 100%;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.08);
-  margin: 8px 0;
+  padding: 0 24px;
 }
 
 .mobileLink {
-  display: block;
-  width: 100%;
-  padding: 14px 20px;
-  font-size: 16px;
+  font-size: 1.35rem; /* Make it easily tappable */
   font-weight: 500;
-  text-align: center;
-  border-radius: 12px;
   transition: background 0.2s ease, color 0.2s ease;
   text-decoration: none;
   background: transparent;
   border: none;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.85);
   font-family: 'Poppins', sans-serif;
+  text-align: center;
+  width: 100%;
+  max-width: 280px;
+  padding: 12px;
+  border-radius: 8px;
 }
 
 .mobileLink:hover,
 .mobileLink:active {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
   color: white;
 }
 
@@ -215,7 +211,7 @@
   background: rgba(108, 99, 255, 0.12);
   border: 1.5px solid rgba(108, 99, 255, 0.4);
   color: #A897FF;
-  margin-top: 4px;
+  margin-top: 16px;
   font-weight: 600;
 }
 .loginMobile:hover,
@@ -228,35 +224,7 @@
 .registerMobile {
   background: linear-gradient(135deg, #6C63FF, #9C89FF);
   color: white;
-  border: none;
-  margin-top: 4px;
-  font-weight: 700;
-  box-shadow: 0 6px 20px rgba(108, 99, 255, 0.35);
-}
-.registerMobile:hover,
-.registerMobile:active {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(108, 99, 255, 0.5);
-}
-
-/* ── Responsive breakpoints ── */
-@media (max-width: 768px) {
-  .desktopLinks {
-    display: none;
-  }
-  .hamburger {
-    display: flex;
-  }
-  .inner {
-    padding: 0 24px;
-  }
-  .brand {
-    font-size: 18px;
-  }
-  .logoImg {
-    width: 32px;
-    height: 32px;
-  }
+  font-weight: 600;
 }
 
 @media (max-width: 767px) {

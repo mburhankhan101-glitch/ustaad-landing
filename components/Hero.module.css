@@ -539,120 +539,85 @@
 /* ================================================================
    MOBILE  ≤ 767px
    ================================================================ */
-@media (max-width: 767px) {
-
-  /* ── Hero: fill the screen, content vertically centred ── */
+/* ── Mobile Responsive Overrides ── */
+@media (max-width: 992px) {
   .hero {
-    min-height: 100svh;
+    padding-top: 80px;
     display: flex;
-    align-items: center;   /* vertically centres .heroGrid */
-    padding-top: 0;
-    padding-bottom: 0;
-    overflow-x: hidden;
+    align-items: center; /* Helps vertical centering */
   }
 
-  /* ── Single-column grid ── */
   .heroGrid {
+    /* FIX: Collapse 2 columns into 1 so there's no blank right side */
     grid-template-columns: 1fr;
-    gap: 0;
-    /* top clears the fixed navbar; bottom gives breathing room */
-    padding: 90px 22px 52px;
-    text-align: center;
+    padding: 20px 24px; /* Tighter padding for mobile */
+    gap: 30px;
     width: 100%;
-    box-sizing: border-box;
-    margin: 0;
-    /* make sure it doesn't shrink inside the flex hero */
-    align-self: stretch;
+    min-height: 80vh; /* Ensure it takes up vertical space */
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
   }
 
-  /* ── Left column: full-width, everything centred ── */
   .heroLeft {
-    max-width: 100%;
-    width: 100%;
+    /* FIX: Center horizontally and vertically */
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
-    animation: none;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
   }
 
-  /* ── Headline ── */
   .h1 {
-    font-size: 40px;
-    letter-spacing: -1px;
-    margin-bottom: 16px;
+    font-size: 2.5rem;
     text-align: center;
-    width: 100%;
-    animation: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  .h1Cycle {
-    height: 1.15em;
-    /* width must be 100% so the absolutely-positioned .cw
-       can use text-align:center relative to the full line */
-    width: 100%;
-  }
-
-  /* FIX: cycle words are absolute-positioned with left:0
-     by default. On mobile we want them centred, so give
-     them full width + text-align:center instead.        */
-  .cw {
-    width: 100%;
+  .h1Line, .h1Cycle {
     text-align: center;
-    left: 0;
   }
 
-  /* ── Subtext ── */
   .sub {
-    font-size: 15px;
-    margin-bottom: 28px;
-    width: 100%;
     text-align: center;
-    animation: none;
-  }
-
-  /* ── CTA area: force every child to fill the column ── */
-  .ctas {
-    width: 100%;
-    margin-bottom: 32px;
-    box-sizing: border-box;
-    animation: none;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .ctaColumn {
     width: 100%;
-    gap: 10px;
+    gap: 12px;
   }
 
+  /* Force elements to span full mobile width */
   .btnPrimary,
   .btnContinue,
-  .btnSwitch {
+  .btnSwitch,
+  .ctas {
     width: 100%;
-    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
   }
 
-  .btnPrimary {
-    padding: 16px 20px;
-    font-size: 16px;
-  }
-
-  /* ── Hide phone mockup + floating badges ── */
+  /* ── Hide phone mockup completely so it stops taking up layout space ── */
   .heroRight,
   .fbStreak,
   .fbAi {
-    display: none;
+    display: none !important;
   }
 
-  /* ── Stats strip: centred, all three items share space equally ── */
+  /* ── Stats strip: centred evenly ── */
   .heroLeft .strip {
     justify-content: center;
     align-items: center;
-    margin-top: 28px;
+    margin-top: 32px;
     margin-bottom: 0;
-    gap: 0;          /* items control spacing via flex:1   */
+    gap: 0;
     flex-wrap: nowrap;
     width: 100%;
   }
@@ -660,30 +625,6 @@
   .heroLeft .stripItem {
     align-items: center;
     text-align: center;
-    flex: 1;         /* each stat takes equal horizontal space */
+    flex: 1;
   }
-
-  .heroLeft .stripSep {
-    height: 32px;
-    flex-shrink: 0;
-  }
-
-  .stripNum { font-size: 26px; }
-  .stripLbl { font-size: 11px; }
-}
-
-/* ================================================================
-   SMALL MOBILE  < 480px
-   ================================================================ */
-@media (max-width: 479px) {
-  .heroGrid { padding: 84px 16px 44px; }
-
-  .h1  { font-size: 34px; }
-  .sub { font-size: 13.5px; }
-
-  .btnPrimary { font-size: 15px; padding: 15px 16px; }
-
-  .heroLeft .strip { margin-top: 22px; }
-  .stripNum { font-size: 22px; }
-  .stripLbl { font-size: 10px; }
 }
