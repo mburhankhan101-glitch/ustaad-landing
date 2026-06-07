@@ -1,4 +1,4 @@
-/* Hero.module.css – final version with improved stats strip spacing */
+/* Hero.module.css – final version with fixed mobile spacing */
 
 /* ── Scroll Reveal ─────────────────────────────────────────────── */
 .revealUp {
@@ -469,7 +469,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;   /* reduced vertical gap between number and label */
+  gap: 2px;
   text-align: center;
 }
 .stripNum {
@@ -494,7 +494,7 @@
   justify-content: flex-start;
   margin-top: 32px;
   padding: 0;
-  gap: 48px;   /* increased horizontal gap between columns */
+  gap: 48px;
 }
 .heroLeft .stripItem {
   align-items: flex-start;
@@ -505,48 +505,24 @@
 
 /* ── Keyframes ─────────────────────────────────────────────────── */
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(22px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 @keyframes slideRight {
-  from {
-    opacity: 0;
-    transform: translateX(44px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(44px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 @keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 0 5px rgba(76, 175, 80, 0);
-  }
+  0%, 100% { box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2); }
+  50% { box-shadow: 0 0 0 5px rgba(76, 175, 80, 0); }
 }
 @keyframes floatY {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-9px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
 }
 @keyframes skelPulse {
-  0%, 100% {
-    opacity: 0.45;
-  }
-  50% {
-    opacity: 0.85;
-  }
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 0.85; }
 }
 
 /* ================================================================
@@ -557,177 +533,78 @@
     gap: 28px;
     padding: 32px 40px 56px;
   }
-
-  .h1 {
-    font-size: 52px;
-    letter-spacing: -1.5px;
-  }
-  .sub {
-    font-size: 15px;
-  }
-
-  .phoneWrap {
-    width: 220px;
-    transform: perspective(900px) rotateY(-6deg) rotateX(1deg);
-  }
-  .phoneWrap:hover {
-    transform: perspective(900px) rotateY(-2deg) rotateX(0deg);
-  }
-
-  .fbStreak {
-    left: -10px;
-    top: 14px;
-    padding: 7px 10px;
-  }
-  .fbAi {
-    right: -10px;
-    bottom: 28px;
-    padding: 7px 10px;
-  }
-  .fbStreakNum {
-    font-size: 12px;
-  }
-  .fbAiMain {
-    font-size: 10px;
-  }
-
-  .heroLeft .strip {
-    gap: 40px; /* slightly less than desktop but still spacious */
-    margin-top: 28px;
-  }
+  .h1 { font-size: 52px; letter-spacing: -1.5px; }
+  .sub { font-size: 15px; }
+  .phoneWrap { width: 220px; transform: perspective(900px) rotateY(-6deg) rotateX(1deg); }
+  .phoneWrap:hover { transform: perspective(900px) rotateY(-2deg) rotateX(0deg); }
+  .fbStreak { left: -10px; top: 14px; padding: 7px 10px; }
+  .fbAi { right: -10px; bottom: 28px; padding: 7px 10px; }
+  .fbStreakNum { font-size: 12px; }
+  .fbAiMain { font-size: 10px; }
+  .heroLeft .strip { gap: 40px; margin-top: 28px; }
 }
 
 /* ================================================================
    LARGE MOBILE  480–767px
-   Single column, phone visible below CTA, floating badges hidden.
    ================================================================ */
 @media (max-width: 767px) {
   .hero {
-    padding-top: 32px;
-    padding-bottom: 40px;
+    padding-top: 16px;    /* reduced from 32px – less space after navbar */
+    padding-bottom: 24px; /* reduced from 40px – less blue space */
   }
-
   .heroGrid {
     grid-template-columns: 1fr;
     gap: 0;
-    padding: 24px 24px 48px;
+    padding: 16px 24px 24px; /* top, sides, bottom – tighter */
     text-align: center;
   }
-
   .heroLeft {
     max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-
   .h1 {
     font-size: 42px;
     letter-spacing: -1px;
     margin-bottom: 16px;
   }
-  .h1Cycle {
-    height: 1.15em;
-  }
-
+  .h1Cycle { height: 1.15em; }
   .sub {
     font-size: 14.5px;
     margin-bottom: 28px;
     max-width: 480px;
   }
+  .ctas { margin-bottom: 28px; }
+  .heroRight { padding: 24px 0 8px; }
+  .phoneWrap { width: 210px; transform: none; filter: drop-shadow(0 18px 40px rgba(0,0,0,0.6)); }
+  .phoneWrap:hover { transform: none; }
+  .phoneShadow { width: 180px; height: 40px; bottom: 20px; }
+  .fbStreak, .fbAi { display: none; }
 
-  .ctas {
-    margin-bottom: 28px;
-  }
-
-  .heroRight {
-    padding: 32px 0 16px;
-  }
-
-  .phoneWrap {
-    width: 210px;
-    transform: none;
-    filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.6));
-  }
-  .phoneWrap:hover {
-    transform: none;
-  }
-
-  .phoneShadow {
-    width: 180px;
-    height: 40px;
-    bottom: 20px;
-  }
-
-  .fbStreak,
-  .fbAi {
-    display: none;
-  }
-
-  /* Stats strip – centered on mobile, good spacing */
+  /* Stats strip – centered, less top margin, no bottom margin */
   .heroLeft .strip {
     justify-content: center;
-    margin-top: 28px;
+    margin-top: 16px;     /* reduced from 28px */
+    margin-bottom: 0;
     gap: 32px;
   }
-  .heroLeft .stripItem {
-    align-items: center;
-  }
-  .heroLeft .stripSep {
-    height: 36px;
-  }
-  .stripItem {
-    gap: 2px; /* keep vertical gap tight */
-  }
-
-  .btnLogin,
-  .btnRegister {
-    font-size: 14px;
-  }
+  .heroLeft .stripItem { align-items: center; }
+  .heroLeft .stripSep { height: 36px; }
+  .stripItem { gap: 2px; }
 }
 
 /* ================================================================
    SMALL MOBILE  < 480px
-   Hide phone mockup entirely.
    ================================================================ */
 @media (max-width: 479px) {
-  .heroGrid {
-    padding: 20px 16px 40px;
-  }
-
-  .h1 {
-    font-size: 36px;
-    letter-spacing: -0.5px;
-  }
-
-  .sub {
-    font-size: 13.5px;
-  }
-
-  .heroRight {
-    display: none;
-  }
-
-  .btnPrimary {
-    font-size: 15px;
-    padding: 14px 20px;
-  }
-  .btnLogin,
-  .btnRegister {
-    font-size: 13px;
-    padding: 12px 8px;
-  }
-
-  .heroLeft .strip {
-    gap: 24px;
-  }
-  .stripNum {
-    font-size: 22px;
-  }
-  .stripLbl {
-    font-size: 10px;
-  }
-  .stripItem {
-    gap: 2px;
-  }
+  .heroGrid { padding: 12px 16px 20px; }
+  .h1 { font-size: 36px; letter-spacing: -0.5px; }
+  .sub { font-size: 13.5px; }
+  .heroRight { display: none; }
+  .btnPrimary { font-size: 15px; padding: 14px 20px; }
+  .heroLeft .strip { gap: 24px; margin-top: 12px; }
+  .stripNum { font-size: 22px; }
+  .stripLbl { font-size: 10px; }
+  .stripItem { gap: 2px; }
 }
