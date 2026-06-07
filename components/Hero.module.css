@@ -1,5 +1,6 @@
+/* Hero.module.css – mobile: centered, stats below, no phone, full height */
 
-/* ── Scroll Reveal ─────────────────────────────────────────────── */
+/* Scroll Reveal */
 .revealUp {
   opacity: 0;
   transform: translateY(28px);
@@ -11,16 +12,19 @@
   transform: translateY(0) !important;
 }
 
-/* ── Hero wrapper ──────────────────────────────────────────────── */
+/* Hero wrapper – full viewport height */
 .hero {
   position: relative;
   min-height: 100vh;
   overflow: hidden;
   padding-bottom: 60px;
   padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* ── Two‑column grid ───────────────────────────────────────────── */
+/* Two‑column grid */
 .heroGrid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -36,7 +40,7 @@
   animation: fadeUp 0.6s ease both;
 }
 
-/* ── Headline ─────────────────────────────────────────────────── */
+/* Headline */
 .h1 {
   font-size: 68px;
   font-weight: 900;
@@ -73,7 +77,7 @@
   transform: translateY(0);
 }
 
-/* ── Subtext ───────────────────────────────────────────────────── */
+/* Subtext */
 .sub {
   font-size: 16.5px;
   color: rgba(255, 255, 255, 0.6);
@@ -87,14 +91,13 @@
   font-weight: 600;
 }
 
-/* ── CTAs wrapper ──────────────────────────────────────────────── */
+/* CTAs */
 .ctas {
   width: 100%;
   margin-bottom: 38px;
   animation: fadeUp 0.6s ease 0.48s both;
 }
 
-/* ── CTA Buttons ───────────────────────────────────────────────── */
 .ctaColumn {
   display: flex;
   flex-direction: column;
@@ -102,81 +105,56 @@
   width: 100%;
 }
 
-.btnPrimary {
+.btnPrimary, .btnContinue, .btnSwitch, .btnSkeleton {
   width: 100%;
   padding: 15px 24px;
   border-radius: 14px;
   border: none;
-  background: linear-gradient(135deg, #6C63FF, #9C89FF);
-  color: #fff;
   font-family: 'Poppins', sans-serif;
-  font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 8px 32px rgba(108, 99, 255, 0.4);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   box-sizing: border-box;
+}
+.btnPrimary {
+  background: linear-gradient(135deg, #6C63FF, #9C89FF);
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(108, 99, 255, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .btnPrimary:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 40px rgba(108, 99, 255, 0.5);
 }
-.btnPrimary:active {
-  transform: translateY(0);
-}
-
 .btnContinue {
-  width: 100%;
-  padding: 14px 24px;
-  border-radius: 14px;
-  border: none;
   background: linear-gradient(135deg, #6C63FF, #9C89FF);
   color: #fff;
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
   transition: transform 0.15s ease;
-  box-sizing: border-box;
 }
 .btnContinue:hover {
   transform: translateY(-2px);
 }
-
 .btnSwitch {
-  width: 100%;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
   color: rgba(255, 255, 255, 0.55);
-  font-family: 'Poppins', sans-serif;
   font-size: 13px;
-  padding: 9px 16px;
-  cursor: pointer;
-  transition: border-color 0.15s, color 0.15s;
-  box-sizing: border-box;
+  font-weight: 500;
 }
 .btnSwitch:hover {
   border-color: rgba(255, 255, 255, 0.35);
   color: rgba(255, 255, 255, 0.8);
 }
-
 .btnSkeleton {
   height: 52px;
-  border-radius: 14px;
   background: rgba(108, 99, 255, 0.35);
   animation: skelPulse 1.5s ease-in-out infinite;
 }
 
-/* ── Phone area ────────────────────────────────────────────────── */
+/* Phone area (desktop only) */
 .heroRight {
   position: relative;
   display: flex;
@@ -185,7 +163,6 @@
   padding: 48px 0;
   animation: slideRight 0.75s cubic-bezier(0.34, 1.1, 0.64, 1) 0.25s both;
 }
-
 .phoneShadow {
   position: absolute;
   bottom: 32px;
@@ -195,7 +172,6 @@
   filter: blur(18px);
   z-index: 0;
 }
-
 .phoneWrap {
   position: relative;
   z-index: 1;
@@ -207,7 +183,6 @@
 .phoneWrap:hover {
   transform: perspective(1100px) rotateY(-3deg) rotateX(1deg);
 }
-
 .phoneBody {
   background: #070B27;
   border-radius: 38px;
@@ -215,7 +190,6 @@
   border: 1.5px solid rgba(255, 255, 255, 0.13);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
 }
-
 .island {
   width: 90px;
   height: 24px;
@@ -223,13 +197,11 @@
   background: #030614;
   margin: 0 auto 12px;
 }
-
 .screen {
   background: linear-gradient(188deg, #0B0F31 0%, #0F0A36 100%);
   border-radius: 26px;
   overflow: hidden;
 }
-
 .appBar {
   padding: 12px 14px 10px;
   display: flex;
@@ -260,7 +232,6 @@
   font-size: 10px;
   font-weight: 700;
 }
-
 .progWrap {
   padding: 0 14px 10px;
 }
@@ -282,7 +253,6 @@
   background: linear-gradient(90deg, #6C63FF, #A78BFA);
   border-radius: 2px;
 }
-
 .topicChip {
   margin: 0 14px 10px;
   display: inline-flex;
@@ -303,7 +273,6 @@
   font-size: 10px;
   color: rgba(255, 255, 255, 0.62);
 }
-
 .qcard {
   margin: 0 14px 10px;
   background: rgba(255, 255, 255, 0.04);
@@ -324,7 +293,6 @@
   color: rgba(255, 255, 255, 0.88);
   line-height: 1.55;
 }
-
 .opts {
   padding: 0 14px 14px;
   display: flex;
@@ -339,7 +307,6 @@
   border-radius: 11px;
   border: 1px solid rgba(255, 255, 255, 0.06);
   background: rgba(255, 255, 255, 0.02);
-  transition: background 0.2s;
 }
 .optCorrect {
   background: rgba(76, 175, 80, 0.12);
@@ -380,7 +347,7 @@
   margin-left: auto;
 }
 
-/* ── Floating badges ───────────────────────────────────────────── */
+/* Floating badges (desktop only) */
 .fbStreak {
   position: absolute;
   top: 26px;
@@ -399,17 +366,8 @@
 }
 .fbStreakIcon { font-size: 20px; }
 .fbStreakInfo { display: flex; flex-direction: column; }
-.fbStreakNum {
-  font-size: 14px;
-  font-weight: 700;
-  color: #FFD700;
-  line-height: 1;
-}
-.fbStreakLbl {
-  font-size: 9px;
-  color: rgba(255, 255, 255, 0.4);
-  margin-top: 2px;
-}
+.fbStreakNum { font-size: 14px; font-weight: 700; color: #FFD700; line-height: 1; }
+.fbStreakLbl { font-size: 9px; color: rgba(255, 255, 255, 0.4); margin-top: 2px; }
 
 .fbAi {
   position: absolute;
@@ -429,19 +387,10 @@
 }
 .fbAiIcon { font-size: 18px; }
 .fbAiInfo { display: flex; flex-direction: column; }
-.fbAiMain {
-  font-size: 11px;
-  font-weight: 600;
-  color: white;
-  line-height: 1;
-}
-.fbAiSub {
-  font-size: 9px;
-  color: rgba(255, 255, 255, 0.4);
-  margin-top: 2px;
-}
+.fbAiMain { font-size: 11px; font-weight: 600; color: white; line-height: 1; }
+.fbAiSub { font-size: 9px; color: rgba(255, 255, 255, 0.4); margin-top: 2px; }
 
-/* ── Stats strip ────────────────────────────────────────────────── */
+/* Stats strip */
 .glowLine {
   width: 100%;
   height: 1px;
@@ -449,7 +398,6 @@
   margin: 0 auto;
   max-width: 900px;
 }
-
 .strip {
   display: flex;
   align-items: center;
@@ -479,7 +427,6 @@
   height: 44px;
   background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.12), transparent);
 }
-
 .heroLeft .strip {
   justify-content: flex-start;
   margin-top: 32px;
@@ -493,7 +440,7 @@
   height: 32px;
 }
 
-/* ── Keyframes ─────────────────────────────────────────────────── */
+/* Keyframes */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(22px); }
   to   { opacity: 1; transform: translateY(0);    }
@@ -501,10 +448,6 @@
 @keyframes slideRight {
   from { opacity: 0; transform: translateX(44px); }
   to   { opacity: 1; transform: translateX(0);    }
-}
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2); }
-  50%       { box-shadow: 0 0 0 5px rgba(76, 175, 80, 0);   }
 }
 @keyframes floatY {
   0%, 100% { transform: translateY(0);   }
@@ -515,20 +458,13 @@
   50%       { opacity: 0.85; }
 }
 
-/* ================================================================
-   TABLET  768–1100px
-   ================================================================ */
+/* Tablet (768–1100px) */
 @media (max-width: 1100px) {
   .heroGrid  { gap: 28px; padding: 32px 40px 56px; }
   .h1        { font-size: 52px; letter-spacing: -1.5px; }
   .sub       { font-size: 15px; }
-  .phoneWrap {
-    width: 220px;
-    transform: perspective(900px) rotateY(-6deg) rotateX(1deg);
-  }
-  .phoneWrap:hover {
-    transform: perspective(900px) rotateY(-2deg) rotateX(0deg);
-  }
+  .phoneWrap { width: 220px; transform: perspective(900px) rotateY(-6deg) rotateX(1deg); }
+  .phoneWrap:hover { transform: perspective(900px) rotateY(-2deg) rotateX(0deg); }
   .fbStreak  { left: -10px; top: 14px; padding: 7px 10px; }
   .fbAi      { right: -10px; bottom: 28px; padding: 7px 10px; }
   .fbStreakNum { font-size: 12px; }
@@ -536,25 +472,21 @@
   .heroLeft .strip { gap: 40px; margin-top: 28px; }
 }
 
-/* ================================================================
-   MOBILE  ≤ 767px
-   ================================================================ */
-/* ── Mobile Responsive Overrides ── */
-/* ── Mobile Responsive Overrides ── */
+/* Mobile (≤ 992px) – center everything, hide phone, stats below */
 @media (max-width: 992px) {
   .hero {
-    padding-top: 110px; /* Give plenty of breathing room for the navbar */
-    display: block; 
+    padding-top: 80px; /* less than before to avoid extra space */
+    min-height: 100vh;
+    justify-content: center;
   }
-
   .heroGrid {
-    /* 1 Column, natural block flow to prevent squishing */
     grid-template-columns: 1fr;
     padding: 0 24px;
-    display: block; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
   }
-
   .heroLeft {
     display: flex;
     flex-direction: column;
@@ -562,62 +494,84 @@
     text-align: center;
     margin: 0 auto;
     width: 100%;
+    max-width: 100%;
   }
-
   .h1 {
-    font-size: 2.2rem;
-    display: block; /* Let the sentence flow naturally */
-    line-height: 1.4;
+    font-size: 2.5rem;
+    display: block;
+    line-height: 1.3;
     margin-bottom: 20px;
+    text-align: center;
   }
-
   .h1Line, .h1Cycle {
-    display: inline-block; /* Keeps words side-by-side */
+    display: inline-block;
     margin: 0 4px;
   }
-
+  .h1Cycle {
+    display: inline-block;
+    height: auto;
+    color: #FFD700;
+  }
+  .cw {
+    position: static;
+    opacity: 0;
+    transform: translateY(0);
+    transition: opacity 0.3s ease;
+    white-space: normal;
+  }
+  .cw.on {
+    opacity: 1;
+    transform: translateY(0);
+  }
   .sub {
     text-align: center;
     margin: 0 auto 32px auto;
     max-width: 100%;
   }
-
   .ctaColumn {
     width: 100%;
     gap: 12px;
   }
-
-  .btnPrimary,
-  .btnContinue,
-  .btnSwitch,
-  .ctas {
+  .btnPrimary, .btnContinue, .btnSwitch, .ctas {
     width: 100%;
-    display: flex;
     justify-content: center;
   }
-
-  /* ── Hide phone mockup completely ── */
-  .heroRight,
-  .fbStreak,
-  .fbAi {
+  /* Hide phone mockup and floating badges */
+  .heroRight, .fbStreak, .fbAi {
     display: none !important;
   }
-
-  /* ── Force cards down to prevent overlapping the text ── */
+  /* Stats strip: centered, below buttons */
   .heroLeft .strip {
-    position: relative;
-    margin-top: 50px !important; /* Hard gap so it never covers the heading */
+    margin-top: 40px !important;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 100%;
-    gap: 12px;
+    gap: 24px;
   }
-
   .heroLeft .stripItem {
     align-items: center;
     text-align: center;
-    flex: 1;
+    flex: 0 1 auto;
+  }
+  .heroLeft .stripSep {
+    height: 30px;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 480px) {
+  .h1 {
+    font-size: 1.8rem;
+  }
+  .strip {
+    gap: 16px;
+  }
+  .stripNum {
+    font-size: 1.5rem;
+  }
+  .stripLbl {
+    font-size: 0.75rem;
   }
 }

@@ -1,11 +1,10 @@
-/* Navbar.module.css – fixed mobile overlay */
+/* Navbar.module.css – fixed mobile overlay + visible hamburger */
 
 .nav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  /* z-index MUST be above the mobile menu so the X button stays clickable */
   z-index: 10000;
   background: rgba(10, 14, 46, 0.95);
   backdrop-filter: blur(12px);
@@ -28,7 +27,7 @@
   justify-content: space-between;
 }
 
-/* ── Logo ── */
+/* Logo */
 .logo {
   display: flex;
   align-items: center;
@@ -51,7 +50,7 @@
   color: transparent;
 }
 
-/* ── Desktop links ── */
+/* Desktop links */
 .desktopLinks {
   display: flex;
   align-items: center;
@@ -75,7 +74,7 @@
   text-decoration: none;
 }
 
-/* ── Desktop buttons ── */
+/* Desktop buttons */
 .login {
   background: transparent;
   border: 1.5px solid rgba(108, 99, 255, 0.5);
@@ -110,7 +109,7 @@
   box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
 }
 
-/* ── Hamburger ── */
+/* Hamburger – hidden on desktop, visible on mobile */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -119,7 +118,6 @@
   border: none;
   cursor: pointer;
   padding: 8px;
-  /* Must be above the mobile menu overlay */
   position: relative;
   z-index: 10001;
 }
@@ -145,26 +143,22 @@
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* ================================================================
-   MOBILE MENU OVERLAY
-   KEY FIX: solid background + z-index below navbar but above EVERYTHING else
-   ================================================================ */
-/* ── Mobile Menu Overlay ── */
+/* Mobile Menu Overlay */
 .mobileMenu {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh; /* FIX: Force to cover the entire viewport height */
-  background: rgba(10, 14, 46, 0.98); /* Solid enough to hide background */
+  height: 100vh;
+  background: rgba(10, 14, 46, 0.98);
   backdrop-filter: blur(15px);
-  z-index: 9999; /* FIX: Just below .nav (10000) so the close button is clickable */
+  z-index: 9999;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  pointer-events: none; /* Ignore clicks when closed */
+  pointer-events: none;
   transition: opacity 0.35s ease-in-out;
 }
 
@@ -178,13 +172,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 32px; /* Add spacing between links */
+  gap: 32px;
   width: 100%;
   padding: 0 24px;
 }
 
 .mobileLink {
-  font-size: 1.35rem; /* Make it easily tappable */
+  font-size: 1.35rem;
   font-weight: 500;
   transition: background 0.2s ease, color 0.2s ease;
   text-decoration: none;
@@ -206,7 +200,6 @@
   color: white;
 }
 
-/* ── Mobile auth buttons ── */
 .loginMobile {
   background: rgba(108, 99, 255, 0.12);
   border: 1.5px solid rgba(108, 99, 255, 0.4);
@@ -214,6 +207,7 @@
   margin-top: 16px;
   font-weight: 600;
 }
+
 .loginMobile:hover,
 .loginMobile:active {
   background: rgba(108, 99, 255, 0.25);
@@ -227,6 +221,7 @@
   font-weight: 600;
 }
 
+/* Mobile styles: show hamburger, hide desktop links */
 @media (max-width: 767px) {
   .nav {
     padding: 10px 0;
@@ -234,7 +229,12 @@
   .inner {
     padding: 0 20px;
   }
-  /* mobileMenu top padding matches nav height */
+  .desktopLinks {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
   .mobileMenu {
     padding-top: 64px;
   }
