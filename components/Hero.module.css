@@ -503,24 +503,30 @@
     margin-bottom: 20px;
     text-align: center;
   }
-  .h1Line, .h1Cycle {
+  .h1Line {
     display: inline-block;
     margin: 0 4px;
   }
   .h1Cycle {
-    display: inline-block;
-    height: auto;
+    /* Must be block + relative so absolute children stack correctly */
+    display: block;
+    position: relative;
+    height: 1.3em;             /* explicit height since children are absolute */
+    width: 100%;
     color: #FFD700;
-    text-align: center;        /* <-- ADD this */
-    min-width: 120px;
+    overflow: hidden;
   }
   .cw {
-    position: static;
+    /* Keep absolute so all three names overlap — only .on is visible */
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;               /* span full parent width */
+    text-align: center;        /* centre the text within that width */
     opacity: 0;
-    transform: translateY(0);
-    transition: opacity 0.3s ease;
-    white-space: nowrap;       /* <-- CHANGE from 'normal' to 'nowrap' */
-    display: inline-block;
+    transform: translateY(10px);
+    transition: opacity 0.42s ease, transform 0.42s ease;
+    white-space: nowrap;
   }
   .cw.on {
     opacity: 1;
