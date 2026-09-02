@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
+import PlayButton from './PlayButton'
 import styles from './Hero.module.css'
 
 // ─── Configuration ─────────────────────────────────────────────────────────────
@@ -193,17 +194,20 @@ function OwlLoader({ message }) {
 }
 
 // ─── StatsStrip (only sub-component left) ─────────────────────────────────────
+// Every figure here has to be one we can defend if a student asks. The MCQ
+// count is the number actually uploaded to Firestore — update it when the
+// extractor ships a new batch, don't round it up.
 function StatsStrip() {
   return (
     <div className={styles.strip}>
       <div className={styles.stripItem}>
-        <span className={styles.stripNum}>400+</span>
-        <span className={styles.stripLbl}>Students</span>
+        <span className={styles.stripNum}>3,900+</span>
+        <span className={styles.stripLbl}>MCQs</span>
       </div>
       <div className={styles.stripSep} />
       <div className={styles.stripItem}>
-        <span className={styles.stripNum}>5000+</span>
-        <span className={styles.stripLbl}>MCQs</span>
+        <span className={styles.stripNum}>3</span>
+        <span className={styles.stripLbl}>Exams covered</span>
       </div>
       <div className={styles.stripSep} />
       <div className={styles.stripItem}>
@@ -297,6 +301,8 @@ function CTAButtons({ authStatus, firstName, onNavigate }) {
     )
   }
 
+  // Signed in on the web: let them straight back into their session, but still
+  // offer the install — streaks and drill reminders only work in the app.
   if (authStatus === 'in') {
     return (
       <div className={styles.ctaColumn}>
@@ -308,6 +314,7 @@ function CTAButtons({ authStatus, firstName, onNavigate }) {
           <span>🦉</span>
           {firstName ? `Continue as ${firstName}` : 'Continue to Dashboard'}
         </button>
+        <PlayButton placement="hero-signed-in" />
         <button
           type="button"
           className={styles.btnSwitch}
@@ -319,14 +326,17 @@ function CTAButtons({ authStatus, firstName, onNavigate }) {
     )
   }
 
+  // Signed out: the install is the goal. Browser practice stays as the escape
+  // hatch for desktop visitors and anyone out of storage.
   return (
     <div className={styles.ctaColumn}>
+      <PlayButton placement="hero" />
       <button
         type="button"
-        className={styles.btnPrimary}
+        className={styles.btnSecondary}
         onClick={() => onNavigate('home', 'Starting your practice session…')}
       >
-        Start Practicing Free →
+        Ya browser mein practice karo →
       </button>
     </div>
   )

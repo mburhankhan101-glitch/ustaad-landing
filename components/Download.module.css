@@ -64,6 +64,60 @@
   font-weight: 700;
 }
 
+/* The install button sits alone so nothing competes with it. */
+.installRow {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  margin: 4px 0 8px;
+}
+
+/* Separates the install (primary) from the MDCAT/NUMS notify (secondary),
+   so the email field never reads as a second way to get the app. */
+.divider {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 22px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.divider span {
+  white-space: nowrap;
+}
+
+.notifySub {
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.62);
+  max-width: 460px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .form {
   display: flex;
   gap: 0;

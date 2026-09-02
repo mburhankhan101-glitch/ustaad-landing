@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import PlayButton from './PlayButton'
 import styles from './Navbar.module.css'
 
 // Same APP_URL logic as Hero
@@ -28,17 +29,14 @@ export default function Navbar() {
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
-  // Navigate to Flutter app (like Hero's handleNavigate)
+  // Navigate to Flutter app (like Hero's handleNavigate). Only "login" is left
+  // here — new users go to Play, not the browser build.
   const handleAuthNavigate = (destination) => {
     if (navigatingTo) return // prevent double‑click
     setNavigatingTo(destination)
 
     setTimeout(() => {
-      const targets = {
-        login: `${APP_URL}/`,
-        register: `${APP_URL}/?signup=true`,
-      }
-      window.location.href = targets[destination] ?? `${APP_URL}/`
+      window.location.href = `${APP_URL}/`
     }, 200)
   }
 
@@ -66,14 +64,9 @@ export default function Navbar() {
             {navigatingTo === 'login' ? 'Loading…' : 'Login'}
           </button>
 
-          {/* Register – solid button */}
-          <button
-            className={styles.register}
-            onClick={() => handleAuthNavigate('register')}
-            disabled={!!navigatingTo}
-          >
-            {navigatingTo === 'register' ? 'Loading…' : 'Register'}
-          </button>
+          {/* Install – the sticky CTA. Replaces the old web "Register",
+              which sent new users into the browser build instead of the app. */}
+          <PlayButton placement="navbar" variant="compact" />
         </div>
 
         {/* Hamburger */}
@@ -107,16 +100,9 @@ export default function Navbar() {
             {navigatingTo === 'login' ? 'Loading…' : 'Login'}
           </button>
 
-          <button
-            className={`${styles.mobileLink} ${styles.registerMobile}`}
-            onClick={() => {
-              handleNavClick()
-              handleAuthNavigate('register')
-            }}
-            disabled={!!navigatingTo}
-          >
-            {navigatingTo === 'register' ? 'Loading…' : 'Register'}
-          </button>
+          <div className={styles.mobileCta} onClick={handleNavClick}>
+            <PlayButton placement="navbar-mobile" />
+          </div>
         </div>
       </div>
     </nav>

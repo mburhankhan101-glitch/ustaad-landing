@@ -95,23 +95,6 @@
   border-color: #6C63FF;
 }
 
-.register {
-  background: linear-gradient(135deg, #6C63FF, #9C89FF);
-  border: none;
-  padding: 8px 20px;
-  border-radius: 40px;
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.register:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
-}
-
 /* Hamburger – hidden on desktop, visible on mobile */
 .hamburger {
   display: none;
@@ -218,10 +201,10 @@
   color: #C4B5FF;
 }
 
-.registerMobile {
-  background: linear-gradient(135deg, #6C63FF, #9C89FF);
-  color: white;
-  font-weight: 600;
+.mobileCta {
+  width: 100%;
+  max-width: 280px;
+  display: flex;
 }
 
 /* Mobile styles: show hamburger, hide desktop links */

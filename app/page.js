@@ -4,7 +4,7 @@ import Problem from '../components/Problem'
 import Features from '../components/Features'
 import ExamCoverage from '../components/ExamCoverage'
 import SocialProof from '../components/SocialProof'
-import Waitlist from '../components/Waitlist'
+import Download from '../components/Download'
 import Footer from '../components/Footer'
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
       <Features />
       <ExamCoverage />
       <SocialProof />
-      <Waitlist />
+      <Download />
       <Footer />
     </main>
   )

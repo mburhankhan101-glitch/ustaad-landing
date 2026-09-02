@@ -1,3 +1,4 @@
+import { playStoreUrl } from '../lib/links'
 import styles from './SocialProof.module.css'
 
 const testimonials = [
@@ -7,7 +8,7 @@ const testimonials = [
     program: 'Preparing for NTS-CS',
     avatar: 'HH',
     color: '#6C63FF',
-    text: '"NTS prep ke liye coloured booklets waala feature toh next level hai, bilkul real paper pattern feel hota hai. Aur upar se Ustu har mushkil sawal ki explanation chutkiyon mein de deta hai.',
+    text: 'NTS prep ke liye coloured booklets waala feature toh next level hai, bilkul real paper pattern feel hota hai. Aur upar se Ustu har mushkil sawal ki explanation chutkiyon mein de deta hai.',
   },
   {
     name: 'Taha bin Talib',
@@ -37,10 +38,19 @@ export default function SocialProof() {
           <span className={styles.purple}>Results show ho rahe hain.</span>
         </h2>
 
-        <div className={styles.counter}>
-          <span className={styles.counterNum}>135+</span>
-          <span className={styles.counterText}>students on the waitlist</span>
-        </div>
+        {/* Was "135+ students on the waitlist", which contradicted the 400+
+            in the hero and described a waitlist that no longer exists. Until
+            there are real install and rating numbers worth showing, this
+            points at the one claim we can prove: the app is live. */}
+        <a
+          className={styles.counter}
+          href={playStoreUrl('social-proof')}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className={styles.counterNum}>Live</span>
+          <span className={styles.counterText}>on Google Play</span>
+        </a>
 
         <div className={styles.cards}>
           {testimonials.map((t, i) => (

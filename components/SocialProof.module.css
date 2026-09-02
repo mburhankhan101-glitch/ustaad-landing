@@ -40,6 +40,19 @@
   padding: 12px 28px;
   border-radius: 99px;
   margin-bottom: 60px;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.counter:hover {
+  background: rgba(108, 99, 255, 0.25);
+  border-color: rgba(108, 99, 255, 0.55);
+  transform: translateY(-1px);
+}
+
+.counter:focus-visible {
+  outline: 2px solid #9C89FF;
+  outline-offset: 3px;
 }
 
 .counterNum {

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { playStoreUrl, PRIVACY_URL, INSTAGRAM_URL } from '../lib/links'
 import styles from './Footer.module.css'
 
 export default function Footer() {
@@ -20,14 +21,16 @@ export default function Footer() {
         <div className={styles.links}>
           <a href="#features">Features</a>
           <a href="#exams">Exams</a>
-          <a href="#waitlist">Waitlist</a>
+          <a href={playStoreUrl('footer')} target="_blank" rel="noopener noreferrer">
+            Download
+          </a>
           <Link href="/contact">Contact Us</Link>      {/* changed from mailto to /contact */}
-          <a href="https://ustaad-privacy.vercel.app/">Privacy Policy</a>
+          <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">Privacy Policy</a>
         </div>
 
         <div className={styles.social}>
           <a
-            href="https://instagram.com/theustaadapp"
+            href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"

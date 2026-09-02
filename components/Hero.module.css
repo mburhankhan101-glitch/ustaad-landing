@@ -148,6 +148,28 @@
   border-color: rgba(255, 255, 255, 0.35);
   color: rgba(255, 255, 255, 0.8);
 }
+/* Escape hatch under the install button — readable, but clearly second. */
+.btnSecondary {
+  width: 100%;
+  padding: 13px 24px;
+  border-radius: 14px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.78);
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+.btnSecondary:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.04);
+}
 .btnSkeleton {
   height: 52px;
   background: rgba(108, 99, 255, 0.35);
