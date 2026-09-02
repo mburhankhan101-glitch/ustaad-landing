@@ -14,13 +14,13 @@ const FIREBASE_CONFIG = {
   appId:             process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 }
 
-const CYCLE_WORDS = ['FAST-NU', 'NUST-NET', 'NTS', 'MDCAT', 'NUMS']
+const CYCLE_WORDS = ['FAST NU', 'NUST NET', 'NTS', 'MDCAT', 'NUMS']
 
 // ─── Custom Hooks ──────────────────────────────────────────────────────────────
 
-// Returns one word at a time rather than stacking all five and cross-fading
+// Returns one word at a time rather than stacking all five and cross fading
 // them. Two 70px words dissolving through each other read as a rendering bug
-// at this size; remounting on key change gives a clean in-animation instead.
+// at this size; remounting on key change gives a clean in animation instead.
 function useCycleWord(words, intervalMs = 2400) {
   const [index, setIndex] = useState(0)
   useEffect(() => {
@@ -95,6 +95,91 @@ function OwlLoader({ message }) {
   )
 }
 
+// ─── Phone mockup ─────────────────────────────────────────────────────────────
+// A live rendering of the quiz screen rather than a flat screenshot: the answer
+// states are already resolved, the streak and AI badges drift, and the whole
+// device sits at a slight angle. It reads as the product running, which a
+// static image does not.
+function PhoneMockup() {
+  return (
+    <div className={styles.heroRight}>
+      <div className={styles.phoneShadow} />
+
+      <div className={styles.fbStreak}>
+        <span className={styles.fbStreakIcon}>🔥</span>
+        <div className={styles.fbStreakInfo}>
+          <span className={styles.fbStreakNum}>7 day streak</span>
+          <span className={styles.fbStreakLbl}>Keep it going!</span>
+        </div>
+      </div>
+
+      <div className={styles.phoneWrap}>
+        <div className={styles.phoneBody}>
+          <div className={styles.island} />
+          <div className={styles.screen}>
+            <div className={styles.appBar}>
+              <div className={styles.back}>‹</div>
+              <div className={styles.appTitle}>Advanced Maths</div>
+              <div className={styles.streakChip}>🔥 7</div>
+            </div>
+
+            <div className={styles.progWrap}>
+              <div className={styles.progMeta}>
+                <span>Progress</span>
+                <span>Q 3 of 10</span>
+              </div>
+              <div className={styles.progTrack}>
+                <div className={styles.progBar} />
+              </div>
+            </div>
+
+            <div className={styles.topicChip}>
+              <div className={styles.chipDot} />
+              <span className={styles.chipLbl}>Advanced Maths · FAST NU</span>
+            </div>
+
+            <div className={styles.qcard}>
+              <div className={styles.qnum}>Question 03</div>
+              <div className={styles.qtext}>
+                The point where the axis of a parabola meets the parabola is called
+              </div>
+            </div>
+
+            <div className={styles.opts}>
+              <div className={`${styles.opt} ${styles.optCorrect}`}>
+                <div className={styles.optL}>A</div>
+                <span className={styles.optT}>Vertex</span>
+                <span className={styles.optI}>✓</span>
+              </div>
+              <div className={styles.opt}>
+                <div className={styles.optL}>B</div>
+                <span className={styles.optT}>Focus</span>
+              </div>
+              <div className={`${styles.opt} ${styles.optWrong}`}>
+                <div className={styles.optL}>C</div>
+                <span className={styles.optT}>Directrix</span>
+                <span className={styles.optI}>✗</span>
+              </div>
+              <div className={styles.opt}>
+                <div className={styles.optL}>D</div>
+                <span className={styles.optT}>Latus rectum</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.fbAi}>
+        <span className={styles.fbAiIcon}>✨</span>
+        <div className={styles.fbAiInfo}>
+          <span className={styles.fbAiMain}>AI Explanation</span>
+          <span className={styles.fbAiSub}>Urdu &amp; English</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ─── Main Export ──────────────────────────────────────────────────────────────
 export default function Hero() {
   const activeWord = useCycleWord(CYCLE_WORDS)
@@ -131,11 +216,9 @@ export default function Hero() {
         <div className={styles.grid}>
 
           <div className={styles.copy}>
-            <p className={styles.eyebrow}>Pakistan · University entry tests</p>
-
             <h1 className={styles.h1}>
               <span className={styles.line}>Crack your</span>
-              <span className={styles.cycle} aria-label="FAST-NU, NUST-NET, NTS, MDCAT and NUMS">
+              <span className={styles.cycle} aria-label="FAST NU, NUST NET, NTS, MDCAT and NUMS">
                 <span key={activeWord} className={styles.word}>{activeWord}</span>
               </span>
               <span className={styles.line}>the smart way.</span>
@@ -143,7 +226,7 @@ export default function Hero() {
 
             <p className={styles.sub}>
               Real past papers, exact marking schemes, and an AI that explains every
-              wrong answer in <strong>Urdu and English</strong> — not just the answer key.
+              wrong answer in <strong>Urdu and English</strong>. Not just the answer key.
             </p>
 
             <div className={styles.ctas}>
@@ -175,8 +258,7 @@ export default function Hero() {
             </div>
 
             {/* Nothing here that the app does not actually do. It has no
-                offline mode — connectivity_plus only surfaces a snackbar — so
-                that is not claimed. */}
+                offline mode, so that is not claimed. */}
             <p className={styles.trust}>
               Free to start · No card needed · Urdu aur English, dono
             </p>
@@ -184,7 +266,7 @@ export default function Hero() {
             <dl className={styles.stats}>
               <div className={styles.stat}>
                 <dt className={styles.statNum}>3,900+</dt>
-                <dd className={styles.statLbl}>Real past-paper MCQs</dd>
+                <dd className={styles.statLbl}>Real past paper MCQs</dd>
               </div>
               <div className={styles.stat}>
                 <dt className={styles.statNum}>5</dt>
@@ -197,20 +279,7 @@ export default function Hero() {
             </dl>
           </div>
 
-          {/* The real app, not a CSS drawing of it. */}
-          <div className={styles.shot}>
-            <div className={styles.phone}>
-              <img
-                src="/app/quiz.jpeg"
-                alt="A timed NTS analytical question in the Ustaad app, showing four options and the progress bar."
-                width="790"
-                height="1624"
-              />
-            </div>
-            <figcaption className={styles.shotCaption}>
-              Actual screen · NTS Analytical, question 3 of 10
-            </figcaption>
-          </div>
+          <PhoneMockup />
 
         </div>
       </section>

@@ -5,7 +5,7 @@ import styles from './ExamCoverage.module.css'
 
 const exams = [
   {
-    name: 'FAST-NU',
+    name: 'FAST NU',
     tag: 'CS · AI · EE · Business',
     color: '#6C63FF',
     bg: '#EEEEFF',
@@ -17,7 +17,7 @@ const exams = [
     sections: ['Advanced Maths (50)', 'Basic Maths (20)', 'Analytical & IQ (20)', 'English (30)'],
   },
   {
-    name: 'NUST-NET',
+    name: 'NUST NET',
     tag: 'Engineering · CS · Business',
     color: '#e85c5c',
     bg: '#FFF0F0',
@@ -56,7 +56,7 @@ const exams = [
     color: '#B4654A',
     bg: '#FBEDE8',
     status: 'soon',
-    note: 'NUMS ka apna pattern hai — alag se tayar kar rahe hain.',
+    note: 'NUMS ka apna pattern hai, alag se tayar kar rahe hain.',
   },
 ]
 

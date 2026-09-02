@@ -53,7 +53,7 @@ export default function PriceAnchor() {
         </div>
 
         <p className={styles.footnote}>
-          Academy figure is a typical published fee for a full entry-test course
+          Academy figure is a typical published fee for a full entry test course
           and varies by city and institute.
         </p>
 

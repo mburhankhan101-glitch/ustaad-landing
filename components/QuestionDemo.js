@@ -56,7 +56,7 @@ export default function QuestionDemo() {
             Asal cheez hai <span className={styles.mark}>kyun</span>.
           </h2>
           <p className={styles.sub}>
-            Ek asli sawal, asli past paper se. Jawab chuno — Ustu wahi explanation
+            Ek asli sawal, asli past paper se. Jawab chuno aur Ustu wahi explanation
             dega jo app ke andar milta hai.
           </p>
         </header>

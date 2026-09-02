@@ -6,8 +6,8 @@ import styles from './Problem.module.css'
 const contrasts = [
   {
     theme: 'Ratta',
-    before: 'Definitions ratta maar li. Test mein application-based sawal aa gaya.',
-    after:  'Har sawal asli past paper se — wahi style, wahi difficulty. Topic-wise drill.',
+    before: 'Definitions ratta maar li. Test mein application based sawal aa gaya.',
+    after:  'Har sawal asli past paper se, wahi style, wahi difficulty. Topic wise drill.',
   },
   {
     theme: 'Past papers',
@@ -17,7 +17,7 @@ const contrasts = [
   {
     theme: 'Galtiyan',
     before: 'Sawal galat hua, cross lagaya, aage barh gaye. Wahi galti test mein dobara.',
-    after:  'Har galat jawab par turant explanation — Urdu ya English, jo samajh aaye.',
+    after:  'Har galat jawab par turant explanation, Urdu ya English, jo samajh aaye.',
   },
 ]
 

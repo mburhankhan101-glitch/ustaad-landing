@@ -51,10 +51,10 @@ export default function Navbar() {
 
         {/* Desktop nav links */}
         <div className={styles.desktopLinks}>
-          <a href="#try" onClick={handleNavClick}>Try a question</a>
-          <a href="#features" onClick={handleNavClick}>Features</a>
-          <a href="#exams" onClick={handleNavClick}>Exams</a>
-          <a href="#faq" onClick={handleNavClick}>FAQ</a>
+          <a href="#try" className={styles.navLink} onClick={handleNavClick}>Try a question</a>
+          <a href="#features" className={styles.navLink} onClick={handleNavClick}>Features</a>
+          <a href="#exams" className={styles.navLink} onClick={handleNavClick}>Exams</a>
+          <a href="#faq" className={styles.navLink} onClick={handleNavClick}>FAQ</a>
 
           {/* Login – ghost button */}
           <button

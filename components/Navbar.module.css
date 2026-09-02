@@ -51,14 +51,17 @@
   gap: 30px;
 }
 
-.desktopLinks a {
+/* Scoped to .navLink, NOT to `.desktopLinks a`. That descendant selector has
+   higher specificity than PlayButton's own .btn class, so it was repainting the
+   install button's white label and glyph in dark grey against purple. */
+.navLink {
   font-size: 15px;
   font-weight: 500;
   color: var(--ink-2);
   transition: color 0.15s ease;
 }
 
-.desktopLinks a:hover {
+.navLink:hover {
   color: var(--ink);
 }
 
