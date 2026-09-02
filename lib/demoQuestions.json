@@ -1,0 +1,58 @@
+[
+  {
+    "exam": "NTS",
+    "topic": "Sequences and Series",
+    "text": "The next two terms of the sequence 71, 25, 83, 37, 95, 49 are:",
+    "options": [
+      "55, 101",
+      "63, 107",
+      "107, 61",
+      "103, 57"
+    ],
+    "correctIndex": 1,
+    "explanationEn": "Concept: Alternating arithmetic series. Solution: 1. Split into two sequences: (71, 83, 95...) and (25, 37, 49...). 2. Sequence 1 adds 12: 95 + 12 = 107. 3. Sequence 2 adds 12: 49 + 12 = 61. 4. Next terms are 107 and 61. Trick: If a sequence jumps up and down, it's usually two series mixed together. Mistake: Trying to find a single relationship between 71 and 25.",
+    "explanationUr": "Concept: Mutabadil (Alternating) riyazi silsila. Solution: 1. Do series alag karein: (71, 83, 95...) aur (25, 37, 49...). 2. Pehli series mein 12 jama ho rahay hain: 95 + 12 = 107. 3. Dosri series mein bhi 12 jama ho rahay hain: 49 + 12 = 61. 4. Agli raqmein 107 aur 61 hain. Trick: Jab sequence barh kar kam ho raha ho, to aksar do series mili hoti hain. Mistake: 71 aur 25 ke darmiyan talluq dhondne ki koshish karna."
+  },
+  {
+    "exam": "NTS",
+    "topic": "Geometry",
+    "text": "Given a triangle with sides 3, 4, and t, what can be the maximum integer value of t?",
+    "options": [
+      "7",
+      "1",
+      "6",
+      "8"
+    ],
+    "correctIndex": 2,
+    "explanationEn": "Concept: Triangle Inequality Theorem. Solution: 1. The sum of any two sides must be greater than the third side: 3 + 4 > t. 2. This implies 7 > t. 3. The largest integer less than 7 is 6. Trick: Third side 't' is always between (Difference of other two) and (Sum of other two). Mistake: Choosing 7, which would make the triangle impossible (a straight line).",
+    "explanationUr": "Concept: Musallas (Triangle) ka qanoon-e-na-barabri. Solution: 1. Do azla ka majmua teesray se bara hona chahiye: 3 + 4 > t. 2. Matlab 7 > t. 3. 7 se chota sab se bara integer 6 hai. Trick: Teesra sila hamesha baqi do ke majmuye se chota hota hai. Mistake: 7 ko chun-na, jis se musallas banna mumkin nahi."
+  },
+  {
+    "exam": "NTS",
+    "topic": "Programming Fundamentals",
+    "text": "A variable which is visible only in the function in which it is defined, is called:",
+    "options": [
+      "Static variable",
+      "Dynamic variable",
+      "External variable",
+      "Local Variable"
+    ],
+    "correctIndex": 3,
+    "explanationEn": "Concept: This tests the understanding of variable scope in programming. Solution: 1. A scope determines where a variable can be accessed. 2. A variable defined inside a specific block or function is limited to that area. 3. This is known as a Local Variable. Trick: 'Local' means nearby or restricted to a specific spot. Mistake: Confusing it with a Static variable, which refers to memory persistence rather than visibility.",
+    "explanationUr": "Concept: Yeh sawal programming mein variable ke 'scope' (had) ke bare mein hai. Solution: 1. Scope batata hai ke variable kahan istemal ho sakta hai. 2. Wo variable jo sirf function ke andar nazar aaye usay local variable kehte hain. Trick: 'Local' ka matlab hota hai jo makhsoos jagah tak mahdood ho. Mistake: Isay Static variable samajh lena jo ke memory ki muddat ko zahir karta hai."
+  },
+  {
+    "exam": "NTS",
+    "topic": "Matrices",
+    "text": "If matrix A = [[2, -1], [5, x]] is a singular matrix, then value of x will be:",
+    "options": [
+      "-2.5",
+      "2.5",
+      "-0.40",
+      "1.4"
+    ],
+    "correctIndex": 0,
+    "explanationEn": "Concept: Determinant of a singular matrix. Solution: 1. A matrix is singular if its determinant is zero. 2. Det(A) = (2)(x) - (-1)(5) = 2x + 5. 3. Set to zero: 2x + 5 = 0. 4. Solve for x: 2x = -5 → x = -2.5. Trick: Cross-multiply and equate: 2x = -5. Mistake: Forgetting to subtract the second product (e.g., 2x + (-5) = 0).",
+    "explanationUr": "Concept: Singular matrix ka determinant. Solution: 1. Singular matrix wo hota hai jis ka determinant zero ho. 2. Det(A) = (2)(x) - (-1)(5) = 2x + 5. 3. Zero ke barabar rakhein: 2x + 5 = 0. 4. Hal karein: x = -2.5. Trick: Tirchi zarb (cross-multiply) karein aur barabar kar dein: 2x = -5. Mistake: Tafreeq ka nishan lagana bhool jana."
+  }
+]

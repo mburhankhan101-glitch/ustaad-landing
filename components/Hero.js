@@ -1,11 +1,10 @@
 'use client'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import PlayButton from './PlayButton'
+import { APP_URL } from '../lib/links'
 import styles from './Hero.module.css'
 
 // ─── Configuration ─────────────────────────────────────────────────────────────
-const APP_URL = (process.env.NEXT_PUBLIC_APP_URL ?? '').replace(/\/$/, '')
-
 const FIREBASE_CONFIG = {
   apiKey:            process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain:        process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -19,15 +18,18 @@ const CYCLE_WORDS = ['FAST-NU', 'NUST-NET', 'NTS', 'MDCAT', 'NUMS']
 
 // ─── Custom Hooks ──────────────────────────────────────────────────────────────
 
-function useCycleWords(words, intervalMs = 2600) {
-  const [currentIndex, setCurrentIndex] = useState(0)
+// Returns one word at a time rather than stacking all five and cross-fading
+// them. Two 70px words dissolving through each other read as a rendering bug
+// at this size; remounting on key change gives a clean in-animation instead.
+function useCycleWord(words, intervalMs = 2400) {
+  const [index, setIndex] = useState(0)
   useEffect(() => {
     const id = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % words.length)
+      setIndex(prev => (prev + 1) % words.length)
     }, intervalMs)
     return () => clearInterval(id)
   }, [words, intervalMs])
-  return words.map((word, idx) => ({ word, isActive: idx === currentIndex }))
+  return words[index]
 }
 
 function useFirebaseAuth() {
@@ -55,17 +57,14 @@ function useFirebaseAuth() {
           if (!isMounted) return
           if (user) {
             setStatus('in')
-            const name = user.displayName?.trim().split(/\s+/)[0] ?? null
-            setFirstName(name)
+            setFirstName(user.displayName?.trim().split(/\s+/)[0] ?? null)
           } else {
             setStatus('out')
             setFirstName(null)
           }
         })
 
-        return () => {
-          unsubscribe()
-        }
+        return () => { unsubscribe() }
       } catch (err) {
         console.warn('[Ustaad] Firebase auth init failed:', err.message)
         if (isMounted) setStatus('out')
@@ -84,292 +83,32 @@ function useFirebaseAuth() {
   return { status, firstName }
 }
 
-function useScrollReveal() {
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-
-    const els = document.querySelectorAll('[data-reveal]')
-    if (!els.length) return
-
-    els.forEach((el, i) => {
-      el.classList.add(styles.revealUp)
-      el.style.transitionDelay = `${i * 0.08}s`
-    })
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('ustaad-revealed')
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
-    )
-
-    els.forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-}
-
 // ─── Owl Loading Overlay ───────────────────────────────────────────────────────
 function OwlLoader({ message }) {
   return (
-    <div
-      role="status"
-      aria-label="Loading Ustaad"
-      style={{
-        position: 'fixed',
-        inset: 0,
-        background: 'rgba(10,14,46,0.93)',
-        backdropFilter: 'blur(14px)',
-        WebkitBackdropFilter: 'blur(14px)',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 9999,
-        gap: '20px',
-        fontFamily: 'Poppins, sans-serif',
-      }}
-    >
-      <div style={{
-        fontSize: '64px',
-        lineHeight: 1,
-        animation: 'ustaadOwlBounce 0.75s ease-in-out infinite alternate',
-      }}>
-        🦉
-      </div>
-
-      <div style={{
-        fontSize: '22px',
-        fontWeight: 700,
-        color: '#fff',
-        letterSpacing: '0.5px',
-      }}>
-        Ustaad
-      </div>
-
-      <div style={{
-        fontSize: '14px',
-        fontWeight: 400,
-        color: 'rgba(255,255,255,0.65)',
-        maxWidth: '220px',
-        textAlign: 'center',
-        lineHeight: 1.5,
-      }}>
-        {message}
-      </div>
-
-      <div style={{
-        width: '140px',
-        height: '3px',
-        background: 'rgba(255,255,255,0.12)',
-        borderRadius: '99px',
-        overflow: 'hidden',
-      }}>
-        <div style={{
-          height: '100%',
-          borderRadius: '99px',
-          background: 'linear-gradient(90deg, #6C63FF, #9C89FF, #6C63FF)',
-          backgroundSize: '200% 100%',
-          animation: 'ustaadBarSweep 1.4s ease-in-out infinite',
-        }} />
-      </div>
-
-      <style>{`
-        @keyframes ustaadOwlBounce {
-          from { transform: translateY(0px) rotate(-6deg) scale(1); }
-          to   { transform: translateY(-18px) rotate(6deg) scale(1.05); }
-        }
-        @keyframes ustaadBarSweep {
-          0%   { background-position: 200% 0; width: 30%; margin-left: 0%;   }
-          50%  { background-position: 0%   0; width: 60%; margin-left: 20%;  }
-          100% { background-position: 200% 0; width: 30%; margin-left: 70%;  }
-        }
-      `}</style>
-    </div>
-  )
-}
-
-// ─── StatsStrip (only sub-component left) ─────────────────────────────────────
-// Every figure here has to be one we can defend if a student asks. The MCQ
-// count is the number actually uploaded to Firestore — update it when the
-// extractor ships a new batch, don't round it up.
-function StatsStrip() {
-  return (
-    <div className={styles.strip}>
-      <div className={styles.stripItem}>
-        <span className={styles.stripNum}>3,900+</span>
-        <span className={styles.stripLbl}>MCQs</span>
-      </div>
-      <div className={styles.stripSep} />
-      {/* "Exams", not "Exams covered" — MDCAT and NUMS are targeted but have
-          no questions live yet. ExamCoverage marks those two "Coming soon" so
-          the page never claims content it does not have. */}
-      <div className={styles.stripItem}>
-        <span className={styles.stripNum}>5</span>
-        <span className={styles.stripLbl}>Exams</span>
-      </div>
-      <div className={styles.stripSep} />
-      <div className={styles.stripItem}>
-        <span className={styles.stripNum}>Free</span>
-        <span className={styles.stripLbl}>to start</span>
-      </div>
-    </div>
-  )
-}
-
-function PhoneMockup() {
-  return (
-    <div className={styles.heroRight}>
-      <div className={styles.phoneShadow} />
-      <div className={styles.fbStreak}>
-        <span className={styles.fbStreakIcon}>🔥</span>
-        <div className={styles.fbStreakInfo}>
-          <span className={styles.fbStreakNum}>7 day streak</span>
-          <span className={styles.fbStreakLbl}>Keep it going!</span>
-        </div>
-      </div>
-      <div className={styles.phoneWrap}>
-        <div className={styles.phoneBody}>
-          <div className={styles.island} />
-          <div className={styles.screen}>
-            <div className={styles.appBar}>
-              <div className={styles.back}>‹</div>
-              <div className={styles.appTitle}>Advanced Maths</div>
-              <div className={styles.streakChip}>🔥 7</div>
-            </div>
-            <div className={styles.progWrap}>
-              <div className={styles.progMeta}>
-                <span>Progress</span>
-                <span>Q 3 of 10</span>
-              </div>
-              <div className={styles.progTrack}>
-                <div className={styles.progBar} />
-              </div>
-            </div>
-            <div className={styles.topicChip}>
-              <div className={styles.chipDot} />
-              <span className={styles.chipLbl}>Advanced Maths · FAST-NU</span>
-            </div>
-            <div className={styles.qcard}>
-              <div className={styles.qnum}>Question 03</div>
-              <div className={styles.qtext}>
-                The point where the axis of a parabola meets the parabola is called
-              </div>
-            </div>
-            <div className={styles.opts}>
-              <div className={`${styles.opt} ${styles.optCorrect}`}>
-                <div className={styles.optL}>A</div>
-                <span className={styles.optT}>Vertex</span>
-                <span className={styles.optI}>✓</span>
-              </div>
-              <div className={styles.opt}>
-                <div className={styles.optL}>B</div>
-                <span className={styles.optT}>Focus</span>
-              </div>
-              <div className={`${styles.opt} ${styles.optWrong}`}>
-                <div className={styles.optL}>C</div>
-                <span className={styles.optT}>Directrix</span>
-                <span className={styles.optI}>✗</span>
-              </div>
-              <div className={styles.opt}>
-                <div className={styles.optL}>D</div>
-                <span className={styles.optT}>Latus rectum</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className={styles.fbAi}>
-        <span className={styles.fbAiIcon}>✨</span>
-        <div className={styles.fbAiInfo}>
-          <span className={styles.fbAiMain}>AI Explanation</span>
-          <span className={styles.fbAiSub}>Urdu &amp; English</span>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-// ─── CTA Buttons ──────────────────────────────────────────────────────────────
-function CTAButtons({ authStatus, firstName, onNavigate }) {
-  return (
-    <div className={styles.ctaColumn}>
-      {/* The install never depends on auth, so it renders immediately and ships
-          in the server HTML. Putting it behind `authStatus` meant the primary
-          CTA was a pulsing skeleton until the Firebase SDK had been fetched,
-          initialised and had fired onAuthStateChanged — seconds, on the mobile
-          connections most of these students are on. */}
-      <PlayButton placement="hero" />
-
-      {authStatus === 'idle' && (
-        <div className={styles.btnSkeleton} aria-hidden="true" />
-      )}
-
-      {/* Signed in on the web: straight back into their session. */}
-      {authStatus === 'in' && (
-        <>
-          <button
-            type="button"
-            className={styles.btnContinue}
-            onClick={() => onNavigate('home', 'Welcome back!')}
-          >
-            <span>🦉</span>
-            {firstName ? `Continue as ${firstName}` : 'Continue to Dashboard'}
-          </button>
-          <button
-            type="button"
-            className={styles.btnSwitch}
-            onClick={() => onNavigate('login', 'Switching account…')}
-          >
-            Use a different account
-          </button>
-        </>
-      )}
-
-      {/* Signed out: browser practice is the escape hatch for desktop visitors
-          and anyone who won't install. */}
-      {authStatus === 'out' && (
-        <button
-          type="button"
-          className={styles.btnSecondary}
-          onClick={() => onNavigate('home', 'Starting your practice session…')}
-        >
-          Ya browser mein practice karo →
-        </button>
-      )}
+    <div role="status" aria-label="Loading Ustaad" className={styles.loader}>
+      <div className={styles.loaderOwl}>🦉</div>
+      <div className={styles.loaderBrand}>Ustaad</div>
+      <div className={styles.loaderMsg}>{message}</div>
+      <div className={styles.loaderTrack}><div className={styles.loaderBar} /></div>
     </div>
   )
 }
 
 // ─── Main Export ──────────────────────────────────────────────────────────────
 export default function Hero() {
-  const cycleWords = useCycleWords(CYCLE_WORDS)
+  const activeWord = useCycleWord(CYCLE_WORDS)
   const { status: authStatus, firstName } = useFirebaseAuth()
-  useScrollReveal()
-
   const [loaderMessage, setLoaderMessage] = useState(null)
 
-  const handleNavigate = (destination, message) => {
+  const handleNavigate = (message) => {
     if (loaderMessage) return
-
     setLoaderMessage(message)
 
     const timer = setTimeout(() => {
-      const targets = {
-        home:   `${APP_URL}/`,
-        login:  `${APP_URL}/`,
-        signup: `${APP_URL}/?signup=true`,
-      }
-      const url = targets[destination] ?? `${APP_URL}/`
-
       try {
-        const parsed = new URL(url, window.location.origin)
-        const allowed = process.env.NEXT_PUBLIC_APP_URL
-        if (allowed && !parsed.href.startsWith(allowed)) {
+        const parsed = new URL(`${APP_URL}/`, window.location.origin)
+        if (APP_URL && !parsed.href.startsWith(APP_URL)) {
           console.error('[Ustaad] Navigation blocked: unexpected target URL')
           setLoaderMessage(null)
           return
@@ -389,43 +128,91 @@ export default function Hero() {
       {loaderMessage && <OwlLoader message={loaderMessage} />}
 
       <section className={styles.hero}>
-        <div className={styles.heroGrid}>
-          <div className={styles.heroLeft}>
-            {/* Removed SocialBadge and ExamTags */}
+        <div className={styles.grid}>
+
+          <div className={styles.copy}>
+            <p className={styles.eyebrow}>Pakistan · University entry tests</p>
+
             <h1 className={styles.h1}>
-              <span className={styles.h1Line}>Crack your</span>
-              <span className={styles.h1Cycle}>
-                {cycleWords.map(({ word, isActive }) => (
-                  <span
-                    key={word}
-                    className={`${styles.cw} ${isActive ? styles.on : ''}`}
-                  >
-                    {word}
-                  </span>
-                ))}
+              <span className={styles.line}>Crack your</span>
+              <span className={styles.cycle} aria-label="FAST-NU, NUST-NET, NTS, MDCAT and NUMS">
+                <span key={activeWord} className={styles.word}>{activeWord}</span>
               </span>
-              <span className={styles.h1Line}>the smart way.</span>
+              <span className={styles.line}>the smart way.</span>
             </h1>
+
             <p className={styles.sub}>
-              Solve real past papers. Get instant{' '}
-              <strong>AI explanations in Urdu&nbsp;&amp;&nbsp;English</strong>.
-              Track every weak topic until you&apos;re exam‑ready.
+              Real past papers, exact marking schemes, and an AI that explains every
+              wrong answer in <strong>Urdu and English</strong> — not just the answer key.
             </p>
 
             <div className={styles.ctas}>
-              <CTAButtons
-                authStatus={authStatus}
-                firstName={firstName}
-                onNavigate={handleNavigate}
-              />
+              {/* The install link depends on nothing, so it renders immediately
+                  and ships in the server HTML rather than waiting on Firebase. */}
+              <PlayButton placement="hero" />
+
+              {authStatus === 'in' && (
+                <button
+                  type="button"
+                  className={styles.ghost}
+                  onClick={() => handleNavigate('Welcome back!')}
+                >
+                  {firstName ? `Continue as ${firstName}` : 'Continue to dashboard'} →
+                </button>
+              )}
+
+              {authStatus === 'out' && (
+                <button
+                  type="button"
+                  className={styles.ghost}
+                  onClick={() => handleNavigate('Starting your practice session…')}
+                >
+                  Ya browser mein practice karo →
+                </button>
+              )}
+
+              {authStatus === 'idle' && <div className={styles.ghostSkeleton} aria-hidden="true" />}
             </div>
 
-            <StatsStrip />
-          </div>
-          <PhoneMockup />
-        </div>
+            {/* Nothing here that the app does not actually do. It has no
+                offline mode — connectivity_plus only surfaces a snackbar — so
+                that is not claimed. */}
+            <p className={styles.trust}>
+              Free to start · No card needed · Urdu aur English, dono
+            </p>
 
-        <div className={styles.glowLine} />
+            <dl className={styles.stats}>
+              <div className={styles.stat}>
+                <dt className={styles.statNum}>3,900+</dt>
+                <dd className={styles.statLbl}>Real past-paper MCQs</dd>
+              </div>
+              <div className={styles.stat}>
+                <dt className={styles.statNum}>5</dt>
+                <dd className={styles.statLbl}>Exams</dd>
+              </div>
+              <div className={styles.stat}>
+                <dt className={styles.statNum}>2</dt>
+                <dd className={styles.statLbl}>Languages, every answer</dd>
+              </div>
+            </dl>
+          </div>
+
+          {/* The real app, not a CSS drawing of it. */}
+          <div className={styles.shot}>
+            <div className={styles.phone}>
+              <img
+                src="/app/quiz.jpeg"
+                alt="A timed NTS analytical question in the Ustaad app, showing four options and the progress bar."
+                width="790"
+                height="1624"
+              />
+            </div>
+            <figcaption className={styles.shotCaption}>
+              Actual screen · NTS Analytical, question 3 of 10
+            </figcaption>
+          </div>
+
+        </div>
       </section>
     </>
   )

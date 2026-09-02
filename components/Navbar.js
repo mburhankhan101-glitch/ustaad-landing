@@ -51,9 +51,10 @@ export default function Navbar() {
 
         {/* Desktop nav links */}
         <div className={styles.desktopLinks}>
+          <a href="#try" onClick={handleNavClick}>Try a question</a>
           <a href="#features" onClick={handleNavClick}>Features</a>
           <a href="#exams" onClick={handleNavClick}>Exams</a>
-          <Link href="/contact" onClick={handleNavClick} className={styles.contactLink}>Contact Us</Link>
+          <a href="#faq" onClick={handleNavClick}>FAQ</a>
 
           {/* Login – ghost button */}
           <button
@@ -85,8 +86,10 @@ export default function Navbar() {
       {/* Mobile menu overlay */}
       <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ''}`}>
         <div className={styles.mobileMenuInner}>
+          <a href="#try" className={styles.mobileLink} onClick={handleNavClick}>Try a question</a>
           <a href="#features" className={styles.mobileLink} onClick={handleNavClick}>Features</a>
           <a href="#exams" className={styles.mobileLink} onClick={handleNavClick}>Exams</a>
+          <a href="#faq" className={styles.mobileLink} onClick={handleNavClick}>FAQ</a>
           <Link href="/contact" className={styles.mobileLink} onClick={handleNavClick}>Contact Us</Link>
 
           <button

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Poppins:wght@400;500;600;700&display=swap');
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -6,36 +6,76 @@
   padding: 0;
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   Design tokens
+
+   Light editorial. The old dark-navy gradient plus glassy rounded cards is
+   the default look every AI-generated landing page lands on, and it is what
+   made this page read as templated. Sections are now separated by whitespace,
+   ground colour and hairline rules — not by another container.
+
+   Two typefaces do the work: Bricolage Grotesque carries every headline at
+   700/800 with tight tracking, Poppins carries body and UI. One purple accent,
+   used sparingly, plus a highlighter yellow reserved for a single phrase.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 :root {
-  --bg-deep:        #0A0E2E;
-  --bg-mid:         #1A1464;
-  --primary:        #6C63FF;
-  --primary-light:  #EEEEFF;
-  --primary-glow:   rgba(108, 99, 255, 0.25);
-  --accent:         #FF6B6B;
-  --success:        #4CAF50;
-  --gold:           #FFD700;
-  --text-primary:   #FFFFFF;
-  --text-dark:      #1A1A2E;
-  --text-muted:     #A0A8C0;
-  --text-body:      #6B7280;
-  --card-bg:        rgba(255, 255, 255, 0.05);
-  --card-border:    rgba(255, 255, 255, 0.10);
-  --card-bg-light:  #FFFFFF;
-  --card-border-light: #E5E7EB;
-  --section-light:  #F8F7FF;
+  /* Grounds */
+  --paper:          #FBFAF8;
+  --paper-alt:      #F2F0EA;
+  --surface:        #FFFFFF;
+  --ink-ground:     #12131A;
+
+  /* Ink */
+  --ink:            #12131A;
+  --ink-2:          #4C4E5C;
+  --ink-3:          #83869A;
+  --ink-on-dark:    #FFFFFF;
+  --ink-2-on-dark:  rgba(255, 255, 255, 0.66);
+
+  /* Rules and edges */
+  --rule:           #E4E1DA;
+  --rule-strong:    #12131A;
+
+  /* Accent */
+  --primary:        #5B54E8;
+  --primary-deep:   #3F38C4;
+  --primary-soft:   #EEEDFD;
+  --marker:         #FFE066;
+
+  /* Semantic */
+  --correct:        #12805C;
+  --correct-soft:   #E3F3EC;
+  --wrong:          #C4362F;
+  --wrong-soft:     #FBEAE9;
+
+  /* Type */
+  --display: 'Bricolage Grotesque', 'Poppins', system-ui, sans-serif;
+  --body:    'Poppins', system-ui, -apple-system, sans-serif;
+
+  /* Rhythm */
+  --gutter:      24px;
+  --measure:     1120px;
+  --section-y:   clamp(72px, 9vw, 128px);
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+/* The navbar is sticky and opaque, so an anchor jump would otherwise park the
+   section heading underneath it. */
+section[id] {
+  scroll-margin-top: 78px;
+}
+
 body {
-  font-family: 'Poppins', sans-serif;
-  background: var(--bg-deep);
-  color: var(--text-primary);
+  font-family: var(--body);
+  background: var(--paper);
+  color: var(--ink);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -44,7 +84,7 @@ a {
 }
 
 button {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--body);
   cursor: pointer;
   border: none;
   outline: none;
@@ -54,18 +94,73 @@ img {
   max-width: 100%;
 }
 
+/* ─── Shared primitives ──────────────────────────────────────────────────── */
+
+.u-shell {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+  width: 100%;
+}
+
+/* Uppercase section label. Replaces the pill-shaped chips that used to sit
+   above every heading — same job, no extra container. */
+.u-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.u-display {
+  font-family: var(--display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+/* Hand-drawn highlighter behind a phrase. Used once per page, on the single
+   idea the section exists to sell. */
+.u-mark {
+  background-image: linear-gradient(var(--marker), var(--marker));
+  background-repeat: no-repeat;
+  background-size: 100% 42%;
+  background-position: 0 78%;
+  padding-inline: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 ::selection {
   background: var(--primary);
   color: #fff;
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-deep);
+  background: var(--paper-alt);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
+  background: #CFCBC1;
   border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

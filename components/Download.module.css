@@ -1,90 +1,89 @@
-.section {
-  background: linear-gradient(135deg, #0A0E2E 0%, #1A1464 50%, #6C63FF 100%);
-  padding: 100px 24px;
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-}
+/* The page's one inverted band. A light page that closes on a dark block gives
+   the scroll a real ending, and it is the only place the app's own dark UI
+   shows up in the chrome rather than inside a phone frame. */
 
-.glow {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(108,99,255,0.3) 0%, transparent 70%);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
+.section {
+  background: var(--ink-ground);
+  padding: var(--section-y) var(--gutter);
+  color: var(--ink-on-dark);
 }
 
 .inner {
-  position: relative;
-  z-index: 1;
-  max-width: 600px;
+  max-width: 620px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  text-align: center;
+  gap: 18px;
 }
 
 .owl {
-  font-size: 52px;
-  animation: float 3s ease-in-out infinite;
+  font-size: 46px;
+  line-height: 1;
+  animation: float 3.4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-7px); }
 }
 
 .label {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  color: rgba(255,255,255,0.6);
-  letter-spacing: 2px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .heading {
-  font-size: clamp(28px, 4.5vw, 48px);
+  font-family: var(--display);
   font-weight: 800;
-  color: #fff;
-  line-height: 1.2;
-  letter-spacing: -1px;
+  font-size: clamp(32px, 5.2vw, 54px);
+  line-height: 1.02;
+  letter-spacing: -0.034em;
+  color: var(--ink-on-dark);
+  text-wrap: balance;
 }
 
-.highlight {
-  color: var(--gold);
-}
+.highlight { color: var(--marker); }
 
 .sub {
-  font-size: 17px;
-  color: rgba(255,255,255,0.72);
-  line-height: 1.7;
+  font-size: 16px;
+  line-height: 1.68;
+  color: var(--ink-2-on-dark);
+  max-width: 48ch;
 }
 
 .sub strong {
-  color: var(--gold);
-  font-weight: 700;
+  color: var(--marker);
+  font-weight: 600;
 }
 
-/* The install button sits alone so nothing competes with it. */
 .installRow {
   width: 100%;
-  max-width: 320px;
+  max-width: 290px;
   display: flex;
-  margin: 4px 0 8px;
+  margin: 8px 0 4px;
 }
 
-/* Separates the install (primary) from the MDCAT/NUMS notify (secondary),
-   so the email field never reads as a second way to get the app. */
+.installRow > * { width: 100%; }
+
+/* ── Divider into the MDCAT/NUMS notify ───────────────────────────────────── */
+
 .divider {
   width: 100%;
   max-width: 480px;
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-top: 22px;
+  margin-top: 30px;
   color: rgba(255, 255, 255, 0.5);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .divider::before,
@@ -92,18 +91,16 @@
   content: '';
   flex: 1;
   height: 1px;
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.14);
 }
 
-.divider span {
-  white-space: nowrap;
-}
+.divider span { white-space: nowrap; }
 
 .notifySub {
   font-size: 15px;
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.62);
-  max-width: 460px;
+  color: var(--ink-2-on-dark);
+  max-width: 46ch;
 }
 
 .srOnly {
@@ -118,99 +115,90 @@
   border: 0;
 }
 
+/* ── Form ─────────────────────────────────────────────────────────────────── */
+
 .form {
   display: flex;
-  gap: 0;
+  gap: 8px;
   width: 100%;
-  max-width: 480px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 99px;
-  padding: 6px;
+  max-width: 440px;
 }
 
 .input {
   flex: 1;
-  background: transparent;
-  border: none;
+  min-width: 0;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9px;
   outline: none;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--body);
   font-size: 15px;
   color: #fff;
-  padding: 12px 20px;
+  padding: 13px 16px;
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
 
-.input::placeholder {
-  color: rgba(255,255,255,0.4);
+.input::placeholder { color: rgba(255, 255, 255, 0.38); }
+
+.input:focus {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.11);
 }
 
 .btn {
   background: #fff;
-  color: var(--text-dark);
-  font-family: 'Poppins', sans-serif;
+  color: var(--ink);
+  font-family: var(--body);
   font-size: 15px;
-  font-weight: 700;
-  padding: 12px 28px;
-  border-radius: 99px;
-  transition: opacity 0.2s, transform 0.2s;
+  font-weight: 600;
+  padding: 13px 22px;
+  border-radius: 9px;
   white-space: nowrap;
+  transition: opacity 0.15s ease;
 }
 
-.btn:hover {
-  opacity: 0.9;
-  transform: scale(1.02);
-}
+.btn:hover { opacity: 0.88; }
+.btn:disabled { opacity: 0.55; cursor: default; }
 
-.btn:disabled {
-  opacity: 0.6;
-}
+/* ── States ───────────────────────────────────────────────────────────────── */
 
 .successBox {
   display: flex;
   align-items: center;
-  gap: 16px;
-  background: rgba(76, 175, 80, 0.15);
-  border: 1px solid rgba(76, 175, 80, 0.35);
-  border-radius: 16px;
-  padding: 20px 28px;
-  font-size: 28px;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  padding: 18px 24px;
+  font-size: 24px;
+  text-align: left;
 }
 
 .successTitle {
-  font-size: 18px;
+  font-family: var(--display);
+  font-size: 17px;
   font-weight: 700;
+  letter-spacing: -0.02em;
   color: #fff;
-  text-align: left;
 }
 
 .successSub {
-  font-size: 14px;
-  color: rgba(255,255,255,0.65);
-  margin-top: 4px;
-  text-align: left;
+  font-size: 13.5px;
+  color: var(--ink-2-on-dark);
+  margin-top: 3px;
 }
 
 .errorText {
   font-size: 14px;
-  color: var(--accent);
+  color: #FF9A93;
 }
 
 .note {
-  font-size: 13px;
-  color: rgba(255,255,255,0.35);
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.35);
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-@media (max-width: 500px) {
-  .form {
-    flex-direction: column;
-    border-radius: 16px;
-  }
-  .btn {
-    border-radius: 99px;
-  }
+@media (max-width: 520px) {
+  .form { flex-direction: column; }
+  .installRow { max-width: 100%; }
 }

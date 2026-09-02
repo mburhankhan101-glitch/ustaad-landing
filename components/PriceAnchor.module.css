@@ -1,0 +1,162 @@
+.section {
+  background: var(--paper-alt);
+  padding: var(--section-y) var(--gutter);
+  border-bottom: 1px solid var(--rule);
+}
+
+.inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.head {
+  margin-bottom: 44px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 16px;
+}
+
+.heading {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(30px, 4.6vw, 48px);
+  line-height: 1.04;
+  letter-spacing: -0.032em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+/* ── Comparison ───────────────────────────────────────────────────────────── */
+
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  padding: clamp(22px, 3vw, 32px);
+}
+
+/* The one place on the page where a border earns its keep: it marks the choice. */
+.cardOwn {
+  border: 2px solid var(--ink);
+}
+
+.cardLabel,
+.cardLabelOwn {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.cardLabel    { color: var(--ink-3); }
+.cardLabelOwn { color: var(--primary); }
+
+.price,
+.priceMuted {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(36px, 5.6vw, 54px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.priceMuted {
+  color: var(--ink-3);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+.price { color: var(--ink); }
+
+.plus {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.per {
+  font-size: 13.5px;
+  color: var(--ink-3);
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+.list,
+.listMuted {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--rule);
+}
+
+.list li,
+.listMuted li {
+  font-size: 14.5px;
+  line-height: 1.5;
+  padding: 12px 0 12px 22px;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+}
+
+.listMuted li {
+  color: var(--ink-3);
+}
+
+.listMuted li::before {
+  content: '✕';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.list li {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--correct);
+}
+
+.cta {
+  margin-top: 24px;
+  display: flex;
+}
+
+.cta > * { width: 100%; }
+
+.footnote {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink-3);
+  margin-top: 20px;
+  max-width: 60ch;
+}
+
+@media (max-width: 760px) {
+  .compare {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

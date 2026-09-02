@@ -19,8 +19,10 @@ export default function Footer() {
         </div>
 
         <div className={styles.links}>
+          <a href="#try">Try a question</a>
           <a href="#features">Features</a>
           <a href="#exams">Exams</a>
+          <a href="#faq">FAQ</a>
           <a href={playStoreUrl('footer')} target="_blank" rel="noopener noreferrer">
             Download
           </a>

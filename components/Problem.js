@@ -1,90 +1,58 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import styles from './Problem.module.css'
 
-const problems = [
+// The three pain points the old page listed as separate icon cards, restructured
+// as before/after pairs. Same content, but the contrast is the argument — a card
+// with an emoji on it isn't.
+const contrasts = [
   {
-    icon: '📚',
-    title: 'Ratta system kaam nahi karta',
-    desc: 'Textbooks give you theory. Entry tests ask application. Memorizing definitions gets you nowhere in FAST-NU Advanced Maths.',
+    theme: 'Ratta',
+    before: 'Definitions ratta maar li. Test mein application-based sawal aa gaya.',
+    after:  'Har sawal asli past paper se — wahi style, wahi difficulty. Topic-wise drill.',
   },
   {
-    icon: '📄',
-    title: 'Past papers scattered everywhere',
-    desc: 'Searching Facebook groups and random PDFs wastes hours. There is no clean, organized source for real past papers.',
+    theme: 'Past papers',
+    before: 'Facebook groups aur random PDFs mein do ghante barbaad, phir bhi adhoora.',
+    after:  'Saare past papers ek jagah, marking scheme ke saath. Search karne ki zaroorat nahi.',
   },
   {
-    icon: '❓',
-    title: 'Wrong answer, now what?',
-    desc: 'You get a question wrong, mark it, and move on. No one explains WHY. That same mistake repeats on the real test.',
+    theme: 'Galtiyan',
+    before: 'Sawal galat hua, cross lagaya, aage barh gaye. Wahi galti test mein dobara.',
+    after:  'Har galat jawab par turant explanation — Urdu ya English, jo samajh aaye.',
   },
 ]
-
-// Shared animation settings for a clean, premium feel
-const fadeUp = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }, // Apple-like ease-out
-}
 
 export default function Problem() {
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        {/* Small label – slight delay, keep it subtle */}
-        <motion.div
-          className={styles.label}
-          {...fadeUp}
-          transition={{ ...fadeUp.transition, delay: 0.1 }}
-          viewport={{ once: true }}
-        >
-          The Problem
-        </motion.div>
 
-        {/* Main heading */}
-        <motion.h2
-          className={styles.heading}
-          {...fadeUp}
-          transition={{ ...fadeUp.transition, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          Baaki sab resources<br />
-          <span className={styles.red}>incomplete hain.</span>
-        </motion.h2>
+        <header className={styles.head}>
+          <p className={styles.eyebrow}>The problem</p>
+          <h2 className={styles.heading}>
+            Baaki sab resources<br />
+            <span className={styles.dim}>incomplete hain.</span>
+          </h2>
+          <p className={styles.sub}>
+            Pakistani students deserve better than scattered PDFs and zero feedback.
+            Yeh farq hai.
+          </p>
+        </header>
 
-        {/* Subtext */}
-        <motion.p
-          className={styles.sub}
-          {...fadeUp}
-          transition={{ ...fadeUp.transition, delay: 0.3 }}
-          viewport={{ once: true }}
-        >
-          Pakistani students preparing for entry tests deserve better than
-          scattered PDFs and zero feedback.
-        </motion.p>
+        <div className={styles.table}>
+          <div className={styles.colHead}>
+            <span className={styles.colLabelBefore}>Ab tak</span>
+            <span className={styles.colLabelAfter}>Ustaad ke saath</span>
+          </div>
 
-        {/* Cards grid – stagger children */}
-        <div className={styles.cards}>
-          {problems.map((p, i) => (
-            <motion.div
-              key={i}
-              className={styles.card}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.5,
-                ease: 'easeOut',
-                delay: 0.4 + i * 0.15,   // stagger each card
-              }}
-              viewport={{ once: true }}
-            >
-              <div className={styles.icon}>{p.icon}</div>
-              <h3 className={styles.cardTitle}>{p.title}</h3>
-              <p className={styles.cardDesc}>{p.desc}</p>
-            </motion.div>
+          {contrasts.map((row) => (
+            <div key={row.theme} className={styles.row}>
+              <p className={styles.theme}>{row.theme}</p>
+              <p className={styles.before}>{row.before}</p>
+              <p className={styles.after}>{row.after}</p>
+            </div>
           ))}
         </div>
+
       </div>
     </section>
   )

@@ -37,7 +37,6 @@ export default function Download() {
 
   return (
     <section className={styles.section} id="download">
-      <div className={styles.glow} />
       <div className={styles.inner}>
         <div className={styles.owl}>🦉</div>
         <div className={styles.label}>Now on Google Play</div>

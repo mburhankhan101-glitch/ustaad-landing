@@ -1,0 +1,332 @@
+.section {
+  background: var(--paper-alt);
+  padding: var(--section-y) var(--gutter);
+  border-bottom: 1px solid var(--rule);
+}
+
+.inner {
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+/* ── Heading ──────────────────────────────────────────────────────────────── */
+
+.head {
+  margin-bottom: 40px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 16px;
+}
+
+.heading {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(30px, 4.6vw, 48px);
+  line-height: 1.04;
+  letter-spacing: -0.032em;
+  color: var(--ink);
+  margin-bottom: 16px;
+  text-wrap: balance;
+}
+
+/* The page's one highlighter, on the single word the section is about. */
+.mark {
+  background-image: linear-gradient(var(--marker), var(--marker));
+  background-repeat: no-repeat;
+  background-size: 100% 40%;
+  background-position: 0 76%;
+  padding-inline: 3px;
+}
+
+.sub {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 52ch;
+}
+
+/* ── Board ────────────────────────────────────────────────────────────────── */
+
+.board {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  padding: clamp(20px, 3.5vw, 32px);
+}
+
+.boardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 22px;
+}
+
+.tag {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.counter {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+}
+
+.question {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(19px, 2.4vw, 24px);
+  line-height: 1.34;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  margin-bottom: 22px;
+  text-wrap: pretty;
+}
+
+/* ── Options ──────────────────────────────────────────────────────────────── */
+
+.options {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 11px;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  text-align: left;
+  font-family: var(--body);
+  font-size: 15.5px;
+  font-weight: 500;
+  color: var(--ink);
+  transition: border-color 0.14s ease, background 0.14s ease, opacity 0.14s ease;
+}
+
+.option:not(:disabled):hover {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.option:disabled {
+  cursor: default;
+}
+
+.letter {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  background: var(--paper-alt);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-2);
+}
+
+.optText { flex: 1; }
+
+.tick, .cross {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.tick  { color: var(--correct); }
+.cross { color: var(--wrong); }
+
+.correct {
+  border-color: var(--correct);
+  background: var(--correct-soft);
+}
+.correct .letter {
+  background: var(--correct);
+  color: #fff;
+}
+
+.wrong {
+  border-color: var(--wrong);
+  background: var(--wrong-soft);
+}
+.wrong .letter {
+  background: var(--wrong);
+  color: #fff;
+}
+
+.muted { opacity: 0.5; }
+
+.prompt {
+  font-size: 13px;
+  color: var(--ink-3);
+  margin-top: 16px;
+}
+
+/* ── Explanation ──────────────────────────────────────────────────────────── */
+
+.explain {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  animation: rise 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.explainTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.owl {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.whoName {
+  font-size: 13px;
+  color: var(--ink-3);
+}
+
+.whoVerdict {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--wrong);
+}
+
+.whoVerdict[data-right='true'] {
+  color: var(--correct);
+}
+
+.langToggle {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  background: var(--paper-alt);
+  border-radius: 9px;
+}
+
+.langOn, .langOff {
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 7px;
+  transition: background 0.14s ease, color 0.14s ease;
+}
+
+.langOn {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 1px 2px rgba(18, 19, 26, 0.08);
+}
+
+.langOff {
+  background: transparent;
+  color: var(--ink-3);
+}
+
+.langOff:hover { color: var(--ink-2); }
+
+.parts {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.part {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 14px;
+  align-items: baseline;
+}
+
+.partLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding-top: 3px;
+}
+
+.partBody {
+  font-size: 15px;
+  line-height: 1.68;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+/* ── Actions ──────────────────────────────────────────────────────────────── */
+
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px 20px;
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+
+.next {
+  font-family: var(--body);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--ink);
+  padding: 11px 20px;
+  border-radius: 9px;
+  transition: background 0.15s ease;
+}
+
+.next:hover { background: #2A2C38; }
+
+.note {
+  font-size: 13px;
+  color: var(--ink-3);
+}
+
+@media (max-width: 560px) {
+  .part {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .explainTop { align-items: flex-start; }
+  .langToggle { width: 100%; }
+  .langOn, .langOff { flex: 1; }
+}
