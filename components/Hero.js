@@ -293,51 +293,51 @@ function PhoneMockup() {
 
 // ─── CTA Buttons ──────────────────────────────────────────────────────────────
 function CTAButtons({ authStatus, firstName, onNavigate }) {
-  if (authStatus === 'idle') {
-    return (
-      <div className={styles.ctaColumn} style={{ opacity: 0.5, pointerEvents: 'none' }}>
-        <div className={styles.btnSkeleton} />
-      </div>
-    )
-  }
-
-  // Signed in on the web: let them straight back into their session, but still
-  // offer the install — streaks and drill reminders only work in the app.
-  if (authStatus === 'in') {
-    return (
-      <div className={styles.ctaColumn}>
-        <button
-          type="button"
-          className={styles.btnContinue}
-          onClick={() => onNavigate('home', 'Welcome back!')}
-        >
-          <span>🦉</span>
-          {firstName ? `Continue as ${firstName}` : 'Continue to Dashboard'}
-        </button>
-        <PlayButton placement="hero-signed-in" />
-        <button
-          type="button"
-          className={styles.btnSwitch}
-          onClick={() => onNavigate('login', 'Switching account…')}
-        >
-          Use a different account
-        </button>
-      </div>
-    )
-  }
-
-  // Signed out: the install is the goal. Browser practice stays as the escape
-  // hatch for desktop visitors and anyone out of storage.
   return (
     <div className={styles.ctaColumn}>
+      {/* The install never depends on auth, so it renders immediately and ships
+          in the server HTML. Putting it behind `authStatus` meant the primary
+          CTA was a pulsing skeleton until the Firebase SDK had been fetched,
+          initialised and had fired onAuthStateChanged — seconds, on the mobile
+          connections most of these students are on. */}
       <PlayButton placement="hero" />
-      <button
-        type="button"
-        className={styles.btnSecondary}
-        onClick={() => onNavigate('home', 'Starting your practice session…')}
-      >
-        Ya browser mein practice karo →
-      </button>
+
+      {authStatus === 'idle' && (
+        <div className={styles.btnSkeleton} aria-hidden="true" />
+      )}
+
+      {/* Signed in on the web: straight back into their session. */}
+      {authStatus === 'in' && (
+        <>
+          <button
+            type="button"
+            className={styles.btnContinue}
+            onClick={() => onNavigate('home', 'Welcome back!')}
+          >
+            <span>🦉</span>
+            {firstName ? `Continue as ${firstName}` : 'Continue to Dashboard'}
+          </button>
+          <button
+            type="button"
+            className={styles.btnSwitch}
+            onClick={() => onNavigate('login', 'Switching account…')}
+          >
+            Use a different account
+          </button>
+        </>
+      )}
+
+      {/* Signed out: browser practice is the escape hatch for desktop visitors
+          and anyone who won't install. */}
+      {authStatus === 'out' && (
+        <button
+          type="button"
+          className={styles.btnSecondary}
+          onClick={() => onNavigate('home', 'Starting your practice session…')}
+        >
+          Ya browser mein practice karo →
+        </button>
+      )}
     </div>
   )
 }
