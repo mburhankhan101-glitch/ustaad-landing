@@ -15,7 +15,7 @@ const FIREBASE_CONFIG = {
   appId:             process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 }
 
-const CYCLE_WORDS = ['FAST-NU', 'NUST-NET', 'NTS']
+const CYCLE_WORDS = ['FAST-NU', 'NUST-NET', 'NTS', 'MDCAT', 'NUMS']
 
 // ─── Custom Hooks ──────────────────────────────────────────────────────────────
 
@@ -205,9 +205,12 @@ function StatsStrip() {
         <span className={styles.stripLbl}>MCQs</span>
       </div>
       <div className={styles.stripSep} />
+      {/* "Exams", not "Exams covered" — MDCAT and NUMS are targeted but have
+          no questions live yet. ExamCoverage marks those two "Coming soon" so
+          the page never claims content it does not have. */}
       <div className={styles.stripItem}>
-        <span className={styles.stripNum}>3</span>
-        <span className={styles.stripLbl}>Exams covered</span>
+        <span className={styles.stripNum}>5</span>
+        <span className={styles.stripLbl}>Exams</span>
       </div>
       <div className={styles.stripSep} />
       <div className={styles.stripItem}>

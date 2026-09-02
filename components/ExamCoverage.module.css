@@ -137,3 +137,28 @@
   padding: 5px 12px;
   border-radius: 99px;
 }
+
+/* Cards for exams we target but have not shipped content for yet. */
+.soonBody {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 18px;
+}
+
+.soonNote {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-body);
+}
+
+.soonLink {
+  font-size: 14px;
+  font-weight: 600;
+  align-self: flex-start;
+  transition: opacity 0.15s ease;
+}
+
+.soonLink:hover {
+  opacity: 0.75;
+}

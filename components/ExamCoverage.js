@@ -40,6 +40,24 @@ const exams = [
     ],
     sections: ['English (20)', 'Analytical (20)', 'Quantitative (20)', 'Subject (30)'],
   },
+  // Targeted, but no questions live yet. Deliberately carries no MCQ count or
+  // paper pattern — inventing those is how you lose a student permanently.
+  {
+    name: 'MDCAT',
+    tag: 'PMDC · MBBS · BDS',
+    color: '#3E8E7E',
+    bg: '#E6F4F1',
+    status: 'soon',
+    note: 'Biology, Chemistry aur Physics ka content tayar ho raha hai.',
+  },
+  {
+    name: 'NUMS',
+    tag: 'Army Medical · AMC',
+    color: '#B4654A',
+    bg: '#FBEDE8',
+    status: 'soon',
+    note: 'NUMS ka apna pattern hai — alag se tayar kar rahe hain.',
+  },
 ]
 
 export default function ExamCoverage() {
@@ -94,29 +112,40 @@ export default function ExamCoverage() {
                   className={styles.examBadge}
                   style={{ background: exam.bg, color: exam.color }}
                 >
-                  Covered ✓
+                  {exam.status === 'soon' ? 'Coming soon' : 'Covered ✓'}
                 </div>
               </div>
 
-              <div className={styles.stats}>
-                {exam.details.map((d, j) => (
-                  <div key={j} className={styles.stat}>
-                    <span className={styles.statVal}>{d.value}</span>
-                    <span className={styles.statLabel}>{d.label}</span>
+              {exam.status === 'soon' ? (
+                <div className={styles.soonBody}>
+                  <p className={styles.soonNote}>{exam.note}</p>
+                  <a className={styles.soonLink} href="#download" style={{ color: exam.color }}>
+                    Live hote hi batayenge →
+                  </a>
+                </div>
+              ) : (
+                <>
+                  <div className={styles.stats}>
+                    {exam.details.map((d, j) => (
+                      <div key={j} className={styles.stat}>
+                        <span className={styles.statVal}>{d.value}</span>
+                        <span className={styles.statLabel}>{d.label}</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
 
-              <div className={styles.sections}>
-                <p className={styles.sectionsLabel}>Sections covered:</p>
-                <div className={styles.tags}>
-                  {exam.sections.map((s, j) => (
-                    <span key={j} className={styles.sectionTag} style={{ background: exam.bg, color: exam.color }}>
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              </div>
+                  <div className={styles.sections}>
+                    <p className={styles.sectionsLabel}>Sections covered:</p>
+                    <div className={styles.tags}>
+                      {exam.sections.map((s, j) => (
+                        <span key={j} className={styles.sectionTag} style={{ background: exam.bg, color: exam.color }}>
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
             </motion.div>
           ))}
         </div>
