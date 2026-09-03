@@ -20,7 +20,7 @@
 
 .heading {
   font-family: var(--display);
-  font-weight: 800;
+  font-weight: 900;
   font-size: clamp(32px, 5vw, 54px);
   line-height: 1.02;
   letter-spacing: -0.034em;
@@ -50,7 +50,7 @@
 .counterNum {
   font-family: var(--display);
   font-size: 19px;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: -0.025em;
   color: inherit;
 }

@@ -20,10 +20,14 @@
 
 .h1 {
   font-family: var(--display);
-  font-weight: 800;
+  font-weight: 900;
   font-size: clamp(42px, 7vw, 76px);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
+  /* Inter Black at 0.98 let the descender of "your" collide with the line
+     below. 1.05 keeps the block punchy while giving three stacked lines room
+     to breathe — the reference sits at 1.2, which is airier than this page
+     wants at 76px. */
+  line-height: 1.05;
+  letter-spacing: -0.032em;
   color: var(--ink);
   display: flex;
   flex-direction: column;
@@ -112,10 +116,13 @@
 
 /* ── Stats ────────────────────────────────────────────────────────────────── */
 
+/* Three equal columns with hairline dividers, centred, rather than a wrapping
+   left-aligned row. The dividers are what make the three figures read as three
+   separate facts instead of one run-on line — especially on a phone, where the
+   old layout wrapped and the numbers ran into each other's labels. */
 .stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px clamp(36px, 5vw, 60px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   padding-top: 30px;
   border-top: 1px solid var(--rule);
 }
@@ -123,26 +130,33 @@
 .stat {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  text-align: center;
+  gap: 7px;
+  padding-inline: clamp(6px, 2vw, 18px);
+}
+
+.stat + .stat {
+  border-left: 1px solid var(--rule);
 }
 
 .statNum {
   font-family: var(--display);
-  font-size: clamp(34px, 4.4vw, 46px);
-  font-weight: 800;
-  letter-spacing: -0.038em;
+  font-size: clamp(30px, 4.4vw, 46px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
   line-height: 1;
   color: var(--ink);
   font-variant-numeric: tabular-nums;
 }
 
 .statLbl {
-  font-size: 14px;
+  font-size: clamp(12px, 1.4vw, 14px);
   font-weight: 500;
   color: var(--ink-2);
   margin: 0;
-  max-width: 16ch;
   line-height: 1.35;
+  text-wrap: balance;
 }
 
 /* ═══ Phone mockup ═════════════════════════════════════════════════════════
@@ -481,7 +495,7 @@
 .loaderBrand {
   font-family: var(--display);
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: -0.03em;
   color: var(--ink);
 }
@@ -536,8 +550,9 @@
 @media (max-width: 520px) {
   .ctas > * { width: 100%; }
   .ghostSkeleton { width: 100%; }
-  .stats { gap: 20px 30px; }
-  .statLbl { max-width: 13ch; }
+  /* The grid stays three-up on a phone — that is the layout that reads well.
+     Only the type steps down. */
+  .statNum { letter-spacing: -0.045em; }
   .fbStreak, .fbAi { padding: 7px 10px; }
   .fbStreakIcon, .fbAiIcon { font-size: 17px; }
   .fbStreakNum, .fbAiMain { font-size: 12.5px; }

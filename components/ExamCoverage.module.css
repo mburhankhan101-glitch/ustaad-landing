@@ -20,7 +20,7 @@
 
 .heading {
   font-family: var(--display);
-  font-weight: 800;
+  font-weight: 900;
   font-size: clamp(32px, 5vw, 54px);
   line-height: 1.02;
   letter-spacing: -0.034em;
@@ -57,7 +57,7 @@
 .examName {
   font-family: var(--display);
   font-size: 23px;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: -0.03em;
   margin-bottom: 4px;
 }
@@ -98,7 +98,7 @@
 .statVal {
   font-family: var(--display);
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--ink);
   font-variant-numeric: tabular-nums;
