@@ -141,7 +141,7 @@ export default function DeleteAccountPage() {
               {status === 'error' && (
                 <p className={styles.error}>
                   Could not send that. Email us at{' '}
-                  <a href="mailto:theustaadapp@gmail.com">theustaadapp@gmail.com</a>{' '}
+                  <a href="mailto:m.burhan.khan101@gmail.com">m.burhan.khan101@gmail.com</a>{' '}
                   instead.
                 </p>
               )}
