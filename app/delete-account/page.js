@@ -26,6 +26,9 @@ const DELETED = [
   'Your streak, daily goals and subject wise accuracy',
   'Your quiz and paper history, including which questions you have already seen',
   'Any feedback you sent us from inside the app',
+  // Added when push notifications shipped: the token is written to the user
+  // document and removed with it, so the app can no longer reach the device.
+  'Your notification token, so we can no longer send anything to your phone',
 ]
 
 export default function DeleteAccountPage() {
