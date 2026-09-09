@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { initializeApp, getApps } from 'firebase/app'
+import { SUPPORT_EMAIL } from '../../lib/links'
 import styles from './DeleteAccount.module.css'
 
 // Google Play requires apps that offer account creation to provide a web page
@@ -141,7 +142,7 @@ export default function DeleteAccountPage() {
               {status === 'error' && (
                 <p className={styles.error}>
                   Could not send that. Email us at{' '}
-                  <a href="mailto:m.burhan.khan101@gmail.com">m.burhan.khan101@gmail.com</a>{' '}
+                  <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>{' '}
                   instead.
                 </p>
               )}
