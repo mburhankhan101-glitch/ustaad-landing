@@ -1,62 +1,56 @@
+/* Frosted glass, on from the first pixel rather than only after scrolling.
+   The bar was previously a solid slab of --paper at the top of the page, which
+   is why nothing ever appeared to pass behind it: an opaque background gives
+   backdrop-filter nothing to show through. Holding it translucent the whole
+   time is what produces the distortion as content slides underneath. */
 .nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--paper);
-  transition: border-color 0.2s ease, background 0.2s ease;
+  background: rgba(251, 250, 248, 0.62);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
   border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
 
+/* Past the fold the bar sits over dense content, so it firms up slightly and
+   draws its hairline. */
 .scrolled {
   border-bottom-color: var(--rule);
-  background: rgba(251, 250, 248, 0.92);
-  backdrop-filter: saturate(1.4) blur(8px);
-  -webkit-backdrop-filter: saturate(1.4) blur(8px);
+  background: rgba(251, 250, 248, 0.78);
+}
+
+/* Safari on iOS and older Android browsers ignore backdrop-filter. Without
+   this they render the translucent bar with the page showing straight through
+   it and the links become unreadable. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .nav { background: rgba(251, 250, 248, 0.97); }
+  .scrolled { background: rgba(251, 250, 248, 0.99); }
 }
 
 .inner {
   max-width: var(--measure);
   margin: 0 auto;
-  padding: 14px var(--gutter);
+  padding: 20px var(--gutter);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-}
-
-.logoImg {
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
-}
-
-.brand {
-  font-family: var(--display);
-  font-size: 21px;
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  color: var(--ink);
-}
-
 .desktopLinks {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 32px;
 }
 
 /* Scoped to .navLink, NOT to `.desktopLinks a`. That descendant selector has
    higher specificity than PlayButton's own .btn class, so it was repainting the
    install button's white label and glyph in dark grey against purple. */
 .navLink {
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 15.5px;
+  font-weight: 600;
   color: var(--ink-2);
   transition: color 0.15s ease;
 }
@@ -114,7 +108,7 @@
 
 .mobileMenu {
   position: fixed;
-  inset: 62px 0 0;
+  inset: var(--nav-h) 0 0;
   background: var(--paper);
   opacity: 0;
   pointer-events: none;

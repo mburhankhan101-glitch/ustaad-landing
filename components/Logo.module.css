@@ -1,0 +1,40 @@
+/* One scale drives both halves of the lockup, so changing the header height
+   cannot leave the wordmark looking bolted onto a mark of the wrong size. */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: calc(var(--logo-size) * 0.26);
+}
+
+.mark {
+  width: var(--logo-size);
+  height: var(--logo-size);
+  border-radius: calc(var(--logo-size) * 0.27);
+  display: block;
+}
+
+.word {
+  font-family: var(--display);
+  font-size: calc(var(--logo-size) * 0.66);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  color: var(--ink);
+}
+
+/* The same purple full stop the page uses on the one line per section it wants
+   remembered. It is what makes this read as a wordmark rather than a filename
+   next to an app icon. */
+.dot {
+  color: var(--primary);
+}
+
+.sm { --logo-size: 30px; }
+.md { --logo-size: 40px; }
+.lg { --logo-size: 46px; }
+
+@media (max-width: 860px) {
+  .md { --logo-size: 34px; }
+  .lg { --logo-size: 38px; }
+}

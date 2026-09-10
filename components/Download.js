@@ -45,7 +45,7 @@ export default function Download() {
           <span className={styles.highlight}>Abhi download karo.</span>
         </h2>
         <p className={styles.sub}>
-          FAST NU, NUST NET aur NTS ki poori tayari: 3,900+ MCQs, real past papers,
+          FAST NU, NUST NET aur NTS ki poori tayari: 5,200+ MCQs, real past papers,
           aur har galat jawab par AI explanation.<br />
           <strong>Free to start.</strong>
         </p>

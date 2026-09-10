@@ -3,12 +3,42 @@
 import { motion } from 'framer-motion'
 import styles from './ExamCoverage.module.css'
 
+/**
+ * The universities each test actually gets you into.
+ *
+ * A student does not sit "the NTS NAT", they sit it to get into COMSATS or
+ * Air. Naming the campuses is what turns an abstract test pattern into the
+ * thing they are working towards, and it is the difference between this
+ * section listing features and it listing outcomes.
+ *
+ * `mark` is the monogram drawn in the exam's colour. Swapping in real crests
+ * later is a matter of adding `logo: '/unis/nust.png'` to a row; the component
+ * already prefers it over the monogram when present. Real crests are
+ * trademarks, so use them nominatively — to say which test we cover — and drop
+ * any university that asks.
+ */
+const UNIS = {
+  fast: [
+    { mark: 'FAST', name: 'FAST NUCES', where: 'Lahore · Karachi · Islamabad · Peshawar' },
+  ],
+  nust: [
+    { mark: 'NUST', name: 'NUST', where: 'Islamabad · Risalpur' },
+  ],
+  nts: [
+    { mark: 'CUI', name: 'COMSATS', where: 'Islamabad · Lahore · Abbottabad · Wah' },
+    { mark: 'AU', name: 'Air University', where: 'Islamabad · Multan' },
+    { mark: 'BZU', name: 'Bahauddin Zakariya', where: 'Multan' },
+    { mark: '+', name: 'Aur doosri NTS lene wali universities', where: '' },
+  ],
+}
+
 const exams = [
   {
     name: 'FAST NU',
     tag: 'CS · AI · EE · Business',
     color: '#6C63FF',
     bg: '#EEEEFF',
+    unis: UNIS.fast,
     details: [
       { label: 'Total MCQs', value: '120' },
       { label: 'Time', value: '120 min' },
@@ -21,6 +51,7 @@ const exams = [
     tag: 'Engineering · CS · Business',
     color: '#e85c5c',
     bg: '#FFF0F0',
+    unis: UNIS.nust,
     details: [
       { label: 'Total MCQs', value: '200' },
       { label: 'Time', value: '180 min' },
@@ -33,6 +64,7 @@ const exams = [
     tag: 'CS · General · COMSATS',
     color: '#a29449',
     bg: '#FFFBEB',
+    unis: UNIS.nts,
     details: [
       { label: 'Total MCQs', value: '90' },
       { label: 'Time', value: '100 min' },
@@ -143,6 +175,31 @@ export default function ExamCoverage() {
                         </span>
                       ))}
                     </div>
+                  </div>
+
+                  <div className={styles.unis}>
+                    <p className={styles.unisLabel}>Is test se admission:</p>
+                    <ul className={styles.uniList}>
+                      {exam.unis.map((u, j) => (
+                        <li key={j} className={styles.uni}>
+                          {u.logo ? (
+                            <img src={u.logo} alt="" className={styles.uniLogo} />
+                          ) : (
+                            <span
+                              className={styles.uniMark}
+                              style={{ background: exam.bg, color: exam.color }}
+                              aria-hidden="true"
+                            >
+                              {u.mark}
+                            </span>
+                          )}
+                          <span className={styles.uniText}>
+                            <span className={styles.uniName}>{u.name}</span>
+                            {u.where && <span className={styles.uniWhere}>{u.where}</span>}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </>
               )}

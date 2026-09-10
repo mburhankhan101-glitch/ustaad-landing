@@ -17,7 +17,7 @@ const ustaad = [
 
 export default function PriceAnchor() {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} id="pricing">
       <div className={styles.inner}>
 
         <header className={styles.head}>

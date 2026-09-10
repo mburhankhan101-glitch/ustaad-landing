@@ -5,7 +5,7 @@ import styles from './Faq.module.css'
 const faqs = [
   {
     q: 'Ustaad kis kis exam ke liye hai?',
-    a: 'Abhi FAST NU entry test, NUST NET aur NTS NAT (ICS/CS aur general) poori tarah cover hain, 3,900+ real past paper MCQs ke saath. MDCAT aur NUMS par kaam ho raha hai.',
+    a: 'Abhi FAST NU entry test, NUST NET aur NTS NAT (ICS/CS aur general) poori tarah cover hain, 5,200+ real past paper MCQs ke saath. MDCAT aur NUMS par kaam ho raha hai.',
   },
   {
     q: 'Kya Ustaad free hai?',

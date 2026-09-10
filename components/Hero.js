@@ -265,7 +265,7 @@ export default function Hero() {
 
             <dl className={styles.stats}>
               <div className={styles.stat}>
-                <dt className={styles.statNum}>3,900+</dt>
+                <dt className={styles.statNum}>5,200+</dt>
                 <dd className={styles.statLbl}>Real past paper MCQs</dd>
               </div>
               <div className={styles.stat}>

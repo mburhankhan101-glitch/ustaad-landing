@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import PlayButton from './PlayButton'
+import Logo from './Logo'
 import styles from './Navbar.module.css'
 
 // Same APP_URL logic as Hero
@@ -43,18 +44,14 @@ export default function Navbar() {
   return (
     <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.inner}>
-        {/* Logo */}
-        <div className={styles.logo}>
-          <img src="/app_icon.png" alt="Ustaad" className={styles.logoImg} />
-          <span className={styles.brand}>Ustaad</span>
-        </div>
+        <Logo size="md" />
 
         {/* Desktop nav links */}
         <div className={styles.desktopLinks}>
-          <a href="#try" className={styles.navLink} onClick={handleNavClick}>Try a question</a>
-          <a href="#features" className={styles.navLink} onClick={handleNavClick}>Features</a>
-          <a href="#exams" className={styles.navLink} onClick={handleNavClick}>Exams</a>
-          <a href="#faq" className={styles.navLink} onClick={handleNavClick}>FAQ</a>
+          <a href="/#try" className={styles.navLink} onClick={handleNavClick}>Try a question</a>
+          <a href="/#features" className={styles.navLink} onClick={handleNavClick}>Features</a>
+          <a href="/#exams" className={styles.navLink} onClick={handleNavClick}>Exams</a>
+          <a href="/#faq" className={styles.navLink} onClick={handleNavClick}>FAQ</a>
 
           {/* Login – ghost button */}
           <button
@@ -86,10 +83,10 @@ export default function Navbar() {
       {/* Mobile menu overlay */}
       <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ''}`}>
         <div className={styles.mobileMenuInner}>
-          <a href="#try" className={styles.mobileLink} onClick={handleNavClick}>Try a question</a>
-          <a href="#features" className={styles.mobileLink} onClick={handleNavClick}>Features</a>
-          <a href="#exams" className={styles.mobileLink} onClick={handleNavClick}>Exams</a>
-          <a href="#faq" className={styles.mobileLink} onClick={handleNavClick}>FAQ</a>
+          <a href="/#try" className={styles.mobileLink} onClick={handleNavClick}>Try a question</a>
+          <a href="/#features" className={styles.mobileLink} onClick={handleNavClick}>Features</a>
+          <a href="/#exams" className={styles.mobileLink} onClick={handleNavClick}>Exams</a>
+          <a href="/#faq" className={styles.mobileLink} onClick={handleNavClick}>FAQ</a>
           <Link href="/contact" className={styles.mobileLink} onClick={handleNavClick}>Contact Us</Link>
 
           <button

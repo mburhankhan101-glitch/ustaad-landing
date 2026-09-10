@@ -60,16 +60,24 @@
   --gutter:      24px;
   --measure:     1120px;
   --section-y:   clamp(72px, 9vw, 128px);
+
+  /* Height of the sticky header. Anchor offsets and the mobile menu both
+     derive from it, so the bar cannot be made taller without them following. */
+  --nav-h:       80px;
+}
+
+@media (max-width: 860px) {
+  :root { --nav-h: 74px; }
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-/* The navbar is sticky and opaque, so an anchor jump would otherwise park the
-   section heading underneath it. */
+/* The navbar is sticky, so an anchor jump would otherwise park the section
+   heading underneath it. */
 section[id] {
-  scroll-margin-top: 78px;
+  scroll-margin-top: calc(var(--nav-h) + 14px);
 }
 
 body {
