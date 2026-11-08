@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
   const uni = universityBySlug(slug)
   if (!uni) return {}
   return {
-    title: `${uni.test} — paper pattern and preparation | Ustaad`,
+    title: `${uni.test} paper pattern and preparation | Ustaad`,
     description:
       `${uni.full}. ${uni.programs.length > 1 ? 'Each paper' : 'The paper'} ` +
       `section by section, and what to practise.`,

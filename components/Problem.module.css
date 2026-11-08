@@ -62,7 +62,12 @@
 }
 
 .colHead:last-child {
-  padding-right: 0;
+  padding-right: 24px;
+  padding-left: 24px;
+  color: var(--primary);
+  background: var(--primary-soft);
+  border-bottom-color: var(--primary);
+  border-radius: 10px 10px 0 0;
 }
 
 .aspect {
@@ -84,9 +89,18 @@
   border-bottom: 1px solid var(--rule);
 }
 
+/* The side being argued for: full ink, heavier, and on its own ground.
+   The left column stays perfectly readable; this one is simply louder. */
 .cell:last-child {
-  padding-right: 0;
+  padding-right: 24px;
+  padding-left: 24px;
   color: var(--ink);
+  font-weight: 600;
+  background: var(--primary-soft);
+}
+
+.table tbody tr:last-child .cell:last-child {
+  border-radius: 0 0 10px 10px;
 }
 
 .srOnly {

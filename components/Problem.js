@@ -18,7 +18,7 @@ const rows = [
   {
     aspect: 'The questions',
     without:
-      'Whatever a PDF happens to contain — mixed years, mixed boards, no way to tell what is still on the syllabus.',
+      'Whatever a PDF happens to contain. Mixed years, mixed boards, and no way to tell what is still on the syllabus.',
     with: 'Real past paper questions, filtered to your exam and your degree.',
   },
   {
@@ -31,7 +31,7 @@ const rows = [
     aspect: 'Getting one wrong',
     without:
       'A cross in the margin. You learn what you got wrong, not why, and you meet the same question again in the exam.',
-    with: 'An explanation the moment you answer — the concept, the working, and the mistake most students make.',
+    with: 'An explanation the moment you answer, covering the concept, the working, and the mistake most students make.',
   },
   {
     aspect: 'What you practise',
