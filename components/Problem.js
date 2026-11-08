@@ -1,38 +1,47 @@
 import styles from './Problem.module.css'
 
 /**
- * The three things that actually go wrong when you prepare without this.
+ * What preparing for these exams is actually like, with and without this.
  *
- * This was a three-column us-and-them table: a theme, a grey "Ab tak" column
- * and a highlighted "Ustaad ke saath" column. Two problems with it. A
- * comparison table against an unnamed competitor is the oldest shape on the
- * internet and reads as marketing before a word is taken in — and writing
- * the other side's case yourself means the student is being shown a strawman
- * they did not agree to.
+ * The earlier version of this table lost on two counts: it dimmed the left
+ * column to grey so the reader was told which side to agree with before
+ * reading either, and the left column was a caricature rather than a
+ * description. A student who has actually prepared from PDFs knows what that
+ * is like, and recognising their real situation is what earns the right-hand
+ * column — being told their situation is pathetic does not.
  *
- * So the strawman column is gone and the complaint is stated in the
- * student's own voice, as something they recognise, with what the app does
- * about it directly underneath. Same three arguments, no table, nobody to
- * beat.
+ * So both columns are set in the same weight and colour, and the left one
+ * says true things. Nobody is being beaten; two ways of working are being
+ * described, and the difference does the arguing.
  */
-const problems = [
+const rows = [
   {
-    says: 'Definitions ratta maar li. Test mein application based sawal aa gaya.',
-    does:
-      'Every question is a real past paper question — same style, same ' +
-      'difficulty. Drill them topic by topic.',
+    aspect: 'The questions',
+    without:
+      'Whatever a PDF happens to contain — mixed years, mixed boards, no way to tell what is still on the syllabus.',
+    with: 'Real past paper questions, filtered to your exam and your degree.',
   },
   {
-    says: 'Facebook groups aur random PDFs mein do ghante barbaad, phir bhi adhoora.',
-    does:
-      'Every past paper in one place, with its marking scheme. Nothing to ' +
-      'go and find.',
+    aspect: 'Past papers',
+    without:
+      'Scattered across Facebook groups and drive links, usually without the marking scheme.',
+    with: 'Every paper in one place, with its marking scheme and the real exam interface.',
   },
   {
-    says: 'Sawal galat hua, cross lagaya, aage barh gaye. Wahi galti test mein dobara.',
-    does:
-      'Every wrong answer gets an explanation on the spot, in Urdu or ' +
-      'English, whichever lands.',
+    aspect: 'Getting one wrong',
+    without:
+      'A cross in the margin. You learn what you got wrong, not why, and you meet the same question again in the exam.',
+    with: 'An explanation the moment you answer — the concept, the working, and the mistake most students make.',
+  },
+  {
+    aspect: 'What you practise',
+    without: 'A whole paper, or nothing.',
+    with: 'One chapter at a time, or a full timed mock when you are ready for it.',
+  },
+  {
+    aspect: 'Knowing where you stand',
+    without: 'A score you work out yourself, with nothing to compare it to.',
+    with: 'Accuracy by subject, and the topics you keep getting wrong.',
   },
 ]
 
@@ -41,20 +50,43 @@ export default function Problem() {
     <section className={styles.section}>
       <div className={styles.inner}>
         <h2 className={styles.heading}>
-          Preparation mein yehi teen cheezein kharab hoti hain.
+          The same syllabus. A different year.
         </h2>
+        <p className={styles.sub}>
+          Nothing here is a trick. It is the difference between working from
+          what you can find and working from what you need.
+        </p>
 
-        <ol className={styles.list}>
-          {problems.map((p, i) => (
-            <li key={p.says} className={styles.item}>
-              <span className={styles.num}>{String(i + 1).padStart(2, '0')}</span>
-              <div className={styles.body}>
-                <p className={styles.says}>{p.says}</p>
-                <p className={styles.does}>{p.does}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th scope="col" className={styles.aspectHead}>
+                <span className={styles.srOnly}>Aspect</span>
+              </th>
+              <th scope="col" className={styles.colHead}>
+                On your own
+              </th>
+              <th scope="col" className={styles.colHead}>
+                With Ustaad
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr key={r.aspect}>
+                <th scope="row" className={styles.aspect}>
+                  {r.aspect}
+                </th>
+                <td className={styles.cell} data-label="On your own">
+                  {r.without}
+                </td>
+                <td className={styles.cell} data-label="With Ustaad">
+                  {r.with}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </section>
   )

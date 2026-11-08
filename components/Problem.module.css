@@ -1,8 +1,12 @@
-/* What goes wrong, and what the app does about it.
+/* Two ways of preparing, side by side.
  *
- * Numbered because these really are three distinct failures rather than a
- * set of equivalent features — the numbering carries information, which is
- * the only reason to use it. No columns, no table, no highlighted winner. */
+ * A real table, because this is tabular: five aspects compared across two
+ * approaches. Both columns are set identically — same size, same colour,
+ * same weight. The previous version greyed the left column out, which told
+ * the reader which side to agree with before they had read either, and a
+ * comparison that argues through styling is not a comparison.
+ *
+ * No ticks, no crosses, no tinted winner column. Rules carry the structure. */
 
 .section {
   padding: 96px 0;
@@ -11,84 +15,145 @@
 }
 
 .inner {
-  max-width: 920px;
+  max-width: 1060px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
 .heading {
-  font-size: clamp(27px, 3.6vw, 38px);
+  font-size: clamp(28px, 3.8vw, 40px);
   font-weight: 800;
   letter-spacing: -0.02em;
-  line-height: 1.2;
+  line-height: 1.15;
   color: var(--ink);
-  margin: 0 0 48px;
-  max-width: 22ch;
+  margin: 0 0 12px;
   text-wrap: balance;
 }
 
-.list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 0;
+.sub {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin: 0 0 44px;
+  max-width: 56ch;
 }
 
-.item {
-  display: grid;
-  grid-template-columns: 56px minmax(0, 1fr);
-  gap: 8px;
-  padding: 28px 0;
-  border-top: 1px solid var(--rule);
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
 }
 
-.item:last-child {
+.aspectHead {
+  width: 1%;
+  padding: 0 24px 12px 0;
+}
+
+.colHead {
+  width: 42%;
+  padding: 0 24px 12px 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  border-bottom: 1px solid var(--rule-strong);
+  vertical-align: bottom;
+}
+
+.colHead:last-child {
+  padding-right: 0;
+}
+
+.aspect {
+  padding: 22px 24px 22px 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+  vertical-align: top;
   border-bottom: 1px solid var(--rule);
 }
 
-.num {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ink-3);
-  font-variant-numeric: tabular-nums;
-  padding-top: 4px;
-}
-
-.body {
-  min-width: 0;
-}
-
-/* The student's own complaint, set as the thing being quoted back to them. */
-.says {
-  font-size: 19px;
-  line-height: 1.5;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin: 0 0 10px;
-  max-width: 46ch;
-}
-
-.does {
-  font-size: 16px;
+.cell {
+  padding: 22px 24px 22px 0;
+  font-size: 15px;
   line-height: 1.6;
   color: var(--ink-2);
-  margin: 0;
-  max-width: 54ch;
+  vertical-align: top;
+  border-bottom: 1px solid var(--rule);
 }
 
-@media (max-width: 600px) {
+.cell:last-child {
+  padding-right: 0;
+  color: var(--ink);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* A table of three columns of prose does not survive a phone. Each row
+   becomes a small stack: the aspect, then each approach under its own
+   heading, so the comparison still reads top to bottom. */
+@media (max-width: 760px) {
   .section {
     padding: 72px 0;
   }
 
-  .item {
-    grid-template-columns: 40px minmax(0, 1fr);
-    padding: 24px 0;
+  .table,
+  .table tbody,
+  .table tr,
+  .table th,
+  .table td {
+    display: block;
+    width: auto;
   }
 
-  .says {
-    font-size: 17px;
+  .table thead {
+    display: none;
+  }
+
+  .table tr {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .table tr:first-child {
+    border-top: 1px solid var(--rule-strong);
+  }
+
+  .aspect,
+  .cell {
+    padding: 0;
+    border-bottom: 0;
+    white-space: normal;
+  }
+
+  .aspect {
+    margin-bottom: 12px;
+  }
+
+  .cell::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 4px;
+  }
+
+  .cell + .cell {
+    margin-top: 14px;
   }
 }
