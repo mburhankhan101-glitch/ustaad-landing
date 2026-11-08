@@ -50,7 +50,6 @@ export default function QuestionDemo() {
       <div className={styles.inner}>
 
         <header className={styles.head}>
-          <p className={styles.eyebrow}>Try it right now</p>
           <h2 className={styles.heading}>
             Jawab dekhna asaan hai.<br />
             Asal cheez hai <span className={styles.mark}>kyun</span>.
@@ -63,7 +62,7 @@ export default function QuestionDemo() {
 
         <div className={styles.board}>
           <div className={styles.boardTop}>
-            <span className={styles.tag}>{q.exam} · {q.topic}</span>
+            <span className={styles.qmeta}>{q.exam} · {q.topic}</span>
             <span className={styles.counter}>
               {String(index + 1).padStart(2, '0')} / {String(questions.length).padStart(2, '0')}
             </span>

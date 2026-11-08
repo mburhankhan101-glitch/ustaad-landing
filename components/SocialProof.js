@@ -32,7 +32,6 @@ export default function SocialProof() {
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        <div className={styles.label}>Student Reviews</div>
         <h2 className={styles.heading}>
           Students bol rahe hain.<br />
           <span className={styles.purple}>Results show ho rahe hain.</span>

@@ -21,7 +21,6 @@ export default function PriceAnchor() {
       <div className={styles.inner}>
 
         <header className={styles.head}>
-          <p className={styles.eyebrow}>The cost</p>
           <h2 className={styles.heading}>Academy ki fees? Yahan nahi.</h2>
         </header>
 

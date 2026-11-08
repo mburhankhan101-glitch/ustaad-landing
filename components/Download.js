@@ -39,7 +39,6 @@ export default function Download() {
     <section className={styles.section} id="download">
       <div className={styles.inner}>
         <div className={styles.owl}>🦉</div>
-        <div className={styles.label}>Now on Google Play</div>
         <h2 className={styles.heading}>
           Ustaad live hai.<br />
           <span className={styles.highlight}>Abhi download karo.</span>

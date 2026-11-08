@@ -35,7 +35,6 @@ export default function Faq() {
       <div className={styles.inner}>
 
         <header className={styles.head}>
-          <p className={styles.eyebrow}>Questions</p>
           <h2 className={styles.heading}>Poochne se pehle.</h2>
         </header>
 

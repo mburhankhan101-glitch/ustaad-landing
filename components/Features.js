@@ -39,7 +39,6 @@ export default function Features() {
       <div className={styles.inner}>
 
         <header className={styles.head}>
-          <p className={styles.eyebrow}>What you get</p>
           <h2 className={styles.heading}>
             Sab kuch ek jagah.<br />
             <span className={styles.accent}>Smart tareeqe se.</span>

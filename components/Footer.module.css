@@ -45,9 +45,9 @@
   height: 40px;
   display: grid;
   place-items: center;
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: 11px;
+  /* Was a bordered squircle around each icon. The icon is the control; the
+     box around it was decoration that made four links look like four cards. */
+  background: transparent;
   color: var(--ink-2);
   transition: border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }

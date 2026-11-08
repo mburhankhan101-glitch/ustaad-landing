@@ -27,7 +27,6 @@ export default function Problem() {
       <div className={styles.inner}>
 
         <header className={styles.head}>
-          <p className={styles.eyebrow}>The problem</p>
           <h2 className={styles.heading}>
             Baaki sab resources<br />
             <span className={styles.dim}>incomplete hain.</span>

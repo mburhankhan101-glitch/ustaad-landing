@@ -133,10 +133,7 @@ function PhoneMockup() {
               </div>
             </div>
 
-            <div className={styles.topicChip}>
-              <div className={styles.chipDot} />
-              <span className={styles.chipLbl}>Advanced Maths · FAST NU</span>
-            </div>
+            <p className={styles.topicLine}>Advanced Maths · FAST NU</p>
 
             <div className={styles.qcard}>
               <div className={styles.qnum}>Question 03</div>

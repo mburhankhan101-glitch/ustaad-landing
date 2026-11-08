@@ -289,33 +289,9 @@
   55%, 100% { width: 32%; }
 }
 
-.topicChip {
-  margin: 0 14px 10px;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: rgba(108, 99, 255, 0.14);
-  border: 1px solid rgba(108, 99, 255, 0.28);
-  padding: 4px 10px;
-  border-radius: 100px;
-}
-
-.chipDot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #6C63FF;
-  animation: blip 2.4s ease-in-out infinite;
-}
-
 @keyframes blip {
   0%, 100% { opacity: 1; }
   50%      { opacity: 0.35; }
-}
-
-.chipLbl {
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.62);
 }
 
 .qcard {
@@ -556,4 +532,14 @@
   .fbStreak, .fbAi { padding: 7px 10px; }
   .fbStreakIcon, .fbAiIcon { font-size: 17px; }
   .fbStreakNum, .fbAiMain { font-size: 12.5px; }
+}
+
+/* Was a pill with a dot. The words still orient you inside the mock-up;
+   the lozenge around them was doing nothing the words were not. */
+.topicLine {
+  margin: 0 0 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-3);
+  letter-spacing: 0.01em;
 }

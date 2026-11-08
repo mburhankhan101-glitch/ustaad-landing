@@ -29,14 +29,6 @@
   50%      { transform: translateY(-7px); }
 }
 
-.label {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
-}
-
 .heading {
   font-family: var(--display);
   font-weight: 900;
