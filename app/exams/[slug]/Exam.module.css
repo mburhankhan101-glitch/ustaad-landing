@@ -1,0 +1,203 @@
+/* One university's tests.
+ *
+ * A reading page: a column of text and one table per paper. No cards, no
+ * pills, no bordered panels — the table rules carry the structure, which is
+ * what a table is for. */
+
+.page {
+  background: var(--paper);
+  min-height: 100vh;
+  padding: 56px 0 96px;
+}
+
+.inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.back {
+  display: inline-block;
+  font-size: 14px;
+  color: var(--ink-3);
+  text-decoration: none;
+  margin-bottom: 36px;
+}
+
+.back:hover {
+  color: var(--ink);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.crest {
+  width: auto;
+  height: auto;
+  max-width: 72px;
+  max-height: 72px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.title {
+  font-size: clamp(26px, 4vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.15;
+}
+
+.full {
+  font-size: 14px;
+  color: var(--ink-3);
+  margin: 6px 0 0;
+}
+
+.intro {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin: 0 0 44px;
+  max-width: 62ch;
+}
+
+.block {
+  margin-bottom: 44px;
+}
+
+.h2 {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 14px;
+}
+
+.campuses,
+.plain {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 0;
+}
+
+.dates {
+  margin: 0;
+}
+
+.dateRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.dateLabel {
+  font-size: 15px;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+.dateValue {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+}
+
+.program {
+  margin-bottom: 36px;
+}
+
+.programName {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+
+.shape {
+  font-size: 14px;
+  color: var(--ink-3);
+  margin: 0 0 14px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.table tr {
+  border-top: 1px solid var(--rule);
+}
+
+.table tr:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.sectionName {
+  text-align: left;
+  font-weight: 500;
+  color: var(--ink);
+  padding: 11px 0;
+}
+
+.sectionCount {
+  text-align: right;
+  color: var(--ink-3);
+  padding: 11px 16px 11px 0;
+  white-space: nowrap;
+}
+
+.sectionWeight {
+  text-align: right;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 11px 0;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.note {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-3);
+  margin: 12px 0 0;
+  max-width: 60ch;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 14px 24px;
+  background: var(--ink);
+  color: var(--ink-on-dark);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.cta:hover {
+  background: var(--primary);
+}
+
+@media (max-width: 560px) {
+  .head {
+    gap: 14px;
+  }
+
+  .sectionCount {
+    padding-right: 12px;
+  }
+}
