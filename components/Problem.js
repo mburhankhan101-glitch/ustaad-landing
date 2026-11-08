@@ -1,23 +1,38 @@
 import styles from './Problem.module.css'
 
-// The three pain points the old page listed as separate icon cards, restructured
-// as before/after pairs. Same content, but the contrast is the argument — a card
-// with an emoji on it isn't.
-const contrasts = [
+/**
+ * The three things that actually go wrong when you prepare without this.
+ *
+ * This was a three-column us-and-them table: a theme, a grey "Ab tak" column
+ * and a highlighted "Ustaad ke saath" column. Two problems with it. A
+ * comparison table against an unnamed competitor is the oldest shape on the
+ * internet and reads as marketing before a word is taken in — and writing
+ * the other side's case yourself means the student is being shown a strawman
+ * they did not agree to.
+ *
+ * So the strawman column is gone and the complaint is stated in the
+ * student's own voice, as something they recognise, with what the app does
+ * about it directly underneath. Same three arguments, no table, nobody to
+ * beat.
+ */
+const problems = [
   {
-    theme: 'Ratta',
-    before: 'Definitions ratta maar li. Test mein application based sawal aa gaya.',
-    after:  'Har sawal asli past paper se, wahi style, wahi difficulty. Topic wise drill.',
+    says: 'Definitions ratta maar li. Test mein application based sawal aa gaya.',
+    does:
+      'Every question is a real past paper question — same style, same ' +
+      'difficulty. Drill them topic by topic.',
   },
   {
-    theme: 'Past papers',
-    before: 'Facebook groups aur random PDFs mein do ghante barbaad, phir bhi adhoora.',
-    after:  'Saare past papers ek jagah, marking scheme ke saath. Search karne ki zaroorat nahi.',
+    says: 'Facebook groups aur random PDFs mein do ghante barbaad, phir bhi adhoora.',
+    does:
+      'Every past paper in one place, with its marking scheme. Nothing to ' +
+      'go and find.',
   },
   {
-    theme: 'Galtiyan',
-    before: 'Sawal galat hua, cross lagaya, aage barh gaye. Wahi galti test mein dobara.',
-    after:  'Har galat jawab par turant explanation, Urdu ya English, jo samajh aaye.',
+    says: 'Sawal galat hua, cross lagaya, aage barh gaye. Wahi galti test mein dobara.',
+    does:
+      'Every wrong answer gets an explanation on the spot, in Urdu or ' +
+      'English, whichever lands.',
   },
 ]
 
@@ -25,33 +40,21 @@ export default function Problem() {
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
+        <h2 className={styles.heading}>
+          Preparation mein yehi teen cheezein kharab hoti hain.
+        </h2>
 
-        <header className={styles.head}>
-          <h2 className={styles.heading}>
-            Baaki sab resources<br />
-            <span className={styles.dim}>incomplete hain.</span>
-          </h2>
-          <p className={styles.sub}>
-            Pakistani students deserve better than scattered PDFs and zero feedback.
-            Yeh farq hai.
-          </p>
-        </header>
-
-        <div className={styles.table}>
-          <div className={styles.colHead}>
-            <span className={styles.colLabelBefore}>Ab tak</span>
-            <span className={styles.colLabelAfter}>Ustaad ke saath</span>
-          </div>
-
-          {contrasts.map((row) => (
-            <div key={row.theme} className={styles.row}>
-              <p className={styles.theme}>{row.theme}</p>
-              <p className={styles.before}>{row.before}</p>
-              <p className={styles.after}>{row.after}</p>
-            </div>
+        <ol className={styles.list}>
+          {problems.map((p, i) => (
+            <li key={p.says} className={styles.item}>
+              <span className={styles.num}>{String(i + 1).padStart(2, '0')}</span>
+              <div className={styles.body}>
+                <p className={styles.says}>{p.says}</p>
+                <p className={styles.does}>{p.does}</p>
+              </div>
+            </li>
           ))}
-        </div>
-
+        </ol>
       </div>
     </section>
   )
