@@ -131,6 +131,46 @@ html, body {
   margin: 0;
 }
 
+/* ─── Swipe affordance ───────────────────────────────────────────────────
+ * Instagram's own carousel dots are grey, small, and easy to miss mid
+ * scroll, so a reader who does not notice them stops at the first slide,
+ * which is the one slide with no ask on it. This says there is more.
+ *
+ * Never on the last slide; it would point at nothing.
+ *
+ * Sits 350px up rather than at the foot of the card because the 4:5 feed
+ * crop takes 285px off the bottom, and a hint that only exists in the
+ * Stories cut is no hint at all. */
+
+.swipe {
+  position: absolute;
+  right: 96px;
+  bottom: 420px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+  font-family: var(--ui);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(10, 14, 46, 0.45);
+}
+
+.swipe .arr {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 3px solid rgba(10, 14, 46, 0.32);
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  letter-spacing: 0;
+  padding-bottom: 2px;
+}
+
 /* ─── Highlight ──────────────────────────────────────────────────────────
  * The one line on a card that is the point of the card.
  *
