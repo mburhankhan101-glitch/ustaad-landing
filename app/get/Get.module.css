@@ -1,0 +1,73 @@
+/* A page nobody should look at for more than a second. It exists so that a
+ * redirect which fails has somewhere to land instead of a blank screen. */
+
+.page {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 32px 24px;
+  background: var(--paper);
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.kicker {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin: 0 0 14px;
+}
+
+.title {
+  font-family: var(--display);
+  font-size: clamp(26px, 6vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+
+.sub {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--ink-2, #5b5f6b);
+  margin: 0 0 28px;
+}
+
+/* A real link, not a spinner's consolation prize: on the in-app browsers
+   that refuse intents outright, this is the whole journey. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 18px 28px;
+  border-radius: 999px;
+  background: var(--ink-ground);
+  color: #fff;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.hint {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink-2, #5b5f6b);
+  margin: 22px 0 0;
+}
+
+.hint strong {
+  color: var(--ink);
+  font-weight: 700;
+}
