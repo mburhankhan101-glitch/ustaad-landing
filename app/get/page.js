@@ -23,11 +23,16 @@ import styles from './Get.module.css'
  * worst case this costs one tap instead of being a dead end.
  */
 
-// Where this page sits in Play Console's acquisition report. `?s=` names
-// the surface the tap came from, so an Instagram bio install is not filed
-// under "website" next to the hero button.
+// Where this page sits in Play Console's acquisition report.
+//
+// The default has to be meaningful without `?s=`, because the bio URL is
+// deliberately bare. Instagram opens ustaadapp.online but will not open a
+// play.google.com link at all, and a URL with a query string on it is one
+// more thing that can be mangled between a bio field and a webview. So
+// `https://ustaadapp.online/get` is the link people are given, and `?s=`
+// stays available for naming another surface later.
 const PLACEMENT = 'get'
-const DEFAULT_SOURCE = 'direct'
+const DEFAULT_SOURCE = 'bio'
 
 function androidIntentUrl(httpsUrl) {
   return (
