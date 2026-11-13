@@ -12,5 +12,7 @@
     { "name": "outro",    "seconds": 2.4, "pop": 0.26 }
   ],
   "audio": null,
-  "caption": "2¹⁰ = 1024, so the maths is right. The answer is still wrong, because scientific notation means one digit before the decimal and a power of ten. So 1.024 × 10³.\n\nThis one came up in NUST NET 2023.\n\nLink in bio.\n\n#NUST #NET #NUSTentrytest #entrytest #physics #ustaad"
+  "posted": "carousel, 4:5, slides 01-05 in order",
+  "caption": "2¹⁰ = 1024. The maths is right. The answer is still wrong.\n\nScientific notation needs one digit before the decimal, then a power of ten. That makes it 1.024 × 10³. 2¹⁰ is the same number written the wrong way, and that is exactly why it catches people.\n\nThis one came up in NUST NET 2023.\n\nNET 1 is on 17 November. Every question in Ustaad is from a real past paper, and every one comes with the reason behind the answer, not just a tick or a cross.\n\nLink in bio.\n\n#NUST #NET #NUSTentrytest #entrytest #NETpreparation #physics #engineering #ustaad",
+  "captionNote": "The 17 November line dates this. Strip it if the post is ever reused after NET 1."
 }
