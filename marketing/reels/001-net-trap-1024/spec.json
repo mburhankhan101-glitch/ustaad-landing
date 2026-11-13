@@ -1,20 +1,16 @@
 {
-  "title": "Ye jawab sahi hai. Aur phir bhi ghalat.",
+  "title": "This came in NUST NET 2023. Most get it wrong.",
   "kind": "reach",
   "source": "NUST NET, Physics, 2023 · Measurements",
-  "width": 4320,
+  "mode": "cards",
   "fps": 30,
-  "start": 0,
-  "beats": [
-    { "hold": 2.4 },
-    { "to": 1080, "move": 0.75 },
-    { "hold": 4.0 },
-    { "to": 2160, "move": 0.7 },
-    { "hold": 2.8 },
-    { "to": 3240, "move": 0.7 },
-    { "hold": 3.0 }
+  "cards": [
+    { "name": "hook",     "seconds": 2.3, "pop": 0.30 },
+    { "name": "question", "seconds": 3.7, "pop": 0.22 },
+    { "name": "trap",     "seconds": 2.2, "pop": 0.22 },
+    { "name": "answer",   "seconds": 2.4, "pop": 0.22 },
+    { "name": "outro",    "seconds": 2.4, "pop": 0.26 }
   ],
-  "end": { "seconds": 3.6 },
   "audio": null,
-  "caption": "2¹⁰ = 1024. Hisaab bilkul theek hai, jawab phir bhi ghalat. Scientific notation ka matlab hai 1 se 10 ke darmiyan ek number, aur 10 ki power. Is liye 1.024 × 10³.\n\nYe sawal NET 2023 mein aaya tha.\n\n#NUST #NET #NUSTentrytest #entrytest #physics #ustaad"
+  "caption": "2¹⁰ = 1024, so the maths is right. The answer is still wrong, because scientific notation means one digit before the decimal and a power of ten. So 1.024 × 10³.\n\nThis one came up in NUST NET 2023.\n\nLink in bio.\n\n#NUST #NET #NUSTentrytest #entrytest #physics #ustaad"
 }

@@ -51,9 +51,19 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─── The strip ──────────────────────────────────────────────────────────
- * A reel is one wide image the camera pans across, not a sequence of cuts.
- * Each .screen is exactly one 1080-wide frame of it. */
+/* ─── Layouts ────────────────────────────────────────────────────────────
+ * .deck stacks cards downward and the reel cuts between them. .strip lays
+ * them out sideways and the camera pans. Cuts suit a question, because a
+ * viewer can see that something changed; a pan suits one continuous thought.
+ * Either way a .screen is exactly one 1080x1920 frame. */
+
+.deck {
+  position: relative;
+  width: 1080px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
 
 .strip {
   position: relative;
@@ -119,6 +129,61 @@ html, body {
   text-transform: uppercase;
   color: var(--ink-soft);
   margin: 0;
+}
+
+/* ─── Highlight ──────────────────────────────────────────────────────────
+ * The one line on a card that is the point of the card.
+ *
+ * Exists because a line that merely changes between two otherwise identical
+ * frames does not register: the eye has nothing telling it to look again.
+ * On a block of accent, it does. Never more than one of these per card. */
+
+.hl {
+  align-self: flex-start;
+  background: var(--accent);
+  color: var(--ink);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 52px;
+  letter-spacing: -0.028em;
+  line-height: 1.22;
+  padding: 22px 30px;
+  border-radius: 10px;
+  margin: 0;
+  box-decoration-break: clone;
+}
+
+/* ─── Crest ──────────────────────────────────────────────────────────────
+ * A university's own mark, so a student knows in the first half second which
+ * exam is being talked about. Used nominatively; any university that asks is
+ * dropped. */
+
+.crest {
+  width: 190px;
+  height: 190px;
+  object-fit: contain;
+  display: block;
+}
+
+/* ─── Button ─────────────────────────────────────────────────────────────
+ * Not interactive, obviously, but it reads as something to press, which is
+ * the whole job of the last frame. */
+
+.btn {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  color: var(--ink);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 46px;
+  letter-spacing: -0.022em;
+  padding: 34px 68px;
+  border-radius: 999px;
+  border: 5px solid var(--ink);
+  white-space: nowrap;
 }
 
 /* ─── Pill ───────────────────────────────────────────────────────────────
@@ -227,6 +292,17 @@ html, body {
 
 .endcard .field i { border-color: rgba(10, 14, 46, 0.16); }
 .endcard .field i.solid { background: rgba(10, 14, 46, 0.16); }
+
+/* Centred, for the last frame. The name is the thing being remembered, so it
+   sits in the middle of the frame rather than hanging off the left edge. */
+.endcard.center {
+  align-items: center;
+  text-align: center;
+}
+
+.endcard.center .proof { align-items: center; }
+.endcard.center .proof li { justify-content: flex-start; }
+.endcard.center .store { align-self: center; }
 
 .wordmark {
   font-family: var(--display);

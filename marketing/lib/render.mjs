@@ -1,23 +1,24 @@
 #!/usr/bin/env node
 /**
- * Renders one reel: scene.html -> a wide still -> a panned 1080x1920 mp4.
+ * Renders one reel.
  *
  *   node marketing/lib/render.mjs marketing/reels/001-net-trap-1024
  *
- * Two things this does that a naive pan does not.
+ * Two modes, both built on the same trick: rasterise the artwork once with
+ * Chrome, then let ffmpeg do all the movement. Nothing is screenshotted per
+ * frame, so a 13-second reel encodes in seconds and changing a word is a
+ * re-render rather than a recompile.
  *
- * First, the camera holds. A question needs reading time, and a constant
- * linear pan gives every part of the strip the same two seconds whether it is
- * a four-word hook or four options with exponents in them. So `beats` in
- * spec.json alternates holds and moves, and the moves ease in and out.
+ *   mode: "cards"  (default) — scene.html is a vertical column of 1080x1920
+ *         cards. Each one cuts to the next and lands with a short scale-in,
+ *         so a changed line arrives as an event instead of sliding past.
  *
- * Second, there are no per-frame screenshots. The scene is rasterised once
- * and ffmpeg does the movement as a cropped window travelling across that one
- * image, which is why a 17-second reel renders in seconds rather than taking
- * 500 screenshots. Changing a word costs one re-render, not a recompile.
+ *   mode: "pan" — scene.html is one wide strip and the camera travels across
+ *         it, holding where there is something to read. Right for a piece
+ *         that is one continuous thought; wrong for a question, because a
+ *         viewer cannot tell that anything changed.
  *
- * Needs only Chrome and ffmpeg, both of which are already on this machine.
- * Override either with CHROME= / FFMPEG= if they move.
+ * Needs only Chrome and ffmpeg. Override with CHROME= / FFMPEG= if they move.
  */
 
 import { execFileSync } from 'node:child_process';
@@ -37,9 +38,7 @@ const CHROME_CANDIDATES = [
 function findChrome() {
   const hit = CHROME_CANDIDATES.find((p) => existsSync(p));
   if (!hit) {
-    throw new Error(
-      'No Chrome or Edge found. Set CHROME=/path/to/chrome.exe and retry.',
-    );
+    throw new Error('No Chrome or Edge found. Set CHROME=/path/to/chrome.exe.');
   }
   return hit;
 }
@@ -59,8 +58,12 @@ function shoot(chrome, html, out, width, height) {
       '--hide-scrollbars',
       '--force-device-scale-factor=1',
       // Without a virtual time budget the screenshot can land before the web
-      // font has arrived, and the whole piece silently falls back to Georgia.
+      // font and the logo have arrived, and the piece silently falls back to
+      // a system face with a missing image where the crest should be.
       '--virtual-time-budget=10000',
+      // scene.html pulls the university crest out of the site's public
+      // folder, which a file:// page is otherwise not allowed to read.
+      '--allow-file-access-from-files',
       `--window-size=${width},${height}`,
       `--screenshot=${target}`,
       `file:///${resolve(html).replace(/\\/g, '/')}`,
@@ -71,43 +74,27 @@ function shoot(chrome, html, out, width, height) {
 }
 
 /**
- * Turns `beats` into absolute keyframes.
+ * A card's scale-in, as an ffmpeg zoompan expression.
  *
- * A beat is either { hold: seconds } (camera still) or
- * { to: x, move: seconds } (camera travels to x). Everything is in scene
- * pixels, where x is the left edge of the 1080-wide window.
+ * Starts slightly enlarged and settles, which reads as the card landing.
+ * Scale can only go one way here: the source is already exactly one frame
+ * wide, so zooming below 1 would have nothing to fill the edges with.
  */
-function keyframes(beats, startX) {
-  const segs = [];
-  let t = 0;
-  let x = startX;
-
-  for (const beat of beats) {
-    if (beat.hold != null) {
-      segs.push({ t0: t, t1: t + beat.hold, x0: x, x1: x });
-      t += beat.hold;
-    } else if (beat.to != null) {
-      const d = beat.move ?? 0.8;
-      segs.push({ t0: t, t1: t + d, x0: x, x1: beat.to });
-      t += d;
-      x = beat.to;
-    } else {
-      throw new Error(`Beat is neither a hold nor a move: ${JSON.stringify(beat)}`);
-    }
-  }
-  return { segs, total: t };
+function popExpr(pop, fps, amount = 0.07) {
+  const frames = Math.max(1, Math.round(pop * fps));
+  const u = `(on/${frames})`;
+  const ease = `(${u}*${u}*(3-2*${u}))`;
+  return `if(lt(on,${frames}),${1 + amount}-${amount}*${ease},1)`;
 }
 
 /**
- * The crop's x as one ffmpeg expression.
+ * The pan's x as one ffmpeg expression.
  *
  * Moves use smoothstep rather than a straight ramp: a pan that starts and
- * stops abruptly reads as a slide transition, which is exactly the look the
- * flat-and-slow reference avoids.
+ * stops abruptly reads as a slide transition.
  */
 function panExpr(segs, maxX) {
   const clamp = (v) => Math.max(0, Math.min(maxX, Math.round(v)));
-
   let expr = `${clamp(segs[segs.length - 1].x1)}`;
   for (let i = segs.length - 1; i >= 0; i--) {
     const { t0, t1, x0, x1 } = segs[i];
@@ -125,6 +112,152 @@ function panExpr(segs, maxX) {
   return expr;
 }
 
+function keyframes(beats, startX) {
+  const segs = [];
+  let t = 0;
+  let x = startX;
+  for (const beat of beats) {
+    if (beat.hold != null) {
+      segs.push({ t0: t, t1: t + beat.hold, x0: x, x1: x });
+      t += beat.hold;
+    } else if (beat.to != null) {
+      const d = beat.move ?? 0.8;
+      segs.push({ t0: t, t1: t + d, x0: x, x1: beat.to });
+      t += d;
+      x = beat.to;
+    } else {
+      throw new Error(`Beat is neither hold nor move: ${JSON.stringify(beat)}`);
+    }
+  }
+  return { segs, total: t };
+}
+
+function run(args) {
+  execFileSync(FFMPEG, args, { stdio: 'inherit' });
+}
+
+function renderCards(dir, spec, chrome, work, out) {
+  const fps = spec.fps ?? 30;
+  const cards = spec.cards;
+  if (!Array.isArray(cards) || !cards.length) {
+    throw new Error('mode "cards" needs a non-empty spec.cards');
+  }
+
+  const sceneH = cards.length * FRAME_H;
+  const scenePng = join(work, 'scene.png');
+  console.log(`· rasterising ${cards.length} cards  ${FRAME_W}x${sceneH}`);
+  shoot(chrome, join(dir, 'scene.html'), scenePng, FRAME_W, sceneH);
+
+  const args = ['-y', '-v', 'error'];
+  // The same still is opened once per card so each can carry its own
+  // duration; ffmpeg is happy to take one file as several inputs.
+  for (const card of cards) {
+    args.push('-loop', '1', '-framerate', String(fps), '-t', String(card.seconds), '-i', scenePng);
+  }
+  if (spec.audio) args.push('-i', resolve(dir, spec.audio));
+
+  const chains = cards.map((card, i) => {
+    const y = i * FRAME_H;
+    const bits = [`[${i}:v]crop=${FRAME_W}:${FRAME_H}:0:${y}`];
+    if (card.pop) {
+      bits.push(
+        `zoompan=z='${popExpr(card.pop, fps)}'` +
+          `:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'` +
+          `:d=1:s=${FRAME_W}x${FRAME_H}:fps=${fps}`,
+      );
+    }
+    bits.push(`fps=${fps}`, `format=yuv420p`);
+    return `${bits.join(',')}[c${i}]`;
+  });
+  chains.push(
+    `${cards.map((_, i) => `[c${i}]`).join('')}concat=n=${cards.length}:v=1:a=0[v]`,
+  );
+
+  // Written to a file: the expressions are full of commas and parentheses,
+  // and quoting them through a shell on Windows loses an afternoon.
+  const graph = join(work, 'filter.txt');
+  writeFileSync(graph, chains.join(';\n'), 'utf8');
+
+  const total = cards.reduce((s, c) => s + c.seconds, 0);
+  console.log(`· encoding  ${total.toFixed(1)}s`);
+
+  args.push('-filter_complex_script', graph, '-map', '[v]');
+  if (spec.audio) {
+    args.push('-map', `${cards.length}:a`, '-c:a', 'aac', '-b:a', '160k', '-shortest');
+  }
+  args.push(
+    '-c:v', 'libx264', '-preset', 'slow', '-crf', '18',
+    '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-r', String(fps),
+    out,
+  );
+  run(args);
+
+  // The last card doubles as the static post, so it is also written on its
+  // own. One asset, two placements.
+  const still = join(work, 'last-card.png');
+  run([
+    '-y', '-v', 'error', '-i', scenePng,
+    '-vf', `crop=${FRAME_W}:${FRAME_H}:0:${(cards.length - 1) * FRAME_H}`,
+    '-frames:v', '1', still,
+  ]);
+
+  return { total, extra: still };
+}
+
+function renderPan(dir, spec, chrome, work, out) {
+  const fps = spec.fps ?? 30;
+  const sceneW = spec.width;
+  if (!sceneW) throw new Error('mode "pan" needs spec.width');
+
+  const scenePng = join(work, 'scene.png');
+  console.log(`· rasterising strip  ${sceneW}x${FRAME_H}`);
+  shoot(chrome, join(dir, 'scene.html'), scenePng, sceneW, FRAME_H);
+
+  const hasEnd = existsSync(join(dir, 'end.html'));
+  const endPng = join(work, 'end.png');
+  if (hasEnd) {
+    console.log(`· rasterising end card  ${FRAME_W}x${FRAME_H}`);
+    shoot(chrome, join(dir, 'end.html'), endPng, FRAME_W, FRAME_H);
+  }
+
+  const { segs, total } = keyframes(spec.beats, spec.start ?? 0);
+  const endSec = hasEnd ? (spec.end?.seconds ?? 2.6) : 0;
+  const expr = panExpr(segs, sceneW - FRAME_W);
+
+  const parts = [
+    `[0:v]crop=${FRAME_W}:${FRAME_H}:'${expr}':0,fps=${fps},format=yuv420p[a]`,
+  ];
+  if (hasEnd) {
+    parts.push(`[1:v]fps=${fps},format=yuv420p[b]`, `[a][b]concat=n=2:v=1:a=0[v]`);
+  } else {
+    parts.push(`[a]null[v]`);
+  }
+  const graph = join(work, 'filter.txt');
+  writeFileSync(graph, parts.join(';\n'), 'utf8');
+
+  const args = [
+    '-y', '-v', 'error',
+    '-loop', '1', '-framerate', String(fps), '-t', total.toFixed(3), '-i', scenePng,
+  ];
+  if (hasEnd) {
+    args.push('-loop', '1', '-framerate', String(fps), '-t', endSec.toFixed(3), '-i', endPng);
+  }
+  if (spec.audio) args.push('-i', resolve(dir, spec.audio));
+  args.push('-filter_complex_script', graph, '-map', '[v]');
+  if (spec.audio) {
+    args.push('-map', `${hasEnd ? 2 : 1}:a`, '-c:a', 'aac', '-b:a', '160k', '-shortest');
+  }
+  args.push(
+    '-c:v', 'libx264', '-preset', 'slow', '-crf', '18',
+    '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-r', String(fps),
+    out,
+  );
+
+  console.log(`· encoding  ${(total + endSec).toFixed(1)}s`);
+  run(args);
+  return { total: total + endSec, extra: hasEnd ? endPng : null };
+}
+
 function main() {
   const dir = process.argv[2];
   if (!dir) {
@@ -140,72 +273,16 @@ function main() {
   const work = join(dir, '.build');
   mkdirSync(work, { recursive: true });
 
-  const sceneW = spec.width;
-  if (!sceneW) throw new Error('spec.width (the strip width in px) is required');
-
-  const scenePng = join(work, 'scene.png');
-  const endPng = join(work, 'end.png');
-
-  console.log(`· rasterising scene  ${sceneW}x${FRAME_H}`);
-  shoot(chrome, join(dir, 'scene.html'), scenePng, sceneW, FRAME_H);
-
-  const hasEnd = existsSync(join(dir, 'end.html'));
-  if (hasEnd) {
-    console.log(`· rasterising end card  ${FRAME_W}x${FRAME_H}`);
-    shoot(chrome, join(dir, 'end.html'), endPng, FRAME_W, FRAME_H);
-  }
-
-  const { segs, total } = keyframes(spec.beats, spec.start ?? 0);
-  const endSec = hasEnd ? (spec.end?.seconds ?? 2.6) : 0;
-  const fps = spec.fps ?? 30;
-  const expr = panExpr(segs, sceneW - FRAME_W);
-
-  // Written to a file rather than passed inline: the expression is full of
-  // commas and parentheses, and quoting it through a shell on Windows is a
-  // reliable way to lose an afternoon.
-  const parts = [
-    `[0:v]crop=${FRAME_W}:${FRAME_H}:'${expr}':0,fps=${fps},format=yuv420p[a]`,
-  ];
-  if (hasEnd) {
-    parts.push(`[1:v]fps=${fps},format=yuv420p[b]`);
-    parts.push(`[a][b]concat=n=2:v=1:a=0[v]`);
-  } else {
-    parts.push(`[a]null[v]`);
-  }
-  const graph = join(work, 'filter.txt');
-  writeFileSync(graph, parts.join(';\n'), 'utf8');
-
   const out = join(dir, `${basename(dir)}.mp4`);
-  const args = [
-    '-y', '-v', 'error',
-    '-loop', '1', '-framerate', String(fps), '-t', total.toFixed(3), '-i', scenePng,
-  ];
-  if (hasEnd) {
-    args.push('-loop', '1', '-framerate', String(fps), '-t', endSec.toFixed(3), '-i', endPng);
-  }
-  if (spec.audio) {
-    args.push('-i', resolve(dir, spec.audio));
-  }
-  args.push(
-    '-filter_complex_script', graph,
-    '-map', '[v]',
-  );
-  if (spec.audio) {
-    args.push('-map', `${hasEnd ? 2 : 1}:a`, '-c:a', 'aac', '-b:a', '160k', '-shortest');
-  }
-  args.push(
-    '-c:v', 'libx264', '-preset', 'slow', '-crf', '18',
-    '-pix_fmt', 'yuv420p', '-movflags', '+faststart',
-    '-r', String(fps),
-    out,
-  );
-
-  console.log(`· encoding  ${(total + endSec).toFixed(1)}s`);
-  execFileSync(FFMPEG, args, { stdio: 'inherit' });
+  const mode = spec.mode ?? 'cards';
+  const { total, extra } =
+    mode === 'pan'
+      ? renderPan(dir, spec, chrome, work, out)
+      : renderCards(dir, spec, chrome, work, out);
 
   console.log(`\n  ${out}`);
-  console.log(`  ${(total + endSec).toFixed(1)}s · ${FRAME_W}x${FRAME_H} · ${fps}fps`);
-  if (hasEnd) console.log(`  end card also usable as the static: ${endPng}`);
+  console.log(`  ${total.toFixed(1)}s · ${FRAME_W}x${FRAME_H} · ${spec.fps ?? 30}fps`);
+  if (extra) console.log(`  static post: ${extra}`);
 }
 
 main();

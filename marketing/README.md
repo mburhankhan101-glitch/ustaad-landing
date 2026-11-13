@@ -4,68 +4,108 @@ Brand kit and reel pipeline. Open `brand/kit.html` in a browser to see the
 system; `brand/brand.css` is the thing every piece actually imports.
 
 > The preview pane inside Claude Code renders these as static snapshots and
-> drops the stylesheet, so they look unstyled there. Open them in a real
-> browser, or render one with the command below, to see them properly.
+> drops the stylesheet, so they look unstyled in there. Open them in a real
+> browser, or render one with the command below.
 
 ## Making a reel
 
     node marketing/lib/render.mjs marketing/reels/001-net-trap-1024
 
 Out comes `001-net-trap-1024.mp4`, 1080x1920, 30fps, ready to upload, plus
-`.build/end.png` which is the end card on its own and doubles as the static
-post.
+`.build/last-card.png`, which is the last frame on its own and doubles as the
+static post.
 
-Nothing needs installing. The renderer uses Chrome (already here) to
-rasterise the HTML and ffmpeg (already here) to move a 1080-wide window
-across it. A 17-second reel takes a few seconds, which is the point: changing
-a word is a re-render, not a recompile.
+Nothing needs installing. Chrome rasterises the artwork once and ffmpeg does
+all the movement, so a 13-second reel encodes in seconds and changing a word
+is a re-render, not a recompile.
 
-## A reel is three files
+## A reel is two files
 
     reels/<slug>/
-      scene.html   one wide strip, 1080px per frame, imports brand.css
-      end.html     one 1080x1920 card on the loud yellow
-      spec.json    how the camera moves, and the caption
+      scene.html   the artwork, importing brand.css
+      spec.json    timing and the caption
 
-`spec.json`:
+### mode: cards (the default)
 
-| field | what it does |
-|---|---|
-| `width` | the strip's full width. Four screens is `4320` |
-| `beats` | the camera, in order. `{"hold": 4.0}` sits still; `{"to": 2160, "move": 0.7}` travels to that x |
-| `end.seconds` | how long the end card holds |
-| `audio` | usually `null`. Add trending audio in Instagram instead; it helps distribution |
-| `caption` | the post caption, kept with the asset so it does not get rewritten from memory later |
+`scene.html` is a `.deck`: a vertical column of 1080x1920 cards. The reel
+cuts between them, and each lands with a short scale-in.
 
-Moves ease in and out, and `to` is the left edge of the visible window in
-scene pixels. A four-screen strip ends at `3240`, not `4320`.
+```json
+{
+  "mode": "cards",
+  "fps": 30,
+  "cards": [
+    { "name": "hook", "seconds": 2.3, "pop": 0.30 },
+    { "name": "question", "seconds": 3.7, "pop": 0.22 }
+  ]
+}
+```
+
+`seconds` is how long the card holds. `pop` is how long its scale-in takes;
+drop it for a flat cut. The scene must be exactly as many cards tall as the
+array is long.
+
+### mode: pan
+
+`scene.html` is a `.strip`, one wide image, and the camera travels across it,
+holding where there is something to read.
+
+```json
+{
+  "mode": "pan",
+  "width": 4320,
+  "beats": [
+    { "hold": 2.4 },
+    { "to": 1080, "move": 0.75 }
+  ],
+  "end": { "seconds": 3.0 }
+}
+```
+
+`to` is the left edge of the visible window in scene pixels, so a
+four-screen strip ends at `3240`, not `4320`. In this mode an `end.html`, if
+present, is appended as the final frame.
+
+**Use cards for a question.** A pan cannot show that something changed: the
+marked answer slides past and a viewer reads it as the same card moving. Use
+pan only for a piece that is one continuous thought.
 
 ## Rules worth not breaking
 
-**The camera holds.** A question needs reading time. A constant pan gives a
-four-word hook and four options with exponents in them the same two seconds.
+**English.** The app is bilingual on purpose; the socials are not. Forced
+Roman Urdu in on-screen copy reads as try-hard, and the one place a Pakistani
+voice belongs is the caption and a voiceover, if there ever is one.
 
-**The layout does not change between frames of the same question.** Only the
-marking does. That is what makes a pan read as an answer sheet being filled
-in rather than as three separate cards.
+**One highlight per card.** The `.hl` block is how a changed line registers.
+Two of them on a card and neither does.
 
-**The yellow is for end cards only.** It is how a viewer knows a piece has
-finished.
+**The hook has to earn two seconds.** A crest so a student knows it is their
+exam, the claim, and a stake. A pill reading "NUST NET" at 26px is not a
+hook; nobody can read it while scrolling.
 
-**Keep clear of Instagram's chrome.** It covers roughly the top 7% and the
-bottom 19%. The `.screen` padding already accounts for this; if you move
-content lower, check a frame before posting.
+**The yellow is for the last card only.** It is how a viewer knows a piece
+has finished.
 
-**Flat.** No gradients, no shadows, no bevels, ever, and especially not on a
-bubble.
+**Keep clear of Instagram's chrome.** Roughly the top 7% and the bottom 19%.
+The `.screen` and `.endcard` padding already accounts for it; check a frame
+if you move anything lower.
+
+**Flat.** No gradients, no shadows, ever, and especially not on a bubble.
+
+## Checking a render before posting
+
+    ffmpeg -ss 1.5 -i <reel>.mp4 -frames:v 1 frame.png
+
+Worth doing on the first frame of each card. Safe-zone bands can be drawn on
+with `drawbox` if something is close to an edge.
 
 ## Two kinds of post
 
 `spec.json` records which one a piece is in `kind`.
 
-**reach** carries no ask. Judged on shares and saves.
-**conversion** carries the ask, goes out only when something is actually
-happening, and is judged on link taps and installs.
+**reach** carries no ask, judged on shares and saves.
+**conversion** carries the ask, goes out only when something is happening,
+judged on link taps and installs.
 
 Judge a conversion post on likes and you will conclude it failed. The
 reference account's own numbers: the brand piece took 22.9K likes, the 75%
@@ -73,10 +113,14 @@ off piece took 65. The second one was not a mistake.
 
 ## Where the questions come from
 
-Real past papers, never invented. `ustaad_extractor` holds the bank; the
-`Mistake:` line in each explanation is what a "ye trap hai" reel is built
-around, and there are thousands of them.
+Real past papers, never invented. `ustaad_extractor` holds the bank, and the
+`Mistake:` line in each explanation is what a trap reel is built around.
 
-Note that `explanations.json` in that repo is an unterminated append log, so
-it needs repair-parsing (drop the trailing partial object, close the array)
-before it will parse.
+Note that `explanations.json` there is an unterminated append log, so it
+needs repair-parsing (drop the trailing partial object, close the array)
+before it will parse. Questions in `done/*.json` carry options and the
+correct index but no explanations; join them to that file on question text.
+
+Crests come from the site's own `public/unis/`. They are trademarks, used
+nominatively to say which test is being covered, and any university that asks
+is dropped.

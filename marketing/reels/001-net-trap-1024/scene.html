@@ -5,50 +5,85 @@
 <title>NET trap: 1024 in scientific notation</title>
 <link rel="stylesheet" href="../../brand/brand.css">
 <style>
-  /* Four frames side by side. Screens 2, 3 and 4 are deliberately the same
-     layout, so the only thing that changes as the camera travels is which
-     bubble is filled. The strip then reads as one answer sheet being marked
-     rather than three separate cards. */
-  .strip { width: 4320px; }
+  /* Five cards stacked. The reel cuts between them rather than panning,
+     because on a question a viewer has to be able to see that something
+     changed, and a slow pan hides exactly that. */
 
-  /* The question has to out-rank the options it is asking about. At the
-     shared .xs size the two read as the same voice, and the eye goes to the
-     coloured bubbles first instead of to what is being asked. */
-  .qline { max-width: 840px; font-size: 78px; }
-  .verdict { margin-top: 8px; }
+  .qline { max-width: 860px; font-size: 76px; }
+
+  /* The hook. A crest first, so a student knows inside half a second that
+     this is their exam, then the year, then a reason to stay. */
+  .hook {
+    align-items: center;
+    text-align: center;
+    gap: 34px;
+  }
+  .hook .display { font-size: 152px; line-height: 0.9; }
+
+  .linkbio {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 40px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: rgba(10, 14, 46, 0.66);
+    margin: 0;
+  }
+
+  .store-note {
+    font-family: var(--ui);
+    font-weight: 600;
+    font-size: 26px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(10, 14, 46, 0.5);
+    margin: 0;
+  }
+
+  .outro .proof li { font-size: 38px; }
+  .outro .wordmark { font-size: 132px; }
+
+  /* The name is centred, the list is not. Centring each line individually
+     leaves three ragged edges and makes the claims harder to read; centring
+     the block while the lines stay flush left keeps both. */
+  /* Needs to out-rank .endcard.center .proof, which centres each line. */
+  .endcard.center.outro .proof {
+    align-items: flex-start;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  /* Big enough to be recognised at a glance on a phone, which is the entire
+     reason the crest is on the card. */
+  .hook .crest { width: 270px; height: 270px; }
 </style>
 </head>
 <body>
 
-<div class="strip">
+<div class="deck">
 
-  <!-- Drifting objects. Without this layer a pan is just sliding text; this
-       is the floating-dominoes equivalent from the reference. -->
-  <div class="field">
-    <i style="left:742px;  top:218px;  width:120px; height:120px"></i>
-    <i class="solid" style="left:218px; top:1498px; width:86px; height:86px"></i>
-    <i class="acc" style="left:900px;  top:1180px; width:150px; height:150px"></i>
-    <i style="left:1180px; top:360px;  width:96px;  height:96px"></i>
-    <i class="acc solid" style="left:1940px; top:250px; width:70px; height:70px"></i>
-    <i style="left:2010px; top:1620px; width:130px; height:130px"></i>
-    <i class="solid" style="left:1320px; top:1700px; width:64px; height:64px"></i>
-    <i class="acc" style="left:2920px; top:300px;  width:110px; height:110px"></i>
-    <i style="left:3120px; top:1772px; width:92px;  height:92px"></i>
-    <i class="solid" style="left:4150px; top:1700px; width:120px; height:120px"></i>
-    <i class="acc solid" style="left:3980px; top:300px; width:78px; height:78px"></i>
-    <i style="left:2480px; top:1820px; width:150px; height:150px"></i>
-  </div>
-
-  <!-- 1 · the hook: a contradiction, so the thumb stops -->
-  <section class="screen">
-    <span class="pill">NUST NET · Physics · 2023</span>
-    <h1 class="display">Ye jawab<br>sahi hai.</h1>
-    <p class="say">Aur phir bhi ghalat.</p>
+  <!-- 1 · the hook -->
+  <section class="screen hook">
+    <div class="field">
+      <i style="left:70px;  top:250px;  width:120px; height:120px"></i>
+      <i class="acc solid" style="left:930px; top:330px; width:74px; height:74px"></i>
+      <i class="solid" style="left:150px; top:1560px; width:88px; height:88px"></i>
+      <i class="acc" style="left:880px; top:1500px; width:132px; height:132px"></i>
+    </div>
+    <img class="crest" src="../../../public/unis/nust.png" alt="">
+    <p class="label">Asked in</p>
+    <h1 class="display">NUST NET<br>2023</h1>
+    <p class="say">Most students get this one wrong.</p>
   </section>
 
   <!-- 2 · the question, nothing marked -->
   <section class="screen">
-    <p class="label">Sawal</p>
+    <div class="field">
+      <i style="left:910px; top:300px; width:104px; height:104px"></i>
+      <i class="solid" style="left:120px; top:1700px; width:72px; height:72px"></i>
+      <i class="acc" style="left:880px; top:1660px; width:140px; height:140px"></i>
+    </div>
+    <p class="label">The question</p>
     <h2 class="display xs qline">1024 can be written in scientific notation as</h2>
     <div class="opts">
       <div class="opt"><span class="bub">A</span><span class="txt">1.024 × 10³</span></div>
@@ -58,9 +93,15 @@
     </div>
   </section>
 
-  <!-- 3 · the trap fills in -->
+  <!-- 3 · the trap. The point of the card is on the accent block, because a
+       line that merely changes between two near-identical frames does not
+       register. -->
   <section class="screen">
-    <p class="label">Zyada log yehi bharte hain</p>
+    <div class="field">
+      <i class="acc solid" style="left:940px; top:250px; width:70px; height:70px"></i>
+      <i style="left:110px; top:1740px; width:96px; height:96px"></i>
+    </div>
+    <p class="label">Most students pick B</p>
     <h2 class="display xs qline">1024 can be written in scientific notation as</h2>
     <div class="opts">
       <div class="opt dim"><span class="bub">A</span><span class="txt">1.024 × 10³</span></div>
@@ -68,12 +109,16 @@
       <div class="opt dim"><span class="bub">C</span><span class="txt">0.000976</span></div>
       <div class="opt dim"><span class="bub">D</span><span class="txt">1 / 0.00097</span></div>
     </div>
-    <p class="say verdict">2¹⁰ = 1024. Hisaab bilkul theek.</p>
+    <p class="hl">2¹⁰ = 1024. The maths is right.</p>
   </section>
 
-  <!-- 4 · the answer, and the one line that explains the trap -->
+  <!-- 4 · the answer -->
   <section class="screen">
-    <p class="label">Sahi jawab</p>
+    <div class="field">
+      <i style="left:900px; top:290px; width:112px; height:112px"></i>
+      <i class="acc" style="left:120px; top:1730px; width:104px; height:104px"></i>
+    </div>
+    <p class="label">Correct answer</p>
     <h2 class="display xs qline">1024 can be written in scientific notation as</h2>
     <div class="opts">
       <div class="opt is-right"><span class="bub right">✓</span><span class="txt">1.024 × 10³</span></div>
@@ -81,7 +126,29 @@
       <div class="opt dim"><span class="bub">C</span><span class="txt">0.000976</span></div>
       <div class="opt dim"><span class="bub">D</span><span class="txt">1 / 0.00097</span></div>
     </div>
-    <p class="say verdict">Hisaab nahi, notation ka sawal tha.</p>
+    <p class="hl">But it is not scientific notation.</p>
+  </section>
+
+  <!-- 5 · the ask. Also the static post. -->
+  <section class="endcard center outro">
+    <div class="field">
+      <i style="left:812px;  top:170px;  width:140px; height:140px"></i>
+      <i class="solid" style="left:132px; top:1640px; width:92px; height:92px"></i>
+      <i style="left:900px;  top:1580px; width:104px; height:104px"></i>
+      <i class="solid" style="left:268px; top:258px;  width:64px;  height:64px"></i>
+    </div>
+
+    <p class="wordmark">Ustaad</p>
+
+    <ul class="proof">
+      <li>6,000+ real past paper questions</li>
+      <li>Full length papers with real exam simulation</li>
+      <li>Topical past papers</li>
+    </ul>
+
+    <p class="linkbio">Link in Bio</p>
+    <div class="btn">Download Now</div>
+    <p class="store-note">Available on Google Play</p>
   </section>
 
 </div>
