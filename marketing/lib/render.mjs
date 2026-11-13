@@ -205,9 +205,25 @@ function renderCards(dir, spec, chrome, work, out) {
       '-frames:v', '1', join(stills, name),
     ]);
   });
-  console.log(`· ${cards.length} stills written`);
+  // And again at 4:5, which is the tallest a feed post is allowed to be.
+  // Instagram crops a 9:16 image to this by hand-held guesswork, so it is
+  // safer to hand it a file that is already the right shape. The cards are
+  // laid out centred with deep padding, so the centre crop takes 285px off
+  // each end without touching anything that matters; worth re-checking if a
+  // card is ever built with content near an edge.
+  const feed = join(work, 'stills-feed');
+  mkdirSync(feed, { recursive: true });
+  cards.forEach((card, i) => {
+    const name = `${String(i + 1).padStart(2, '0')}-${card.name ?? 'card'}.png`;
+    run([
+      '-y', '-v', 'error', '-i', join(stills, name),
+      '-vf', `crop=${FRAME_W}:1350:0:285`,
+      '-frames:v', '1', join(feed, name),
+    ]);
+  });
+  console.log(`· ${cards.length} stills at 9:16 and 4:5`);
 
-  return { total, extra: stills };
+  return { total, extra: `${stills} (9:16) and ${feed} (4:5)` };
 }
 
 function renderPan(dir, spec, chrome, work, out) {

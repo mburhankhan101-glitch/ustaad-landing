@@ -11,9 +11,19 @@ system; `brand/brand.css` is the thing every piece actually imports.
 
     node marketing/lib/render.mjs marketing/reels/001-net-trap-1024
 
-Out comes `001-net-trap-1024.mp4`, 1080x1920, 30fps, plus `.build/stills/`,
-which holds every card as its own 1080x1920 PNG, numbered in order. The same
-scene therefore ships as a reel or as a carousel with no rebuild.
+Out comes `001-net-trap-1024.mp4` at 1080x1920 30fps, plus two sets of
+stills, numbered in order:
+
+- `.build/stills/` at 1080x1920, for Stories and for a reel's frames
+- `.build/stills-feed/` at 1080x1350, for a feed carousel
+
+4:5 is the tallest a feed post may be. Handing Instagram a 9:16 image for the
+feed leaves the crop to it, so the second set is cut here instead, 285px off
+each end. The cards are centred with deep padding so nothing is lost; worth
+re-checking if a card is ever built with content near an edge.
+
+The same scene therefore ships as a reel, a Story or a carousel with no
+rebuild.
 
 Nothing needs installing. Chrome rasterises the artwork once and ffmpeg does
 all the movement, so a 13-second reel encodes in seconds and changing a word
