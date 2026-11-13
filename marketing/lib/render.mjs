@@ -192,16 +192,22 @@ function renderCards(dir, spec, chrome, work, out) {
   );
   run(args);
 
-  // The last card doubles as the static post, so it is also written on its
-  // own. One asset, two placements.
-  const still = join(work, 'last-card.png');
-  run([
-    '-y', '-v', 'error', '-i', scenePng,
-    '-vf', `crop=${FRAME_W}:${FRAME_H}:0:${(cards.length - 1) * FRAME_H}`,
-    '-frames:v', '1', still,
-  ]);
+  // Every card is also written on its own, numbered in order, so the same
+  // artwork can go out as a carousel instead of a reel without rebuilding
+  // anything. One scene, two formats.
+  const stills = join(work, 'stills');
+  mkdirSync(stills, { recursive: true });
+  cards.forEach((card, i) => {
+    const name = `${String(i + 1).padStart(2, '0')}-${card.name ?? 'card'}.png`;
+    run([
+      '-y', '-v', 'error', '-i', scenePng,
+      '-vf', `crop=${FRAME_W}:${FRAME_H}:0:${i * FRAME_H}`,
+      '-frames:v', '1', join(stills, name),
+    ]);
+  });
+  console.log(`· ${cards.length} stills written`);
 
-  return { total, extra: still };
+  return { total, extra: stills };
 }
 
 function renderPan(dir, spec, chrome, work, out) {
@@ -282,7 +288,7 @@ function main() {
 
   console.log(`\n  ${out}`);
   console.log(`  ${total.toFixed(1)}s · ${FRAME_W}x${FRAME_H} · ${spec.fps ?? 30}fps`);
-  if (extra) console.log(`  static post: ${extra}`);
+  if (extra) console.log(`  stills: ${extra}`);
 }
 
 main();

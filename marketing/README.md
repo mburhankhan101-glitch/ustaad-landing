@@ -11,9 +11,9 @@ system; `brand/brand.css` is the thing every piece actually imports.
 
     node marketing/lib/render.mjs marketing/reels/001-net-trap-1024
 
-Out comes `001-net-trap-1024.mp4`, 1080x1920, 30fps, ready to upload, plus
-`.build/last-card.png`, which is the last frame on its own and doubles as the
-static post.
+Out comes `001-net-trap-1024.mp4`, 1080x1920, 30fps, plus `.build/stills/`,
+which holds every card as its own 1080x1920 PNG, numbered in order. The same
+scene therefore ships as a reel or as a carousel with no rebuild.
 
 Nothing needs installing. Chrome rasterises the artwork once and ffmpeg does
 all the movement, so a 13-second reel encodes in seconds and changing a word
