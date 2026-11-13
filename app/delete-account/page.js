@@ -165,13 +165,10 @@ export default function DeleteAccountPage() {
 
         <p className={styles.footer}>
           Questions? <Link href="/contact">Contact us</Link> or read the{' '}
-          <a
-            href="https://ustaad-privacy.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            privacy policy
-          </a>.
+          {/* Same view, not a new window: an in-app browser often refuses to
+              open one, and a privacy policy that silently fails to open is
+              the worst page on the site to have do that. */}
+          <a href="https://ustaad-privacy.vercel.app/">privacy policy</a>.
         </p>
 
       </div>

@@ -44,8 +44,6 @@ export default function SocialProof() {
         <a
           className={styles.counter}
           href={playStoreUrl('social-proof')}
-          target="_blank"
-          rel="noopener noreferrer"
         >
           <span className={styles.counterNum}>Live</span>
           <span className={styles.counterText}>on Google Play</span>

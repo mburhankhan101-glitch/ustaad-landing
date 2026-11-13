@@ -45,7 +45,7 @@ const COLUMNS = [
 function FooterLink({ link }) {
   if (link.external) {
     return (
-      <a href={link.href} target="_blank" rel="noopener noreferrer">
+      <a href={link.href}>
         {link.label}
       </a>
     )
@@ -73,8 +73,6 @@ export default function Footer() {
           <div className={styles.social}>
             <a
               href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
               aria-label="Ustaad on Instagram"
             >
               <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -85,8 +83,6 @@ export default function Footer() {
             </a>
             <a
               href={playStoreUrl('footer')}
-              target="_blank"
-              rel="noopener noreferrer"
               aria-label="Ustaad on Google Play"
             >
               <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">

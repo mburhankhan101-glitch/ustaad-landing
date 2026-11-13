@@ -2,6 +2,20 @@
 import { playStoreUrl } from '../lib/links'
 import styles from './PlayButton.module.css'
 
+/*
+ * Deliberately no target="_blank" on anything that leaves this site.
+ *
+ * Most people arriving here tap a link in an Instagram bio, which opens in
+ * Instagram's own in-app webview. That webview frequently refuses to open a
+ * new window, so an anchor with target="_blank" is not "opens elsewhere", it
+ * is a tap that does nothing at all, with no error and nothing to debug. The
+ * install button was silently dead for the single most important audience
+ * this site has.
+ *
+ * Navigating in the same view always works, and on Android the Play Store
+ * app still takes over the play.google.com URL from there.
+ */
+
 /**
  * The install button. Every placement passes its own `placement` string so
  * Play Console's acquisition report can tell them apart.
@@ -14,8 +28,6 @@ export default function PlayButton({ placement, variant = 'primary', className =
   return (
     <a
       href={playStoreUrl(placement)}
-      target="_blank"
-      rel="noopener noreferrer"
       className={`${styles.btn} ${isCompact ? styles.compact : styles.primary} ${className}`}
       data-placement={placement}
     >
