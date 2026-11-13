@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NET trap: 1024 in scientific notation</title>
+<link rel="stylesheet" href="../../brand/brand.css">
+<style>
+  /* Four frames side by side. Screens 2, 3 and 4 are deliberately the same
+     layout, so the only thing that changes as the camera travels is which
+     bubble is filled. The strip then reads as one answer sheet being marked
+     rather than three separate cards. */
+  .strip { width: 4320px; }
+
+  /* The question has to out-rank the options it is asking about. At the
+     shared .xs size the two read as the same voice, and the eye goes to the
+     coloured bubbles first instead of to what is being asked. */
+  .qline { max-width: 840px; font-size: 78px; }
+  .verdict { margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<div class="strip">
+
+  <!-- Drifting objects. Without this layer a pan is just sliding text; this
+       is the floating-dominoes equivalent from the reference. -->
+  <div class="field">
+    <i style="left:742px;  top:218px;  width:120px; height:120px"></i>
+    <i class="solid" style="left:218px; top:1498px; width:86px; height:86px"></i>
+    <i class="acc" style="left:900px;  top:1180px; width:150px; height:150px"></i>
+    <i style="left:1180px; top:360px;  width:96px;  height:96px"></i>
+    <i class="acc solid" style="left:1940px; top:250px; width:70px; height:70px"></i>
+    <i style="left:2010px; top:1620px; width:130px; height:130px"></i>
+    <i class="solid" style="left:1320px; top:1700px; width:64px; height:64px"></i>
+    <i class="acc" style="left:2920px; top:300px;  width:110px; height:110px"></i>
+    <i style="left:3120px; top:1772px; width:92px;  height:92px"></i>
+    <i class="solid" style="left:4150px; top:1700px; width:120px; height:120px"></i>
+    <i class="acc solid" style="left:3980px; top:300px; width:78px; height:78px"></i>
+    <i style="left:2480px; top:1820px; width:150px; height:150px"></i>
+  </div>
+
+  <!-- 1 · the hook: a contradiction, so the thumb stops -->
+  <section class="screen">
+    <span class="pill">NUST NET · Physics · 2023</span>
+    <h1 class="display">Ye jawab<br>sahi hai.</h1>
+    <p class="say">Aur phir bhi ghalat.</p>
+  </section>
+
+  <!-- 2 · the question, nothing marked -->
+  <section class="screen">
+    <p class="label">Sawal</p>
+    <h2 class="display xs qline">1024 can be written in scientific notation as</h2>
+    <div class="opts">
+      <div class="opt"><span class="bub">A</span><span class="txt">1.024 × 10³</span></div>
+      <div class="opt"><span class="bub">B</span><span class="txt">2¹⁰</span></div>
+      <div class="opt"><span class="bub">C</span><span class="txt">0.000976</span></div>
+      <div class="opt"><span class="bub">D</span><span class="txt">1 / 0.00097</span></div>
+    </div>
+  </section>
+
+  <!-- 3 · the trap fills in -->
+  <section class="screen">
+    <p class="label">Zyada log yehi bharte hain</p>
+    <h2 class="display xs qline">1024 can be written in scientific notation as</h2>
+    <div class="opts">
+      <div class="opt dim"><span class="bub">A</span><span class="txt">1.024 × 10³</span></div>
+      <div class="opt is-wrong"><span class="bub wrong">✕</span><span class="txt">2¹⁰</span></div>
+      <div class="opt dim"><span class="bub">C</span><span class="txt">0.000976</span></div>
+      <div class="opt dim"><span class="bub">D</span><span class="txt">1 / 0.00097</span></div>
+    </div>
+    <p class="say verdict">2¹⁰ = 1024. Hisaab bilkul theek.</p>
+  </section>
+
+  <!-- 4 · the answer, and the one line that explains the trap -->
+  <section class="screen">
+    <p class="label">Sahi jawab</p>
+    <h2 class="display xs qline">1024 can be written in scientific notation as</h2>
+    <div class="opts">
+      <div class="opt is-right"><span class="bub right">✓</span><span class="txt">1.024 × 10³</span></div>
+      <div class="opt is-wrong"><span class="bub wrong">✕</span><span class="txt">2¹⁰</span></div>
+      <div class="opt dim"><span class="bub">C</span><span class="txt">0.000976</span></div>
+      <div class="opt dim"><span class="bub">D</span><span class="txt">1 / 0.00097</span></div>
+    </div>
+    <p class="say verdict">Hisaab nahi, notation ka sawal tha.</p>
+  </section>
+
+</div>
+
+</body>
+</html>

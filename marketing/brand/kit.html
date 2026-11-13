@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ustaad social kit</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  /* This page is the reference, not a post. It borrows the tokens so that
+     what you see here is literally what renders into a reel: if a swatch
+     here is wrong, every piece is wrong. */
+  body { padding: 72px 48px 160px; }
+  .wrap { max-width: 1040px; margin: 0 auto; }
+
+  h1.k {
+    font-family: var(--display);
+    font-variation-settings: 'opsz' 144;
+    font-weight: 900; font-size: 76px; letter-spacing: -0.03em;
+    margin: 0 0 12px;
+  }
+  .lede {
+    font-family: var(--display); font-style: italic; font-weight: 400;
+    font-size: 24px; color: var(--ink-soft); margin: 0 0 72px; max-width: 54ch;
+    line-height: 1.5;
+  }
+
+  section { margin: 0 0 76px; }
+  h2.k {
+    font-family: var(--ui); font-weight: 700; font-size: 14px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft);
+    margin: 0 0 8px; padding-bottom: 14px;
+    border-bottom: 1px solid var(--ink-faint);
+  }
+  .why {
+    font-family: var(--ui); font-size: 15px; line-height: 1.65;
+    color: var(--ink-soft); max-width: 62ch; margin: 18px 0 28px;
+  }
+  .why b { color: var(--ink); font-weight: 600; }
+
+  .swatches { display: flex; flex-wrap: wrap; gap: 16px; }
+  .sw { width: 150px; }
+  .sw .chip { height: 104px; border-radius: 10px; border: 1px solid var(--ink-faint); }
+  .sw p {
+    font-family: var(--ui); font-size: 12.5px; margin: 10px 0 0; line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .sw p b { display: block; color: var(--ink); font-weight: 600; font-size: 13.5px; }
+
+  .row { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+  .scale > * { margin: 0 0 18px; }
+  .note {
+    font-family: var(--ui); font-size: 12.5px; color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+  /* The display sizes are built for a 1080px frame, so they are shown here
+     scaled down. Done with explicit sizes rather than `zoom`, which collapsed
+     them to a few pixels once the pane applied its own scaling on top. */
+  .scale .display { font-size: 48px; }
+  .scale .display.sm { font-size: 34px; }
+  .scale .display.xs { font-size: 25px; }
+  .scale .say { font-size: 18px; }
+  .scale .label { font-size: 11px; }
+
+  .rowdemo .opts { gap: 16px; }
+  .rowdemo .opt { font-size: 21px; gap: 14px; }
+  .rowdemo .bub { width: 36px; height: 36px; border-width: 4px; font-size: 15px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1 class="k">Ustaad on Instagram</h1>
+  <p class="lede">
+    One system behind every reel and every static, so twenty posts read as
+    one account. Type is the hero, the answer sheet is the decoration, and
+    nothing has a gradient on it.
+  </p>
+
+  <section>
+    <h2 class="k">Colour</h2>
+    <p class="why">
+      Cream, not white. That one choice does more for the editorial feel than
+      anything else here, because white reads as SaaS. <b>The yellow appears
+      on end cards only</b>. It is how a viewer knows a piece has finished,
+      and it stops working the moment it shows up mid-piece.
+    </p>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#F4F1E8"></div><p><b>Paper</b>#F4F1E8<br>every ground</p></div>
+      <div class="sw"><div class="chip" style="background:#0A0E2E"></div><p><b>Ink</b>#0A0E2E<br>all type, all bubbles</p></div>
+      <div class="sw"><div class="chip" style="background:#9B94FF"></div><p><b>Accent</b>#9B94FF<br>from the app</p></div>
+      <div class="sw"><div class="chip" style="background:#FFD23F"></div><p><b>Hit</b>#FFD23F<br>end cards only</p></div>
+      <div class="sw"><div class="chip" style="background:#2F9E5F"></div><p><b>Right</b>#2F9E5F</p></div>
+      <div class="sw"><div class="chip" style="background:#E4572E"></div><p><b>Wrong</b>#E4572E</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="k">Type</h2>
+    <p class="why">
+      <b>Fraunces</b> for anything with a voice, <b>Inter</b> for anything
+      that is a label. Deliberately not Poppins: the app uses it and it is
+      right there, but it is the most-used typeface in the Pakistani startup
+      scene, so on a feed it reads as every other prep page. Three display
+      sizes and no more. Ten sizes is what makes a grid look unplanned.
+    </p>
+    <div class="scale">
+      <p class="display">Ye jawab sahi hai.</p>
+      <p class="display sm">Har sawal ki wajah.</p>
+      <p class="display xs">1024 can be written in scientific notation as</p>
+      <p class="say">Aur phir bhi ghalat.</p>
+      <p class="label">Zyada log yehi bharte hain</p>
+    </div>
+    <p class="note">Shown small here. These are sized for a 1080&times;1920 frame.</p>
+  </section>
+
+  <section>
+    <h2 class="k">The bubble</h2>
+    <p class="why">
+      What the Wordle tile is to NYT Games, the <b>OMR bubble</b> is to this.
+      Every entry-test student in Pakistan has filled thousands of them, it
+      carries real feeling, and it is a circle, so it costs nothing to draw.
+      Empty is a ring, filled is solid, and that is the whole vocabulary.
+      <b>Never put a gradient or a shadow on one</b>; the entire system rests
+      on these staying flat.
+    </p>
+    <div class="row">
+      <span class="bub">A</span>
+      <span class="bub filled">B</span>
+      <span class="bub right">&check;</span>
+      <span class="bub wrong">&#10005;</span>
+      <span class="note">empty &middot; filled &middot; right &middot; wrong</span>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="k">An answer row</h2>
+    <p class="why">
+      The row is the unit a student reads, so it is also the unit that gets
+      marked. In a reel the layout never changes between frames: only the
+      marking does, which is what makes a pan read as a sheet being filled in
+      rather than as three separate cards.
+    </p>
+    <div class="rowdemo"><div class="opts">
+      <div class="opt is-right"><span class="bub right">&check;</span><span class="txt">1.024 &times; 10&sup3;</span></div>
+      <div class="opt is-wrong"><span class="bub wrong">&#10005;</span><span class="txt">2&sup1;&#8304;</span></div>
+      <div class="opt dim"><span class="bub">C</span><span class="txt">0.000976</span></div>
+    </div></div>
+  </section>
+
+  <section>
+    <h2 class="k">The pill</h2>
+    <p class="why">
+      One badge, borrowed straight from the reference's <i>SUBSCRIBE NOW</i>
+      and <i>WON'T LAST</i>. It is the cheapest way for a viewer to recognise
+      that two posts came from the same place.
+    </p>
+    <div class="row">
+      <span class="pill">NUST NET &middot; Physics &middot; 2023</span>
+      <span class="pill accent">4 din baaki</span>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="k">Two kinds of post</h2>
+    <p class="why">
+      <b>Reach</b> carries no ask and is judged on shares and saves.
+      <b>Conversion</b> carries the ask, goes out only when something is
+      actually happening, and is judged on link taps and installs. The
+      reference account's own numbers show the gap: the brand piece took
+      22.9K likes, the 75% off piece took 65. The second one is not a
+      failure. Judge a conversion post on likes and you will conclude it was,
+      and stop making them.
+    </p>
+    <p class="why">
+      Every reel ends on a card that stands alone, so <b>the end card is the
+      static</b>. One asset, two placements, no extra work.
+    </p>
+  </section>
+
+</div>
+</body>
+</html>

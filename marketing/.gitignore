@@ -1,0 +1,2 @@
+# Rasterised intermediates, regenerable with render.mjs
+.build/
