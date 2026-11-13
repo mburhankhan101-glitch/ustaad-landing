@@ -19,9 +19,9 @@
     margin: 0 0 12px;
   }
   .lede {
-    font-family: var(--display); font-style: italic; font-weight: 400;
-    font-size: 24px; color: var(--ink-soft); margin: 0 0 72px; max-width: 54ch;
-    line-height: 1.5;
+    font-family: var(--display); font-weight: 500;
+    font-size: 23px; color: var(--ink-soft); margin: 0 0 72px; max-width: 56ch;
+    line-height: 1.55; letter-spacing: -0.015em;
   }
 
   section { margin: 0 0 76px; }
@@ -64,6 +64,7 @@
   .rowdemo .opts { gap: 16px; }
   .rowdemo .opt { font-size: 21px; gap: 14px; }
   .rowdemo .bub { width: 36px; height: 36px; border-width: 4px; font-size: 15px; }
+  .demo-proof li::before { width: 13px; height: 13px; }
 </style>
 </head>
 <body>
@@ -97,11 +98,13 @@
   <section>
     <h2 class="k">Type</h2>
     <p class="why">
-      <b>Fraunces</b> for anything with a voice, <b>Inter</b> for anything
-      that is a label. Deliberately not Poppins: the app uses it and it is
-      right there, but it is the most-used typeface in the Pakistani startup
-      scene, so on a feed it reads as every other prep page. Three display
-      sizes and no more. Ten sizes is what makes a grid look unplanned.
+      <b>Inter</b> throughout, heavy for anything with a voice and semibold
+      for anything that is a label. The one thing that matters: <b>tight
+      tracking</b>. Inter at its default spacing reads as a browser default
+      once it is 130px tall, which is this face's only real failure mode, so
+      display sizes run at -0.045em and nothing large is ever left at normal
+      spacing. Three display sizes and no more. Ten sizes is what makes a
+      grid look unplanned.
     </p>
     <div class="scale">
       <p class="display">Ye jawab sahi hai.</p>
@@ -157,6 +160,31 @@
     <div class="row">
       <span class="pill">NUST NET &middot; Physics &middot; 2023</span>
       <span class="pill accent">4 din baaki</span>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="k">The end card</h2>
+    <p class="why">
+      The only frame in a piece that asks for anything, so it carries the
+      name, what the thing is, who it is for, and where to get it. Three
+      proof lines is the most that can be read in the three and a half
+      seconds it is on screen. The bullet is a filled bubble, so even the
+      list is made of the one object the system is built on.
+    </p>
+    <div class="endcard" style="width:auto;height:auto;padding:56px 48px;border-radius:14px;gap:28px">
+      <p class="wordmark" style="font-size:46px">Ustaad</p>
+      <ul class="proof demo-proof" style="gap:12px">
+        <li style="font-size:19px">5,250 past paper sawal</li>
+        <li style="font-size:19px">FAST &middot; NUST &middot; NTS &middot; MDCAT &middot; NUMS</li>
+      </ul>
+      <div class="store" style="padding:13px 22px 13px 18px;border-radius:12px;gap:14px">
+        <span class="tri" style="border-left-width:17px;border-top-width:11px;border-bottom-width:11px"></span>
+        <span>
+          <span class="t1" style="font-size:11px;margin-bottom:2px">Get it on</span>
+          <span class="t2" style="font-size:21px">Google Play</span>
+        </span>
+      </div>
     </div>
   </section>
 

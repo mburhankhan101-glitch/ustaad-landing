@@ -4,24 +4,51 @@
 <meta charset="utf-8">
 <title>Ustaad end card</title>
 <link rel="stylesheet" href="../../brand/brand.css">
+<style>
+  /* The only frame in a piece that asks for anything, so it has to carry the
+     name, what the thing actually is, and where to get it. The loud colour
+     appears here and nowhere else, which is what makes it read as an ending.
+     This frame is also the static post: same asset, two placements. */
+  .endcard { gap: 40px; }
+  .endcard .display { font-size: 86px; }
+  .search {
+    font-family: var(--ui);
+    font-weight: 600;
+    font-size: 30px;
+    letter-spacing: -0.01em;
+    color: rgba(10, 14, 46, 0.62);
+    margin: 0;
+  }
+</style>
 </head>
 <body>
 
-<!-- The loud colour appears here and nowhere else in a piece, which is what
-     makes it register as an ending. This frame is also the static post: same
-     asset, two placements. -->
 <div class="endcard">
   <div class="field">
-    <i style="left:760px;  top:210px;  width:140px; height:140px"></i>
-    <i class="solid" style="left:160px; top:1560px; width:92px; height:92px"></i>
-    <i style="left:880px;  top:1420px; width:104px; height:104px"></i>
-    <i class="solid" style="left:300px; top:300px;  width:64px;  height:64px"></i>
+    <i style="left:812px;  top:170px;  width:140px; height:140px"></i>
+    <i class="solid" style="left:132px; top:1612px; width:92px; height:92px"></i>
+    <i style="left:900px;  top:1560px; width:104px; height:104px"></i>
+    <i class="solid" style="left:268px; top:268px;  width:64px;  height:64px"></i>
   </div>
 
   <p class="wordmark">Ustaad</p>
-  <h2 class="display sm">Har sawal ki<br>wajah milti hai.</h2>
-  <p class="say">5,250 past paper sawal. Har ek ke saath explanation.</p>
-  <span class="pill">Play Store · Ustaad</span>
+  <h2 class="display">Har sawal ki<br>wajah milti hai.</h2>
+
+  <ul class="proof">
+    <li>5,250 past paper sawal</li>
+    <li>FAST &middot; NUST &middot; NTS &middot; MDCAT &middot; NUMS</li>
+    <li>Har jawab ke saath explanation</li>
+  </ul>
+
+  <div class="store">
+    <span class="tri"></span>
+    <span>
+      <span class="t1">Get it on</span>
+      <span class="t2">Google Play</span>
+    </span>
+  </div>
+
+  <p class="search">Play Store pe &ldquo;Ustaad&rdquo; search karein. Free hai.</p>
 </div>
 
 </body>

@@ -10,14 +10,17 @@
  * the one object this audience recognises instantly, it carries real feeling,
  * and it costs nothing to draw.
  *
- * Deliberately NOT the app's palette or type. The app is Poppins on deep
- * navy, which is right for a UI and wrong here: Poppins is the most-used
- * typeface in the Pakistani startup scene, so it reads as every other prep
- * page. Fraunces on warm cream reads as editorial, which is most of why the
- * NYT pieces look expensive.
+ * Type is Inter, heavy and tightly tracked. The tracking is the whole job:
+ * Inter at default spacing reads as a browser default once it is 130px tall,
+ * and negative tracking is what turns it back into something set rather than
+ * typed. Everything large here runs at -0.03em or tighter.
+ *
+ * The ground is warm cream rather than the app's deep navy, and not white.
+ * On a feed, white reads as SaaS and cream reads as editorial, which is a
+ * large part of why the reference pieces look expensive.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..900&display=swap');
 
 :root {
   /* Cream, not white. This single choice does more for the editorial feel
@@ -34,7 +37,7 @@
   --ink-soft: rgba(10, 14, 46, 0.52);
   --ink-faint: rgba(10, 14, 46, 0.14);
 
-  --display: 'Fraunces', Georgia, serif;
+  --display: 'Inter', 'Segoe UI', sans-serif;
   --ui: 'Inter', 'Segoe UI', sans-serif;
 }
 
@@ -76,27 +79,33 @@ html, body {
  * Three sizes and no more. The temptation on a 1080x1920 canvas is to use
  * ten, and that is what makes a feed look unplanned. */
 
+/* Inter needs tight tracking to look designed at display sizes. Left at its
+   default spacing a 132px headline reads as a browser default, which is the
+   one failure mode this face has. The negative tracking below is most of
+   what makes it feel set rather than typed. */
 .display {
   font-family: var(--display);
-  font-variation-settings: 'opsz' 144;
-  font-weight: 900;
+  font-variation-settings: 'opsz' 32;
+  font-weight: 800;
   font-size: 132px;
-  line-height: 0.94;
-  letter-spacing: -0.025em;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
   margin: 0;
   text-wrap: balance;
 }
 
-.display.sm { font-size: 92px; }
-.display.xs { font-size: 68px; line-height: 1.04; }
+.display.sm { font-size: 92px; letter-spacing: -0.04em; }
+.display.xs { font-size: 68px; line-height: 1.08; letter-spacing: -0.032em; }
 
+/* The aside. Lighter and quieter so it reads as a second voice rather than
+   more headline, now that it cannot be a different face. */
 .say {
   font-family: var(--display);
-  font-variation-settings: 'opsz' 40;
-  font-weight: 400;
-  font-style: italic;
-  font-size: 48px;
+  font-variation-settings: 'opsz' 20;
+  font-weight: 500;
+  font-size: 46px;
   line-height: 1.35;
+  letter-spacing: -0.018em;
   color: var(--ink-soft);
   margin: 0;
 }
@@ -221,9 +230,87 @@ html, body {
 
 .wordmark {
   font-family: var(--display);
-  font-variation-settings: 'opsz' 144;
+  font-variation-settings: 'opsz' 32;
   font-weight: 900;
   font-size: 104px;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.05em;
   margin: 0;
+}
+
+/* ─── End-card proof and CTA ─────────────────────────────────────────────
+ * The end card is the only place in a piece that asks for anything, so it
+ * has to say what the thing is, who it is for, and where to get it, in the
+ * two and a half seconds it is on screen. Three proof lines is the most that
+ * can be read in that time. */
+
+.proof {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.proof li {
+  font-family: var(--ui);
+  font-weight: 600;
+  font-size: 40px;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* A filled bubble as the bullet, so even the list is made of the one object
+   this whole system is built on. */
+.proof li::before {
+  content: '';
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--ink);
+  flex: none;
+}
+
+/* Says where to get it without lifting Google's badge artwork. The triangle
+   plus the words is the recognisable part. */
+.store {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  padding: 26px 42px 26px 36px;
+  border-radius: 22px;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.store .tri {
+  width: 0;
+  height: 0;
+  border-left: 34px solid var(--paper);
+  border-top: 21px solid transparent;
+  border-bottom: 21px solid transparent;
+  flex: none;
+}
+
+.store .t1 {
+  font-family: var(--ui);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.72;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.store .t2 {
+  font-family: var(--ui);
+  font-weight: 800;
+  font-size: 42px;
+  letter-spacing: -0.03em;
+  display: block;
 }
