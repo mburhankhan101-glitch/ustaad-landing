@@ -12,6 +12,14 @@ import Download from '../components/Download'
 // what is this → let me try it → why is my current setup failing → what
 // exactly do I get → is my exam here → what does it cost → does it work for
 // anyone → my remaining objections → install.
+// A self-referencing canonical on every indexable page. Without one, a link
+// shared from Instagram or Facebook arrives as ?fbclid=... and Google is free
+// to treat that as a separate URL competing with the clean one. Relative paths
+// resolve against metadataBase in the root layout.
+export const metadata = {
+  alternates: { canonical: '/' },
+}
+
 export default function Home() {
   return (
     <main>

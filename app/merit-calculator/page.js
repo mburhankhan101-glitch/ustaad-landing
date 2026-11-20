@@ -4,6 +4,7 @@ import { MERIT } from '../../lib/merit'
 import styles from './Merit.module.css'
 
 export const metadata = {
+  alternates: { canonical: '/merit-calculator' },
   title: 'University merit calculators 2027 | Ustaad',
   description:
     'Work out your aggregate using each university\u2019s own published ' +

@@ -19,6 +19,7 @@ export async function generateMetadata({ params }) {
   const uni = universityBySlug(slug)
   if (!uni) return {}
   return {
+    alternates: { canonical: `/exams/${slug}` },
     title: `${uni.test} paper pattern and preparation | Ustaad`,
     description:
       `${uni.full}. ${uni.programs.length > 1 ? 'Each paper' : 'The paper'} ` +
