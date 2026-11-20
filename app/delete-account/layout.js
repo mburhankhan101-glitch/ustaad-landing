@@ -8,6 +8,10 @@
 // its own.
 export const metadata = {
   alternates: { canonical: '/delete-account' },
+  title: 'Delete your Ustaad account',
+  description:
+    'How to delete your Ustaad account and what gets removed with it, ' +
+    'from inside the app or by request if you cannot open it.',
 }
 
 export default function DeleteAccountLayout({ children }) {

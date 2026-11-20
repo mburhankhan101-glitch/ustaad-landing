@@ -8,6 +8,10 @@
 // its own.
 export const metadata = {
   alternates: { canonical: '/contact' },
+  title: 'Contact Ustaad',
+  description:
+    'Questions, bug reports or feedback about the Ustaad entry test app. ' +
+    'Send us a message and we will get back to you.',
 }
 
 export default function ContactLayout({ children }) {
