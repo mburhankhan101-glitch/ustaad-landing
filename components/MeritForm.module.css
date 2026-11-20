@@ -1,0 +1,228 @@
+.wrap {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 20px;
+  padding: clamp(20px, 3.5vw, 34px);
+}
+
+/* ─── Which applicant are you ─────────────────────────────────────────── */
+
+.routes {
+  border: 0;
+  margin: 0 0 30px;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.legend {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink);
+  padding: 0;
+  margin-bottom: 12px;
+}
+
+.route {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border: 1.5px solid var(--rule);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.route:hover { border-color: var(--ink-3); }
+
+.routeOn {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.radio {
+  margin-top: 3px;
+  accent-color: var(--primary);
+  flex: none;
+}
+
+.routeLabel {
+  display: block;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.routeHint {
+  display: block;
+  margin-top: 4px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+/* ─── The inputs ──────────────────────────────────────────────────────── */
+
+.fields { display: grid; gap: 22px; }
+
+.field { display: grid; gap: 10px; }
+
+.fieldLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 14.5px;
+  color: var(--ink);
+}
+
+.step {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  background: var(--primary-soft);
+  color: var(--primary-deep);
+  font-size: 11px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+/* The weight sits on the label rather than in a footnote: it is the single
+   most useful thing on the row. Seeing 75% next to the NET box answers the
+   question most students actually came with. */
+.weight {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--primary-deep);
+  background: var(--primary-soft);
+  padding: 3px 9px;
+  border-radius: 999px;
+  flex: none;
+}
+
+.pair, .single {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  padding: 13px 15px;
+  border: 1.5px solid var(--rule);
+  border-radius: 12px;
+  background: var(--paper);
+  font-family: var(--body);
+  font-size: 16px; /* 16px or iOS zooms the page on focus */
+  color: var(--ink);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--surface);
+}
+
+/* Spinners take width from a number that is already tight on a phone, and
+   nobody has ever nudged their matric marks up one at a time. */
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.input[type='number'] { appearance: textfield; -moz-appearance: textfield; }
+
+.outOf {
+  font-size: 13.5px;
+  color: var(--ink-3);
+  white-space: nowrap;
+  flex: none;
+}
+
+/* ─── The answer ──────────────────────────────────────────────────────── */
+
+.resultBox {
+  margin-top: 28px;
+  padding: 24px;
+  border-radius: 16px;
+  background: var(--paper-alt);
+  border: 1px solid var(--rule);
+}
+
+.waiting {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--ink-3);
+  text-align: center;
+}
+
+.resultLabel {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.resultValue {
+  margin: 6px 0 20px;
+  font-family: var(--display);
+  font-size: clamp(46px, 9vw, 62px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--ink);
+}
+
+/* The working, not just the total. A student who can see three quarters of
+   the number coming from one row has learned where the marks are. */
+.working {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.working th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--ink-2);
+  padding: 7px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.working td {
+  text-align: right;
+  padding: 7px 0 7px 10px;
+  color: var(--ink-2);
+  border-top: 1px solid var(--rule);
+  white-space: nowrap;
+}
+
+.times { color: var(--ink-3); }
+
+.contrib {
+  font-weight: 700;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.caveat {
+  margin: 18px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.caveat a { color: var(--primary-deep); }
+
+@media (max-width: 420px) {
+  .pair { flex-wrap: wrap; }
+  .outOf { width: 100%; }
+}

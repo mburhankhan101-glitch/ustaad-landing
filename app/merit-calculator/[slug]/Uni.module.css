@@ -1,0 +1,149 @@
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: calc(var(--nav-h) + 36px) var(--gutter) var(--section-y);
+}
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13.5px;
+  color: var(--ink-3);
+  margin-bottom: 26px;
+}
+
+.crumbs a { color: var(--ink-2); text-decoration: none; }
+.crumbs a:hover { color: var(--primary-deep); }
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.crest { width: 64px; height: 64px; object-fit: contain; flex: none; }
+
+.title {
+  font-family: var(--display);
+  font-size: clamp(26px, 4.4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.028em;
+  line-height: 1.1;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+
+.lede {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+.info { margin-top: 52px; }
+
+.infoTitle {
+  font-family: var(--display);
+  font-size: clamp(22px, 3.2vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 24px;
+  color: var(--ink);
+}
+
+/* Each route's formula spelled out, generated from the same data the
+   calculator runs on — so the words and the arithmetic cannot disagree. */
+.formula {
+  padding: 16px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.formulaName {
+  font-size: 14.5px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+
+.formulaLine {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+.formulaLine strong { color: var(--primary-deep); }
+
+.note { margin-top: 26px; }
+
+.noteHead {
+  font-size: 15.5px;
+  font-weight: 700;
+  margin: 0 0 7px;
+  color: var(--ink);
+}
+
+.noteBody {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+.source {
+  margin: 34px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink-3);
+}
+
+.source a { color: var(--primary-deep); }
+
+@media (max-width: 520px) {
+  .head { gap: 14px; }
+  .crest { width: 48px; height: 48px; }
+}
+
+/* The same warning, said in full, above the form rather than under it. */
+.estimate {
+  display: block;
+  margin: 0 0 22px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: #FFF8E8;
+  border: 1px solid #E8C76A;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #6B4E0C;
+}
+
+.estimate strong { color: #4A360A; }
+
+/* ─── FAQs ────────────────────────────────────────────────────────────── */
+
+.faqs { margin: 0 0 8px; }
+
+.faq {
+  padding: 18px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.faqQ {
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+
+.faqA {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}

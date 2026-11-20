@@ -51,6 +51,7 @@ export default function Navbar() {
           <a href="/#try" className={styles.navLink} onClick={handleNavClick}>Try a question</a>
           <a href="/#features" className={styles.navLink} onClick={handleNavClick}>Features</a>
           <a href="/#exams" className={styles.navLink} onClick={handleNavClick}>Exams</a>
+          <Link href="/merit-calculator" className={styles.navLink} onClick={handleNavClick}>Merit Calculator</Link>
           <a href="/#faq" className={styles.navLink} onClick={handleNavClick}>FAQ</a>
 
           {/* Login – ghost button */}
@@ -86,6 +87,7 @@ export default function Navbar() {
           <a href="/#try" className={styles.mobileLink} onClick={handleNavClick}>Try a question</a>
           <a href="/#features" className={styles.mobileLink} onClick={handleNavClick}>Features</a>
           <a href="/#exams" className={styles.mobileLink} onClick={handleNavClick}>Exams</a>
+          <Link href="/merit-calculator" className={styles.mobileLink} onClick={handleNavClick}>Merit Calculator</Link>
           <a href="/#faq" className={styles.mobileLink} onClick={handleNavClick}>FAQ</a>
           <Link href="/contact" className={styles.mobileLink} onClick={handleNavClick}>Contact Us</Link>
 
