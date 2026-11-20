@@ -222,7 +222,12 @@
 
 .caveat a { color: var(--primary-deep); }
 
+/* Below ~420px "Obtained / out of / Total" stops fitting on one line, so the
+   pair wraps and the words take a row of their own between the two boxes.
+   Scoped to .pair on purpose: a .single row has nowhere to wrap to, and a
+   full-width item that refuses to shrink pushed "out of 200" clean off the
+   right edge of the phone. */
 @media (max-width: 420px) {
   .pair { flex-wrap: wrap; }
-  .outOf { width: 100%; }
+  .pair .outOf { width: 100%; }
 }

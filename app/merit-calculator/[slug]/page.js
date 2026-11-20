@@ -124,17 +124,30 @@ export default async function UniMerit({ params }) {
           </div>
         ))}
 
-        <h2 className={styles.infoTitle} id="faqs">
+      </section>
+
+      {/* id on the section, not the heading: globals.css gives section[id]
+          the scroll-margin that keeps an anchor jump clear of the sticky
+          navbar, and putting it on the h2 opted out of that silently. */}
+      <section className={styles.faqSection} id="faqs">
+        <h2 className={styles.faqTitle}>
           {uni.name} merit calculator FAQs
         </h2>
-        <dl className={styles.faqs}>
+
+        {/* Native <details>, so the answers are in the HTML whether or not
+            JavaScript runs — which is what lets the FAQPage markup above be
+            true, and what makes them keyboard accessible for free. */}
+        <div className={styles.faqs}>
           {faqs.map((f) => (
-            <div key={f.q} className={styles.faq}>
-              <dt className={styles.faqQ}>{f.q}</dt>
-              <dd className={styles.faqA}>{f.a}</dd>
-            </div>
+            <details key={f.q} className={styles.faq}>
+              <summary className={styles.faqQ}>
+                <span className={styles.faqMark} aria-hidden="true" />
+                <span>{f.q}</span>
+              </summary>
+              <p className={styles.faqA}>{f.a}</p>
+            </details>
           ))}
-        </dl>
+        </div>
 
         <p className={styles.source}>
           Taken from{' '}
